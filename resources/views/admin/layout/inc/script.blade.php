@@ -11,7 +11,7 @@
 <script src="{{ asset('assets/admin') }}/js/main.js"></script>
 <!-- Page JS -->
 <script src="{{ asset('assets/admin') }}/js/dashboards-analytics.js"></script>
-
+<!-- iziToast -->
+<script src="{{ asset('assets/admin/js/iziToast.min.js') }}" type="text/javascript"></script>
 
 @stack('admin_script')
-

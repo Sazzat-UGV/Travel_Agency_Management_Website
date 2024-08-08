@@ -22,6 +22,7 @@
     <!-- Helpers -->
     <script src="{{ asset('assets/admin') }}/vendor/js/helpers.js"></script>
     <script src="{{ asset('assets/admin') }}/js/config.js"></script>
-
+    <!-- iziToast -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/iziToast.min.css') }}">
 
     @stack('admin_style')

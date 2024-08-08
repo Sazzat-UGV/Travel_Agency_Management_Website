@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('admin')->check()) {
-            return redirect()->route('admin_login')->with('You are not authorize as admin!');
+            return redirect()->route('admin.login')->with('error','You are not authorize as admin!');
         }
         return $next($request);
     }

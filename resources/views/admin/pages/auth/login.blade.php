@@ -78,11 +78,20 @@
                             </a>
                         </div>
 
-                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('admin.loginSubmit') }}"
+                            method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email-username"
-                                    placeholder="Enter your email or username" autofocus />
+                                <input type="text"
+                                    class="form-control @error('email')
+                                 is-invalid
+                                @enderror"
+                                    id="email" name="email" placeholder="Enter your email" autocomplete="off" />
+                                @error('email')
+                                    <span class="invalid-feedback"
+                                        role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
@@ -92,15 +101,24 @@
                                     </a>
                                 </div>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
+                                    <input type="password" id="password"
+                                        class="form-control @error('password')
+                                    is-invalid
+                                   @enderror"
+                                        name="password" autocomplete="off"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                    @error('password')
+                                        <span class="invalid-feedback"
+                                            role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
+                                    <input class="form-check-input" type="checkbox" id="remember-me"
+                                        name="remember" />
                                     <label class="form-check-label" for="remember-me"> Remember Me </label>
                                 </div>
                             </div>
@@ -117,6 +135,24 @@
 
     <!-- / Content -->
     @include('admin.layout.inc.script')
+    @if (session('success'))
+        <script>
+            iziToast.show({
+                color: 'green',
+                position: 'topRight',
+                message: '{{ session('success') }}'
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            iziToast.show({
+                color: 'red',
+                position: 'topRight',
+                message: '{{ session('error') }}'
+            });
+        </script>
+    @endif
 </body>
 
 </html>

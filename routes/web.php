@@ -8,12 +8,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Admin
+// admin route
 Route::prefix('/admin')->group(function () {
     Route::get('login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
+    Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('forget-password', [AdminAuthController::class, 'forget_password'])->name('admin.forget_password');
     Route::get('reset-password', [AdminAuthController::class, 'reset_password'])->name('admin.reset_password');
-    Route::get('profile', [AdminAuthController::class, 'profile'])->name('admin.profile');
 
-    Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::middleware('admin')->group(function () {
+        Route::get('profile', [AdminAuthController::class, 'profile'])->name('admin.profile');
+        Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+    });
 });
