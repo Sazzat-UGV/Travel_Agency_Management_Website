@@ -79,14 +79,37 @@
                         </div>
 
                         <h4 class="mb-2">Reset Password 🔄</h4>
-                        <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                        <form id="formAuthentication" class="mb-3"
+                            action="{{ route('admin.reset_password_submit', [$token, $email]) }}" method="POST">
+                            @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter your email" autofocus />
+                                <label for="password" class="form-label">Password<span
+                                        class="text-danger">*</span></label>
+                                <input type="text"
+                                    class="form-control @error('password')
+                                    is-invalid
+                                   @enderror"
+                                    id="password" name="password" placeholder="Enter password" autofocus />
+                                @error('password')
+                                    <span class="invalid-feedback"
+                                        role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
-                            <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+                            <div class="mb-3">
+                                <label for="retype_password" class="form-label">Retype Password<span
+                                        class="text-danger">*</span></label>
+                                <input type="text"
+                                    class="form-control @error('retype_password')
+                                    is-invalid
+                                   @enderror"
+                                    id="retype_password" name="retype_password" placeholder="Enter retype password"
+                                    autofocus />
+                                @error('retype_password')
+                                    <span class="invalid-feedback"
+                                        role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <button class="btn btn-primary d-grid w-100">Reset</button>
                         </form>
                     </div>
                 </div>
@@ -97,6 +120,7 @@
 
     <!-- / Content -->
     @include('admin.layout.inc.script')
+    @include('admin.layout.inc.showToast')
 </body>
 
 </html>

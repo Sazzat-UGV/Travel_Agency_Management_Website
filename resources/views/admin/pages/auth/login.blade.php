@@ -82,7 +82,7 @@
                             method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                                 <input type="text"
                                     class="form-control @error('email')
                                  is-invalid
@@ -95,7 +95,7 @@
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
+                                    <label class="form-label" for="password">Password<span class="text-danger">*</span></label>
                                     <a href="{{ route('admin.forget_password') }}">
                                         <small>Forgot Password?</small>
                                     </a>
@@ -135,24 +135,7 @@
 
     <!-- / Content -->
     @include('admin.layout.inc.script')
-    @if (session('success'))
-        <script>
-            iziToast.show({
-                color: 'green',
-                position: 'topRight',
-                message: '{{ session('success') }}'
-            });
-        </script>
-    @endif
-    @if (session('error'))
-        <script>
-            iziToast.show({
-                color: 'red',
-                position: 'topRight',
-                message: '{{ session('error') }}'
-            });
-        </script>
-    @endif
+    @include('admin.layout.inc.showToast')
 </body>
 
 </html>

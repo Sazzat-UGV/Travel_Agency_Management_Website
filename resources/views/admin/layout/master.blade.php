@@ -58,6 +58,7 @@
 
     <!-- Core JS -->
     @include('admin.layout.inc.script')
+    @include('admin.layout.inc.showToast')
 </body>
 
 </html>
