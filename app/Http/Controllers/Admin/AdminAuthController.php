@@ -30,7 +30,7 @@ class AdminAuthController extends Controller
             'password' => $request->password,
         ];
 
-        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('admin.login')->with('error', 'The information you entered is incorrect! Please try again!');
