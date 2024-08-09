@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\FrontController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// user route
+Route::prefix('/')->group(function () {
+    
+    Route::get('', [FrontController::class, 'home'])->name('home');
 });
 
 // admin route

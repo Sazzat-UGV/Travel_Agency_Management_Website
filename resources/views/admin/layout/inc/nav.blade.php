@@ -12,7 +12,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- User -->
             <li>
-                <a href="{{ url('/') }}" class="btn btn-warning">Front End</a>
+                <a href="{{ route('home') }}" class="btn btn-warning">Front End</a>
             </li>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
