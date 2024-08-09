@@ -22,7 +22,11 @@ Route::prefix('/admin')->group(function () {
     Route::post('reset-password/{token}/{email}', [AdminAuthController::class, 'reset_password_submit'])->name('admin.reset_password_submit');
 
     Route::middleware('admin')->group(function () {
+
         Route::get('profile', [AdminAuthController::class, 'profile'])->name('admin.profile');
+        Route::post('profile', [AdminAuthController::class, 'profile_submit'])->name('admin.profile_submit');
+        Route::post('profile/image', [AdminAuthController::class, 'profile_image_submit'])->name('admin.profile_image_submit');
+
         Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
     });
 });

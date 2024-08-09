@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Image;
 
 class AdminAuthController extends Controller
 {
@@ -45,6 +46,52 @@ class AdminAuthController extends Controller
     public function profile()
     {
         return view('admin.pages.auth.profile');
+    }
+
+    public function profile_submit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+        ]);
+
+        $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
+
+        if ($request->password) {
+            $request->validate([
+                'password' => 'required|string|min:4',
+                'retype_password' => 'required|string|same:password',
+            ]);
+            $admin->password = Hash::make($request->password);
+        }
+
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->update();
+        return redirect()->back()->with('success', 'Profile is updated!');
+    }
+
+    public function profile_image_submit(Request $request)
+    {
+
+        $request->validate([
+            'photo' => 'required|mimes:png,jpg|max:10240',
+        ]);
+        $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
+        $old_photo = public_path('uploads/user/' . $admin->photo);
+        if (file_exists($old_photo)) {
+            unlink($old_photo);
+        }
+        $photo_loation = 'public/uploads/user/';
+        $photo = $request->photo;
+        $photoname = time() . '.' . $photo->getClientOriginalExtension();
+        $new_photo_location = $photo_loation . $photoname;
+        $status = Image::make($photo)->resize(600, 600)->save(base_path($new_photo_location));
+        $admin->update([
+            'photo' => $photoname,
+        ]);
+
+        return redirect()->back()->with('success', 'Profile Picture Updated Successfully!');
     }
 
     public function forget_password()
