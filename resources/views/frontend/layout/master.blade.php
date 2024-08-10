@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    @include('frontend.layout.inc.preloader')
     @include('frontend.layout.inc.nav')
 
 

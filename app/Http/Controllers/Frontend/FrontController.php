@@ -10,4 +10,5 @@ class FrontController extends Controller
     public function home(){
         return view('frontend.pages.home');
     }
+
 }

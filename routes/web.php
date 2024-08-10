@@ -2,13 +2,22 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\FrontAuthController;
 use App\Http\Controllers\Frontend\FrontController;
 use Illuminate\Support\Facades\Route;
 
 // user route
 Route::prefix('/')->group(function () {
-    
+
     Route::get('', [FrontController::class, 'home'])->name('home');
+
+    Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');
+    Route::post('registration', [FrontAuthController::class, 'registration_submit'])->name('registration_submit');
+
+    Route::get('registration_verify/{token}/{email}', [FrontAuthController::class, 'registration_verify'])->name('registration_verify');
+
+    Route::get('login', [FrontAuthController::class, 'login'])->name('login');
+    Route::get('forget-password', [FrontAuthController::class, 'forget_password'])->name('forget_password');
 });
 
 // admin route

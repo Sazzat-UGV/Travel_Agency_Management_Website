@@ -143,7 +143,7 @@
                             <a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a>
                         </li>
                     </ul>
-                    <p>©Copyright 2024, Your_App_Name. All Rights Reserved. </p>
+                    <p>©Copyright 2024, {{ config('app.name') }}. All Rights Reserved. </p>
 
                 </div>
             </div>

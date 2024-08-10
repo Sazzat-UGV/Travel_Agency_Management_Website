@@ -38,12 +38,12 @@
                 <a href="#" class="drop-down">Contact</a>
             </li>
             <li class="d-lg-none"> <!-- Visible only on mobile screens -->
-                <a href="#" class="primary-btn3 text-center">Sign Up</a>
+                <a href="{{ route('login') }}" class="primary-btn3 text-center">Login</a>
             </li>
         </ul>
     </div>
     <div class="nav-right d-flex jsutify-content-end align-items-center">
-        <a href="#" class="primary-btn3 d-none d-xl-flex">Sign Up</a> <!-- Hidden on mobile screens -->
+        <a href="{{ route('login') }}" class="primary-btn3 d-none d-xl-flex">Login</a> <!-- Hidden on mobile screens -->
         <div class="sidebar-button mobile-menu-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                 <path

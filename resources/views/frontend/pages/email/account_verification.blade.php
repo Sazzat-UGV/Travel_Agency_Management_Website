@@ -106,7 +106,7 @@
                 <table class="content" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="header">
-                            <a href="#"
+                            <a href="http://localhost"
                                 style="color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none;">
                                 {{ config('app.name') }}
                             </a>
@@ -117,9 +117,9 @@
                             <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-cell">
-                                        <p style="font-size: 16px; line-height: 1.5em; text-align: left;">You are
-                                            receiving this email because we received a password reset request for your
-                                            account.</p>
+                                        <p style="font-size: 16px; line-height: 1.5em; text-align: left;">Thank you for
+                                            creating an account with us. To complete your registration, please verify
+                                            your email address by clicking the button below.</p>
                                         <table class="action" align="center" width="100%" cellpadding="0"
                                             cellspacing="0" style="margin: 30px auto; text-align: center;">
                                             <tr>
@@ -127,22 +127,20 @@
                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td>
-                                                                <a href="{{ $reset_link }}" class="button"
+                                                                <a href="{{ $verification_link }}" class="button"
                                                                     target="_blank"
-                                                                    style="background-color: #2d3748; border-radius: 4px; color: #fff; display: inline-block; text-decoration: none;">Reset
-                                                                    Password</a>
+                                                                    style="background-color: #2d3748; border-radius: 4px; color: #fff; display: inline-block; text-decoration: none;">Verify
+                                                                    Email Address</a>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                             </tr>
                                         </table>
-                                        <p style="font-size: 16px; line-height: 1.5em; text-align: left;">This password
-                                            reset link will expire in 60 minutes.</p>
                                         <p style="font-size: 16px; line-height: 1.5em; text-align: left;">If you did not
-                                            request a password reset, no further action is required.</p>
-                                        <p style="font-size: 16px; line-height: 1.5em; text-align: left;">Regards,<br>
-                                            {{ config('app.name') }}</p>
+                                            create an account, no further action is required.</p>
+                                        <p style="font-size: 16px; line-height: 1.5em; text-align: left;">
+                                            Regards,<br>{{ config('app.name') }}</p>
                                     </td>
                                 </tr>
                             </table>
