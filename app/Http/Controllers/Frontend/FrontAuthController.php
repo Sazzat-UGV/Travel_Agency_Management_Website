@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\AccountConfirmationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class FrontAuthController extends Controller
@@ -49,12 +50,38 @@ class FrontAuthController extends Controller
         $user->status = '1';
         $user->update();
         return redirect()->route('login')->with('success', 'Account verified Successfully. You can login now.');
-
     }
 
     public function login()
     {
         return view('frontend.pages.login');
+    }
+
+    public function login_submit(Request $request)
+    {
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 1,
+        ];
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('login')->with('error', 'The information you entered is incorrect! Please try again!')->withInput();
+        }
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        return redirect()->route('login')->with('success', 'Logout is successful!');
     }
 
     public function forget_password()

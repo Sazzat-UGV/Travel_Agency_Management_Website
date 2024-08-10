@@ -5,22 +5,7 @@
 @push('frontend_style')
 @endpush
 @section('content')
-    <div class="breadcrumb-section"
-        style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.3) 101.02%), url({{ asset('assets/frontend') }}/img/innerpage/inner-banner-bg.png);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <div class="banner-content">
-                        <h1>SignUp</h1>
-                        <ul class="breadcrumb-list">
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <li>SignUp</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('frontend.layout.inc.breadcrumb', ['page_name' => 'SignUp'])
 
     <div class="contact-page pt-30 mb-30">
         <div class="container">

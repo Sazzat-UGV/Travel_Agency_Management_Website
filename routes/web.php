@@ -4,21 +4,31 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Frontend\FrontAuthController;
 use App\Http\Controllers\Frontend\FrontController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-// user route
+// public route
 Route::prefix('/')->group(function () {
 
     Route::get('', [FrontController::class, 'home'])->name('home');
 
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');
     Route::post('registration', [FrontAuthController::class, 'registration_submit'])->name('registration_submit');
-
     Route::get('registration_verify/{token}/{email}', [FrontAuthController::class, 'registration_verify'])->name('registration_verify');
 
     Route::get('login', [FrontAuthController::class, 'login'])->name('login');
+    Route::post('login', [FrontAuthController::class, 'login_submit'])->name('login_submit');
+    Route::get('logout', [FrontAuthController::class, 'logout'])->name('logout');
+
     Route::get('forget-password', [FrontAuthController::class, 'forget_password'])->name('forget_password');
 });
+
+
+// user route
+Route::prefix('user/')->middleware('auth')->group(function () {
+    Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+});
+
 
 // admin route
 Route::prefix('/admin')->group(function () {
