@@ -12,7 +12,7 @@
             <div class="row g-lg-4 gy-5 justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="contact-form-area">
-                        <form action="" method="POST">
+                        <form action="{{ route('forget_password_submit') }}" method="POST">
                             @csrf
                             <div class="row">
 
@@ -20,6 +20,7 @@
                                     <div class="form-inner">
                                         <label for="email">Email<span class="text-danger">*</span></label>
                                         <input type="email" id="email" placeholder="Enter your email" name="email"
+                                            value="{{ old('email') }}"
                                             class="form-control @error('email')
                                             is-invalid
                                         @enderror">

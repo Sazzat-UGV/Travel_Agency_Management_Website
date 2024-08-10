@@ -21,14 +21,17 @@ Route::prefix('/')->group(function () {
     Route::get('logout', [FrontAuthController::class, 'logout'])->name('logout');
 
     Route::get('forget-password', [FrontAuthController::class, 'forget_password'])->name('forget_password');
-});
+    Route::post('forget-password', [FrontAuthController::class, 'forget_password_submit'])->name('forget_password_submit');
 
+    Route::get('reset-password/{token}/{email}', [FrontAuthController::class, 'reset_password'])->name('reset_password');
+    Route::post('reset-password/{token}/{email}', [FrontAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+
+});
 
 // user route
 Route::prefix('user/')->middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
-
 
 // admin route
 Route::prefix('/admin')->group(function () {

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AccountConfirmationMail;
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class FrontAuthController extends Controller
@@ -87,5 +89,52 @@ class FrontAuthController extends Controller
     public function forget_password()
     {
         return view('frontend.pages.forget_password');
+    }
+
+    public function forget_password_submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'Email is not found');
+        }
+
+        $token = hash('sha256', time());
+        $user->token = $token;
+        $user->update();
+
+        $reset_link = url('reset-password/' . $token . '/' . $request->email);
+        $subject = "Password Reset";
+
+        Mail::to($request->email)->send(new ResetPasswordMail($subject, $reset_link));
+
+        return redirect()->back()->with('success', 'We have sent a password reset link to your email.');
+    }
+
+    public function reset_password($token, $email)
+    {
+        $user = User::where('email', $email)->where('token', $token)->first();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Token or email is not correct');
+        }
+        return view('frontend.pages.reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request, $token, $email)
+    {
+        $request->validate([
+            'password' => 'required',
+            'retype_password' => 'required|same:password',
+        ]);
+
+        $user = User::where('email', $email)->where('token', $token)->first();
+        $user->password = Hash::make($request->password);
+        $user->token = "";
+        $user->update();
+
+        return redirect()->route('login')->with('success', 'Password reset is successful. You can login now.');
     }
 }
