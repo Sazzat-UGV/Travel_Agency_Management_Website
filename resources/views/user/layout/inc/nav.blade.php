@@ -63,7 +63,7 @@
         <div class="hotline-area d-xl-flex d-none">
             <div class="content">
                 <span>Logged In As</span>
-                <h6><a href="#">{{ Auth::user()->name }}</a></h6>
+                <h6><a href="{{ route('profile') }}">{{ Auth::user()->name }}</a></h6>
             </div>
         </div>
         <div class="sidebar-button mobile-menu-btn">

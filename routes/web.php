@@ -31,6 +31,10 @@ Route::prefix('/')->group(function () {
 // user route
 Route::prefix('user/')->middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('profile', [UserController::class, 'profile_submit'])->name('profile_submit');
+
 });
 
 // admin route
