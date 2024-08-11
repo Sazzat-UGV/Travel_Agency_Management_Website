@@ -26740,3 +26740,35 @@ to {
 .tour-facilites-section .nav-tabs .nav-item .nav-link.active svg {
     fill: var(--primary-color1);
 }
+
+        .home2-banner-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .slide-text {
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .slide-text h2 {
+            font-size: 3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .slide-text p {
+            font-size: 1.1em;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }

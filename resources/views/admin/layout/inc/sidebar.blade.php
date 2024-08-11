@@ -64,6 +64,28 @@
             </a>
         </li>
 
+        <li class="menu-item @if (Route::is('slider.index') || Route::is('slider.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-slider"></i>
+                <div data-i18n="Sliders">Sliders</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('slider.index')) active @endif">
+                    <a href="{{ route('slider.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Slider List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('slider.create')) active @endif">
+                    <a href="{{ route('slider.create') }}"
+                        class="menu-link">
+                        <div data-i18n="Without navbar">Add New Slider</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>

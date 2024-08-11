@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Frontend\FrontAuthController;
 use App\Http\Controllers\Frontend\FrontController;
 use App\Http\Controllers\User\UserController;
@@ -57,5 +58,8 @@ Route::prefix('/admin')->group(function () {
         Route::post('profile/image', [AdminAuthController::class, 'profile_image_submit'])->name('admin.profile_image_submit');
 
         Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+        // resource controller
+        Route::resource('slider', AdminSliderController::class);
     });
 });
