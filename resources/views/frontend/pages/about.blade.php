@@ -1,43 +1,11 @@
 @extends('frontend.layout.master')
 @section('title')
-    Home Page
+    About Us
 @endsection
 @push('frontend_style')
 @endpush
 @section('content')
-    <!-- slider section start-->
-    <div class="home2-banner-area">
-        <div class="swiper home1-banner-slider">
-            <div class="swiper-wrapper">
-                @foreach ($sliders as $slider)
-                    <div class="swiper-slide">
-                        <div class="home2-banner-wrapper"
-                            style="background-image: linear-gradient(180deg, rgba(16, 12, 8, 0.4) 0%, rgba(16, 12, 8, 0.4) 100%), url({{ asset('uploads/slider') }}/{{ $slider->photo }});">
-                            <div class="slide-text">
-                                <h2>{{ $slider->heading }}</h2>
-                                <p>{{ $slider->text }}</p>
-                                @if ($slider->button_name)
-                                    <a href="{{ $slider->button_link }}" target="blank"
-                                        class="primary-btn1 text-center">{{ $slider->button_name }}</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="slider-btn-grp">
-                <div class="slider-btn home1-banner-prev">
-                    <i class="bi bi-arrow-left"></i>
-                </div>
-                <div class="slider-btn home1-banner-next">
-                    <i class="bi bi-arrow-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- slider section end-->
-
+    @include('frontend.layout.inc.breadcrumb', ['page_name' => 'About Us'])
 
     <!-- welcome section start-->
     @if ($welcome_item->status == 'Show')
@@ -95,7 +63,6 @@
         </div>
     @endif
     <!-- welcome section end-->
-
 @endsection
 @push('frontend_script')
 @endpush
