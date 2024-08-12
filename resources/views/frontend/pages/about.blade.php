@@ -63,6 +63,30 @@
         </div>
     @endif
     <!-- welcome section end-->
+
+
+    <!-- feature section start-->
+    <div class="feature-card-section mb-120">
+        <img src="{{ asset('assets/frontend') }}/img/home1/section-vector4.png" alt="" class="section-vector4">
+        <div class="container">
+            <div class="row g-md-4 gy-5">
+                @foreach ($features as $index => $feature)
+                    <div class="col-xl-4 col-md-6">
+                        <div class="feature-card {{ $index % 2 == 0 ? 'two' : 'three' }}">
+                            <div class="feature-card-icon">
+                                <i class="{{ $feature->icon }}" style="font-size:35px; color: #495E57"></i>
+                            </div>
+                            <div class="feature-card-content">
+                                <h6>{{ $feature->heading }}</h6>
+                                <p>{{ $feature->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- feature section end-->
 @endsection
 @push('frontend_script')
 @endpush

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             SliderSeeder::class,
             WelcomeItemSeeder::class,
+            FeatureSeeder::class,
         ]);
     }
 }

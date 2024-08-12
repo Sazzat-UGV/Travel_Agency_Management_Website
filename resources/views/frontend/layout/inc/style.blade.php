@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/slick-theme.css">
 
 <link href="{{ asset('assets/frontend') }}/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <link href="{{ asset('assets/frontend') }}/css/select2.css" rel="stylesheet">
 <link href="{{ asset('assets/frontend') }}/css/nice-select.css" rel="stylesheet">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminWelcomeItemController;
 use App\Http\Controllers\Frontend\FrontAuthController;
@@ -73,6 +74,7 @@ Route::prefix('/admin')->group(function () {
 
         // resource controller
         Route::resource('slider', AdminSliderController::class);
+        Route::resource('feature', AdminFeatureController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');
