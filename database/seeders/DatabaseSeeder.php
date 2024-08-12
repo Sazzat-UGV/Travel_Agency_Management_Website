@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             SliderSeeder::class,
             WelcomeItemSeeder::class,
             FeatureSeeder::class,
+            CounterItemSeeder::class,
+            
         ]);
     }
 }

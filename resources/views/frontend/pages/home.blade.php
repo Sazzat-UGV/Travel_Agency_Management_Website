@@ -38,6 +38,7 @@
     </div>
     <!-- slider section end-->
 
+
     <!-- welcome section start-->
     @if ($welcome_item->status == 'Show')
         <div class="home2-about-section pt-120 mb-120">
@@ -95,6 +96,7 @@
     @endif
     <!-- welcome section end-->
 
+
     <!-- feature section start-->
     <div class="feature-card-section mb-120">
         <img src="{{ asset('assets/frontend') }}/img/home1/section-vector4.png" alt="" class="section-vector4">
@@ -117,6 +119,7 @@
         </div>
     </div>
     <!-- feature section end-->
+
 
 @endsection
 @push('frontend_script')

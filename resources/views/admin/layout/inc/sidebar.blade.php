@@ -78,8 +78,7 @@
                     </a>
                 </li>
                 <li class="menu-item @if (Route::is('slider.create')) active @endif">
-                    <a href="{{ route('slider.create') }}"
-                    class="menu-link">
+                    <a href="{{ route('slider.create') }}" class="menu-link">
                         <div data-i18n="Without navbar">Add New Slider</div>
                     </a>
                 </li>
@@ -109,13 +108,20 @@
                     </a>
                 </li>
                 <li class="menu-item @if (Route::is('feature.create')) active @endif">
-                    <a href="{{ route('feature.create') }}"
-                    class="menu-link">
+                    <a href="{{ route('feature.create') }}" class="menu-link">
                         <div data-i18n="Without navbar">Add New Feature</div>
                     </a>
                 </li>
 
             </ul>
+        </li>
+
+        <!-- Counter Item -->
+        <li class="menu-item @if (Route::is('admin.counterItemIndex')) active @endif">
+            <a href="{{ route('admin.counterItemIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="Analytics">Counter Item</div>
+            </a>
         </li>
 
     </ul>
