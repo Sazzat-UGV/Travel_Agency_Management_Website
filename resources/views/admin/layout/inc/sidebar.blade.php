@@ -124,5 +124,26 @@
             </a>
         </li>
 
+        <!-- Testimonial -->
+        <li class="menu-item @if (Route::is('testimonial.index') || Route::is('testimonial.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="testimonials">Testimonials</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('testimonial.index')) active @endif">
+                    <a href="{{ route('testimonial.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Testimonial List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('testimonial.create')) active @endif">
+                    <a href="{{ route('testimonial.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Testimonial</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>
