@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\CounterItem;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Slider;
 use App\Models\TeamMember;
@@ -50,6 +51,12 @@ class FrontController extends Controller
     {
         $team_member = TeamMember::where('slug', $slug)->first();
         return view('frontend.pages.team_member_detail', compact('team_member'));
+    }
+
+    public function faq()
+    {
+        $faqs = Faq::get();
+        return view('frontend.pages.faq', compact('faqs'));
     }
 
 }

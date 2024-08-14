@@ -28,8 +28,8 @@
             <li class="@if (Route::is('team_members')) active @endif">
                 <a href="{{ route('team_members') }}" class="drop-down">Team</a>
             </li>
-            <li>
-                <a href="#" class="drop-down">FAQ</a>
+            <li class="@if (Route::is('faq')) active @endif">
+                <a href="{{ route('faq') }}" class="drop-down">FAQ</a>
             </li>
             <li>
                 <a href="#" class="drop-down">Blog</a>

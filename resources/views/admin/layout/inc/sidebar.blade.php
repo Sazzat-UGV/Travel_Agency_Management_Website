@@ -167,5 +167,26 @@
 
             </ul>
         </li>
+        <!-- Faq -->
+        <li class="menu-item @if (Route::is('faq.index') || Route::is('faq.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                <div data-i18n="faqs">FAQ</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('faq.index')) active @endif">
+                    <a href="{{ route('faq.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">FAQ List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('faq.create')) active @endif">
+                    <a href="{{ route('faq.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New FAQ</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>
