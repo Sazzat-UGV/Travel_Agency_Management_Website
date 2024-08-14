@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminFaqController;
@@ -85,6 +86,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('testimonial', AdminTestimonialController::class);
         Route::resource('team_member', AdminTeamMemberController::class);
         Route::resource('faq', AdminFaqController::class);
+        Route::resource('blog_category', AdminBlogCategoryController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');

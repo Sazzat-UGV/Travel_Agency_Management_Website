@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CounterItemSeeder::class,
             TestimonialSeeder::class,
             FaqSeeder::class,
+            BlogCategorySeeder::class,
         ]);
     }
 }

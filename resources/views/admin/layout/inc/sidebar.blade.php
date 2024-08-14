@@ -188,5 +188,26 @@
 
             </ul>
         </li>
+        <!-- Blog category -->
+        <li class="menu-item @if (Route::is('blog_category.index') || Route::is('blog_category.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="blog_categories">Blog Categories</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('blog_category.index')) active @endif">
+                    <a href="{{ route('blog_category.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Category List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('blog_category.create')) active @endif">
+                    <a href="{{ route('blog_category.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Category</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>
