@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminSliderController;
+use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminWelcomeItemController;
 use App\Http\Controllers\Frontend\FrontAuthController;
@@ -18,6 +19,8 @@ Route::prefix('/')->group(function () {
     // front page route
     Route::get('', [FrontController::class, 'home'])->name('home');
     Route::get('about', [FrontController::class, 'about'])->name('about');
+    Route::get('team_members', [FrontController::class, 'team_members'])->name('team_members');
+    Route::get('team_member/{slug}', [FrontController::class, 'team_member'])->name('team_member');
 
     // registration route
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');
@@ -78,6 +81,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('slider', AdminSliderController::class);
         Route::resource('feature', AdminFeatureController::class);
         Route::resource('testimonial', AdminTestimonialController::class);
+        Route::resource('team_member', AdminTeamMemberController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');

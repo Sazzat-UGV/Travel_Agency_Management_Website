@@ -13,6 +13,9 @@
     </style>
 @endpush
 @section('content')
+@include('admin.layout.inc.breadcumb',
+['main_page'=>'Profile',
+'sub_page'=>''])
     <div class="col-md-4 mb-3">
         <div class="card">
             <div class="card-body">

@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Slider List
+    Team Member List
 @endsection
 @push('admin_style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -18,16 +18,17 @@
     </style>
 @endpush
 @section('content')
-@include('admin.layout.inc.breadcumb',
-['main_page'=>'Sliders',
-'sub_page'=>'Slider List'])
+    @include('admin.layout.inc.breadcumb', [
+        'main_page' => 'Team Member',
+        'sub_page' => 'Team Member List',
+    ])
     <div class="col-12">
         <div class="card px-4">
             <div class="col-md-12 col-lg-12 col-sm-12 py-4">
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('slider.create') }}" class="btn btn-primary">
+                    <a href="{{ route('team_member.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus-circle"></i>
-                        Add New Slider
+                        Add New Team Member
                     </a>
                 </div>
             </div>
@@ -37,19 +38,21 @@
                         <tr>
                             <th>#</th>
                             <th>Photo</th>
-                            <th>Heading</th>
-                            <th>Detail</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Address</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sliders as $index => $slider)
+                        @foreach ($team_members as $index => $team_member)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td><img src="{{ asset('uploads/slider') }}/{{ $slider->photo }}" alt=""
+                                <td><img src="{{ asset('uploads/team_member') }}/{{ $team_member->photo }}" alt=""
                                         class="img-fluid w-50"></td>
-                                <td class="wrap">{{ $slider->heading }}</td>
-                                <td class="wrap">{{ $slider->text }}</td>
+                                <td class="wrap">{{ $team_member->name }}</td>
+                                <td class="wrap">{{ $team_member->designation }}</td>
+                                <td class="wrap">{{ $team_member->address }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -57,10 +60,12 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('slider.edit', $slider->id) }}"><i
+                                            <a class="dropdown-item"
+                                                href="{{ route('team_member.edit', $team_member->id) }}"><i
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Edit</a>
-                                            <form action="{{ route('slider.destroy', $slider->id) }}" method="POST">
+                                            <form action="{{ route('team_member.destroy', $team_member->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item show_confirm" type="submit"><i

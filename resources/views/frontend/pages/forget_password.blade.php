@@ -5,7 +5,9 @@
 @push('frontend_style')
 @endpush
 @section('content')
-    @include('frontend.layout.inc.breadcrumb', ['page_name' => 'Forget Password'])
+    @include('frontend.layout.inc.breadcrumb', [
+        'page_name' => 'Forget Password',
+    ])
 
     <div class="contact-page pt-30 mb-30">
         <div class="container">

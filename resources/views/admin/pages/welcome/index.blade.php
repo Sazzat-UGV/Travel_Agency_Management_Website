@@ -39,11 +39,14 @@
     </style>
 @endpush
 @section('content')
+    @include('admin.layout.inc.breadcumb', ['main_page' => 'Welcome Item', 'sub_page' => ''])
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-body">
                 <form action="{{ route('admin.welcomeItemUpdate') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <div class="row">
+                        <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label" for="heading">Heading<span class="text-danger">*</span></label>
                         <input type="text"
@@ -56,6 +59,36 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="button name">Button Name</label>
+                            <input type="text"
+                                class="form-control @error('button name')
+                                is-invalid
+                                @enderror"
+                                id="button name" placeholder="Enter button name" name="button_name"
+                                value="{{ old('button_name', $welcome_item->button_name) }}">
+                            @error('button name')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="button_link">Button Link</label>
+                            <input type="text"
+                                class="form-control @error('button_link')
+                                is-invalid
+                                @enderror"
+                                id="button_link" placeholder="Enter button link" name="button_link"
+                                value="{{ old('button_link', $welcome_item->button_link) }}">
+                            @error('button_link')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label" for="description">Description<span class="text-danger">*</span></label>
                         <textarea name="description" id="editor" cols="30" rows="3"
@@ -68,30 +101,9 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="button name">Button Name</label>
-                        <input type="text"
-                            class="form-control @error('button name')
-                            is-invalid
-                            @enderror"
-                            id="button name" placeholder="Enter button name" name="button_name"
-                            value="{{ old('button_name', $welcome_item->button_name) }}">
-                        @error('button name')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="button_link">Button Link</label>
-                        <input type="text"
-                            class="form-control @error('button_link')
-                            is-invalid
-                            @enderror"
-                            id="button_link" placeholder="Enter button link" name="button_link"
-                            value="{{ old('button_link', $welcome_item->button_link) }}">
-                        @error('button_link')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
+
+                    <div class="col-12">
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Photo<span
                                 class="text-danger">*</span></label>
@@ -106,7 +118,8 @@
                         @enderror
                         <span class="text-danger fs-tiny">Upload JPG, PNG, JPEG. Not more than 10 MB</span>
                     </div>
-
+                    </div>
+                    <div class="col-12">
                     @if ($welcome_item->video)
                         <div class="mb-3">
                             <label for="defaultFormControlInput" class="form-label">Existing Video</label>
@@ -121,8 +134,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
-
+                        @endif
+                    </div>
+                    <div class="col-6">
                     <div class="mb-3">
                         <label for="defaultFormControlInput" class="form-label">Video <strong class="text-bold">(Only
                                 Youtube Video ID)</strong></label>
@@ -136,7 +150,8 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-
+                    </div>
+                    <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label" for="status">Status</label>
                         <select name="status" id="status"
@@ -149,6 +164,8 @@
                         @error('status')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
+                    </div>
+                    </div>
                     </div>
                     <button type="submit" class="btn btn-warning mt-3">Update</button>
 

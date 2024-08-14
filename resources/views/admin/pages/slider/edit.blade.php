@@ -14,6 +14,7 @@
     </style>
 @endpush
 @section('content')
+    @include('admin.layout.inc.breadcumb', ['main_page' => 'Sliders', 'sub_page' => 'Edit Slider'])
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-header d-flex align-items-center">
@@ -28,65 +29,77 @@
                 <form action="{{ route('slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="mb-3">
-                        <label class="form-label" for="heading">Heading<span class="text-danger">*</span></label>
-                        <input type="text"
-                            class="form-control @error('heading')
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label" for="heading">Heading<span class="text-danger">*</span></label>
+                                <input type="text"
+                                    class="form-control @error('heading')
                             is-invalid
                             @enderror"
-                            id="heading" placeholder="Enter slider heading" name="heading"
-                            value="{{ old('heading', $slider->heading) }}">
-                        @error('heading')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="text">Text<span class="text-danger">*</span></label>
-                        <textarea name="text" id="" cols="30" rows="3"
-                            class="form-control @error('text')
+                                    id="heading" placeholder="Enter slider heading" name="heading"
+                                    value="{{ old('heading', $slider->heading) }}">
+                                @error('heading')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label" for="text">Text<span class="text-danger">*</span></label>
+                                <textarea name="text" id="" cols="30" rows="4"
+                                    class="form-control @error('text')
                         is-invalid
                         @enderror"
-                            placeholder="Enter slider text" id="text">{{ old('text', $slider->text) }}</textarea>
-                        @error('text')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="button name">Button Name</label>
-                        <input type="text"
-                            class="form-control @error('button name')
+                                    placeholder="Enter slider text" id="text">{{ old('text', $slider->text) }}</textarea>
+                                @error('text')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="button name">Button Name</label>
+                                <input type="text"
+                                    class="form-control @error('button name')
                             is-invalid
                             @enderror"
-                            id="button name" placeholder="Enter slider button name" name="button_name"
-                            value="{{ old('button_name', $slider->button_name) }}">
-                        @error('button name')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="button_link">Button Link</label>
-                        <input type="text"
-                            class="form-control @error('button_link')
+                                    id="button name" placeholder="Enter slider button name" name="button_name"
+                                    value="{{ old('button_name', $slider->button_name) }}">
+                                @error('button name')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="button_link">Button Link</label>
+                                <input type="text"
+                                    class="form-control @error('button_link')
                             is-invalid
                             @enderror"
-                            id="button_link" placeholder="Enter slider button link" name="button_link"
-                            value="{{ old('button_link', $slider->button_link) }}">
-                        @error('button_link')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="defaultFormControlInput" class="form-label">Photo</label>
-                        <input type="file"
-                            class="form-control dropify @error('photo')
+                                    id="button_link" placeholder="Enter slider button link" name="button_link"
+                                    value="{{ old('button_link', $slider->button_link) }}">
+                                @error('button_link')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <label for="defaultFormControlInput" class="form-label">Photo</label>
+                                <input type="file"
+                                    class="form-control dropify @error('photo')
                             is-invalid
                         @enderror"
-                            data-default-file="{{ asset('uploads/slider') }}/{{ $slider->photo }}"
-                            id="defaultFormControlInput" name="photo" aria-describedby="defaultFormControlHelp">
-                        @error('photo')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                        <span class="text-danger fs-tiny">Upload JPG, PNG, JPEG. Not more than 10 MB</span>
+                                    data-default-file="{{ asset('uploads/slider') }}/{{ $slider->photo }}"
+                                    id="defaultFormControlInput" name="photo" aria-describedby="defaultFormControlHelp">
+                                @error('photo')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                                <span class="text-danger fs-tiny">Upload JPG, PNG, JPEG. Not more than 10 MB</span>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-warning mt-3">Update</button>

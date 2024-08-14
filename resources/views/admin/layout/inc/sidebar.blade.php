@@ -145,5 +145,27 @@
 
             </ul>
         </li>
+
+        <!-- Team member -->
+        <li class="menu-item @if (Route::is('team_member.index') || Route::is('team_member.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="team_members">Team Member</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('team_member.index')) active @endif">
+                    <a href="{{ route('team_member.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Team Member List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('team_member.create')) active @endif">
+                    <a href="{{ route('team_member.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Team Member</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>

@@ -5,7 +5,9 @@
 @push('frontend_style')
 @endpush
 @section('content')
-    @include('frontend.layout.inc.breadcrumb', ['page_name' => 'About Us'])
+    @include('frontend.layout.inc.breadcrumb', [
+        'page_name' => 'About Us',
+    ])
     <!-- welcome section start-->
     @if ($welcome_item->status == 'Show')
         <div class="home2-about-section pt-120 mb-120">

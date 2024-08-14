@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-Feature List
+    Feature List
 @endsection
 @push('admin_style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -18,6 +18,7 @@ Feature List
     </style>
 @endpush
 @section('content')
+    @include('admin.layout.inc.breadcumb', ['main_page' => 'Features', 'sub_page' => 'Feature List'])
     <div class="col-12">
         <div class="card px-4">
             <div class="col-md-12 col-lg-12 col-sm-12 py-4">
@@ -44,7 +45,7 @@ Feature List
                         @foreach ($features as $index => $feature)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td class="wrap"><i class="{{ $feature->icon }}" ></i></td>
+                                <td class="wrap"><i class="{{ $feature->icon }}"></i></td>
                                 <td class="wrap">{{ $feature->icon }}</td>
                                 <td class="wrap">{{ $feature->heading }}</td>
                                 <td class="wrap">{{ $feature->description }}</td>
