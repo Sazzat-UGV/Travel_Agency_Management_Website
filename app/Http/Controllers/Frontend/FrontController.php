@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\CounterItem;
 use App\Models\Faq;
 use App\Models\Feature;
@@ -19,12 +21,14 @@ class FrontController extends Controller
         $welcome_item = WelcomeItem::where('id', 1)->first();
         $features = Feature::latest('id')->get();
         $testimonials = Testimonial::latest('id')->get();
+        $blogs = Blog::latest('id')->take(3)->get();
 
         return view('frontend.pages.home', compact(
             'sliders',
             'welcome_item',
             'features',
             'testimonials',
+            'blogs',
         ));
     }
 
@@ -57,6 +61,20 @@ class FrontController extends Controller
     {
         $faqs = Faq::get();
         return view('frontend.pages.faq', compact('faqs'));
+    }
+
+    public function blog()
+    {
+        $blogs = Blog::latest('id')->paginate(9);
+        return view('frontend.pages.blog', compact('blogs'));
+    }
+
+    public function blog_details($slug)
+    {
+        $blog_categories = BlogCategory::latest('id')->limit(8)->get();
+        $latest_blogs = Blog::latest('id')->whereNot('slug', $slug)->limit(3)->get();
+        $blog = Blog::with('blog_category:id,name')->where('slug', $slug)->first();
+        return view('frontend.pages.blog_details', compact('blog', 'blog_categories', 'latest_blogs'));
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -79,6 +80,10 @@ class AdminBlogCategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        $total = Blog::where('blog_category_id', $id)->count();
+        if ($total > 0) {
+            return redirect()->back()->with('error', 'This category has some blog.');
+        }
         $blog_category = BlogCategory::findorFail($id);
         $blog_category->delete();
         return redirect()->back()->with('success', 'Blog category delete successfully');

@@ -140,7 +140,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="status">Status</label>
                         <select name="status" id="status"
-                            class="form-control @error('status')
+                            class="form-select @error('status')
                             is-invalid
                             @enderror">
                             <option value="Show" {{ $counter_item->status == 'Show' ? 'selected' : '' }}>Show</option>

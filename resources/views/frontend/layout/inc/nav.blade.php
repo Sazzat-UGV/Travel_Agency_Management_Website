@@ -31,8 +31,8 @@
             <li class="@if (Route::is('faq')) active @endif">
                 <a href="{{ route('faq') }}" class="drop-down">FAQ</a>
             </li>
-            <li>
-                <a href="#" class="drop-down">Blog</a>
+            <li class="@if (Route::is('blog')) active @endif">
+                <a href="{{ route('blog') }}" class="drop-down">Blog</a>
             </li>
             <li>
                 <a href="#" class="drop-down">Contact</a>
@@ -46,7 +46,8 @@
     </div>
     <div class="nav-right d-flex jsutify-content-end align-items-center">
         @guest
-            <a href="{{ route('login') }}" class="primary-btn3 d-none d-xl-flex">Login</a> <!-- Hidden on mobile screens -->
+            <a href="{{ route('login') }}" class="primary-btn3 d-none d-xl-flex">Login</a>
+            <!-- Hidden on mobile screens -->
         @endguest
         @auth
             <a href="{{ route('dashboard') }}" class="primary-btn3 d-none d-xl-flex">Dashboard</a>

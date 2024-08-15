@@ -209,5 +209,26 @@
 
             </ul>
         </li>
+        <!-- Blog -->
+        <li class="menu-item @if (Route::is('blog.index') || Route::is('blog.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxl-blogger"></i>
+                <div data-i18n="blogs">Blogs</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('blog.index')) active @endif">
+                    <a href="{{ route('blog.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Blog List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('blog.create')) active @endif">
+                    <a href="{{ route('blog.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Blog</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>

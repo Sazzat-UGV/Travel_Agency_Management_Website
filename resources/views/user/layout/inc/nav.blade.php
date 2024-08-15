@@ -51,7 +51,7 @@
                 <a href="{{ route('faq') }}" class="drop-down">FAQ</a>
             </li>
             <li>
-                <a href="#" class="drop-down">Blog</a>
+                <a href="{{ route('blog') }}" class="drop-down">Blog</a>
             </li>
             <li>
                 <a href="#" class="drop-down">Contact</a>
