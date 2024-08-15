@@ -6,10 +6,10 @@
 @endpush
 @section('content')
     @include('frontend.layout.inc.breadcrumb', [
-        'page_heading' => 'Blog',
-        'parent_page_name' => '',
-        'parent_page_link' => '',
-        'page_name' => 'Blog',
+        'page_heading' => $category->name,
+        'parent_page_name' => 'Category',
+        'parent_page_link' => '#',
+        'page_name' => $category->name,
     ])
     <div class="blod-grid-section pt-120 mb-120">
         <div class="container">
@@ -18,7 +18,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="blog-card">
                             <div class="blog-card-img-wrap">
-                                <a href="{{ route('blog_details',$blog->slug) }}" class="card-img"><img
+                                <a href="{{ route('blog_details', $blog->slug) }}" class="card-img"><img
                                         src="{{ asset('uploads/blog') }}/{{ $blog->photo }}" alt="Blog Photo"></a>
                                 <a href="blog-grid.html" class="date">
                                     <span><strong>{{ $blog->created_at->format('d') }}</strong> <br>
@@ -26,10 +26,10 @@
                                 </a>
                             </div>
                             <div class="blog-card-content">
-                                <h5><a href="{{ route('blog_details',$blog->slug) }}">{{ $blog->title }}</a></h5>
+                                <h5><a href="{{ route('blog_details', $blog->slug) }}">{{ $blog->title }}</a></h5>
                                 <p class="text-black">{{ Str::words($blog->short_description, 100, '...') }}</p>
                                 <div class="bottom-area">
-                                    <a href="{{ route('blog_details',$blog->slug) }}">View Post
+                                    <a href="{{ route('blog_details', $blog->slug) }}">View Post
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12"
                                                 viewBox="0 0 14 12" fill="none">

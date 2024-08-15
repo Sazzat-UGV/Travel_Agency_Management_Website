@@ -27,6 +27,7 @@ Route::prefix('/')->group(function () {
     Route::get('faq', [FrontController::class, 'faq'])->name('faq');
     Route::get('blog', [FrontController::class, 'blog'])->name('blog');
     Route::get('blog_details/{slug}', [FrontController::class, 'blog_details'])->name('blog_details');
+    Route::get('category/{slug}', [FrontController::class, 'category'])->name('category');
 
     // registration route
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');

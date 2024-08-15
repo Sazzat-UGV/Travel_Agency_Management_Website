@@ -1,6 +1,6 @@
 @extends('frontend.layout.master')
 @section('title')
-    Team Member Details
+    Member Details
 @endsection
 @push('frontend_style')
     <style>
@@ -12,7 +12,10 @@
 @endpush
 @section('content')
     @include('frontend.layout.inc.breadcrumb', [
-        'page_name' => 'Team Member Details',
+        'page_heading' => $team_member->name,
+        'parent_page_name' => 'Team',
+        'parent_page_link' => route('team_members'),
+        'page_name' => $team_member->name,
     ])
 
     <div class="package-details-area pt-120 mb-120">
@@ -20,7 +23,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="booking-form-wrap mb-30">
-                        <img src="{{ asset('uploads/team_member') }}/{{ $team_member->photo }}"  alt="Member Photo">
+                        <img src="{{ asset('uploads/team_member') }}/{{ $team_member->photo }}" alt="Member Photo">
                         <ul class="d-flex mt-3 justify-content-center">
                             <li>
                                 @if ($team_member->facebook)
@@ -57,62 +60,62 @@
                 <div class="col-sm-12 col-md-8 col-lg-8">
                     <div class="card mb-3">
                         <div class="card-body">
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Name</h6>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $team_member->name }}
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $team_member->name }}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Designation</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $team_member->designation }}
+                                </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Designation</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $team_member->email }}
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $team_member->designation }}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $team_member->phone }}
+                                </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $team_member->email }}
-                            </div>
-                          </div>
-                          <hr>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $team_member->phone }}
-                            </div>
-                          </div>
 
-                          <hr>
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Address</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $team_member->address }}
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $team_member->address }}
-                            </div>
-                          </div>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="col-12 mt-3">
                     @if ($team_member->biography)
-                    <div class="eg-tag2">
-                        <span>Biography</span>
-                    </div>
+                        <div class="eg-tag2">
+                            <span>Biography</span>
+                        </div>
 
-                    <p>{!! $team_member->biography !!}</p>
-                @endif
+                        <p>{!! $team_member->biography !!}</p>
+                    @endif
                 </div>
             </div>
 

@@ -6,6 +6,9 @@
 @endpush
 @section('content')
     @include('frontend.layout.inc.breadcrumb', [
+        'page_heading' => 'Reset Password',
+        'parent_page_name' => '',
+        'parent_page_link' => '',
         'page_name' => 'Reset Password',
     ])
 

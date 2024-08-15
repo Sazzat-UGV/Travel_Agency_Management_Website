@@ -73,8 +73,15 @@ class FrontController extends Controller
     {
         $blog_categories = BlogCategory::latest('id')->limit(8)->get();
         $latest_blogs = Blog::latest('id')->whereNot('slug', $slug)->limit(3)->get();
-        $blog = Blog::with('blog_category:id,name')->where('slug', $slug)->first();
+        $blog = Blog::with('blog_category:id,name,slug')->where('slug', $slug)->first();
         return view('frontend.pages.blog_details', compact('blog', 'blog_categories', 'latest_blogs'));
+    }
+
+    public function category($slug)
+    {
+        $category = BlogCategory::where('slug', $slug)->first();
+        $blogs = Blog::with('blog_category')->where('blog_category_id', $category->id)->latest('id')->paginate(9);
+        return view('frontend.pages.category', compact('category', 'blogs'));
     }
 
 }

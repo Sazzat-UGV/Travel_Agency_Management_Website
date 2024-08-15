@@ -6,6 +6,9 @@
 @endpush
 @section('content')
     @include('frontend.layout.inc.breadcrumb', [
+        'page_heading' => 'Login',
+        'parent_page_name' => '',
+        'parent_page_link' => '',
         'page_name' => 'Login',
     ])
     <div class="contact-page pt-30 mb-30">
