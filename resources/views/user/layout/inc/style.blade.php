@@ -1,3 +1,6 @@
+@php
+    $setting = App\Models\Setting::where('id', 1)->first();
+@endphp
 <link href="{{ asset('assets/frontend') }}/css/bootstrap.min.css" rel="stylesheet">
 <link href="{{ asset('assets/frontend') }}/css/jquery-ui.css" rel="stylesheet">
 
@@ -24,7 +27,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/style.css">
 <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/dashboard.css">
-<link rel="icon" href="{{ asset('assets/frontend') }}/img/sm-logo.svg" type="image/gif" sizes="20x20">
+<link rel="icon" href="{{ asset('uploads/setting') }}/{{ $setting->favicon }}" type="image/gif" sizes="20x20">
 
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/iziToast.min.css') }}">
 

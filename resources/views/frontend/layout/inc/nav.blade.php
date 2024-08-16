@@ -1,12 +1,15 @@
+@php
+    $setting = App\Models\Setting::where('id', 1)->first();
+@endphp
 <header class="header-area style-2">
     <div class="header-logo">
         <a href="{{ route('home') }}"><img alt="image" class="img-fluid"
-                src="{{ asset('assets/frontend') }}/img/logo2.svg"></a>
+                src="{{ asset('uploads/setting') }}/{{ $setting->logo }}"></a>
     </div>
     <div class="main-menu">
         <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div class="mobile-logo-wrap">
-                <a href="{{ route('home') }}"><img alt="image" src="{{ asset('assets/frontend') }}/img/logo2.svg"></a>
+                <a href="{{ route('home') }}"><img alt="image" src="{{ asset('uploads/setting') }}/{{ $setting->logo }}"></a>
             </div>
             <div class="menu-close-btn">
                 <i class="bi bi-x"></i>

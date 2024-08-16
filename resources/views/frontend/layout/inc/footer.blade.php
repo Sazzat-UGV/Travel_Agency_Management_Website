@@ -1,3 +1,6 @@
+@php
+    $setting = App\Models\Setting::where('id', 1)->first();
+@endphp
 <footer class="footer-section style-2">
     <div class="container">
         <div class="footer-top">
@@ -5,7 +8,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="index.html"><img src="{{ asset('assets/frontend') }}/img/logo2.svg"
+                            <a href="{{ route('home') }}"><img src="{{ asset('uploads/setting') }}/{{ $setting->logo }}"
                                     alt=""></a>
                         </div>
                         <h3>Want <span>to Take <br></span> Tour Packages<span>?</span></h3>
@@ -40,7 +43,7 @@
                                 </svg>
                                 <h5>More Inquiry</h5>
                             </div>
-                            <a href="tel:999858624984">+999-858 624 984</a>
+                            <a href="tel:{{ $setting->phone }}">{{ $setting->phone }}</a>
                         </div>
                         <div class="single-contact mb-35">
                             <div class="widget-title">
@@ -54,7 +57,7 @@
                                 </svg>
                                 <h5>Send Mail</h5>
                             </div>
-                            <a href="mailto:info@example.com">info@example.com</a>
+                            <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a>
                         </div>
                         <div class="single-contact">
                             <div class="widget-title">
@@ -66,11 +69,10 @@
                                         </path>
                                     </g>
                                 </svg>
-                                <h5>Send Mail</h5>
+                                <h5>Address</h5>
                             </div>
                             <a
-                                href="https://www.google.com/maps/place/Egens+Lab/@23.8340712,90.3631117,17z/data=!3m1!4b1!4m6!3m5!1s0x3755c14c8682a473:0xa6c74743d52adb88!8m2!3d23.8340663!4d90.3656866!16s%2Fg%2F11rs9vlwsk?entry=ttu">House
-                                168/170, Avenue 01, Mirpur <br> DOHS, Dhaka Bangladesh</a>
+                                href="#">{{ $setting->address }}</a>
                         </div>
                     </div>
                 </div>
@@ -94,25 +96,7 @@
                                 </button>
                             </div>
                         </form>
-                        <div class="payment-partner">
-                            <div class="widget-title">
-                                <h5>Payment Partner</h5>
-                            </div>
-                            <div class="icons">
-                                <ul>
-                                    <li><img src="{{ asset('assets/frontend') }}/img/home1/icon/visa-logo.svg"
-                                            alt=""></li>
-                                    <li><img src="{{ asset('assets/frontend') }}/img/home1/icon/stripe-logo.svg"
-                                            alt=""></li>
-                                    <li><img src="{{ asset('assets/frontend') }}/img/home1/icon/paypal-logo.svg"
-                                            alt=""></li>
-                                    <li><img src="{{ asset('assets/frontend') }}/img/home1/icon/woo-logo.svg"
-                                            alt=""></li>
-                                    <li><img src="{{ asset('assets/frontend') }}/img/home1/icon/skrill-logo.svg"
-                                            alt=""></li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -123,10 +107,10 @@
                     class="col-lg-12 d-flex flex-md-row flex-column align-items-center justify-content-md-between justify-content-center flex-wrap gap-3">
                     <ul class="social-list">
                         <li>
-                            <a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a>
+                            <a href="{{ $setting->facebook }}"><i class="bx bxl-facebook"></i></a>
                         </li>
                         <li>
-                            <a href="https://twitter.com/"><svg xmlns="http://www.w3.org/2000/svg" width="10"
+                            <a href="{{ $setting->twitter }}"><svg xmlns="http://www.w3.org/2000/svg" width="10"
                                     height="10" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
                                     <path
                                         d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z">
@@ -134,16 +118,16 @@
                                 </svg></a>
                         </li>
                         <li>
-                            <a href="https://www.pinterest.com/"><i class="bx bxl-youtube"></i></a>
+                            <a href="{{ $setting->youtube }}"><i class="bx bxl-youtube"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.pinterest.com/"><i class="bx bxl-linkedin"></i></a>
+                            <a href="{{ $setting->linkedin }}"><i class="bx bxl-linkedin"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a>
+                            <a href="{{ $setting->instagram }}"><i class="bx bxl-instagram"></i></a>
                         </li>
                     </ul>
-                    <p>©Copyright 2024, {{ config('app.name') }}. All Rights Reserved. </p>
+                    <p>{{ $setting->copyright }}</p>
 
                 </div>
             </div>

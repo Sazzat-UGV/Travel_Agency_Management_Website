@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
@@ -117,5 +118,9 @@ Route::prefix('/admin')->group(function () {
         Route::get('destination_videos/{id}', [AdminDestinationController::class, 'destination_videos'])->name('admin.destination_videos');
         Route::post('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_submit'])->name('admin.destination_video_submit');
         Route::delete('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_delete'])->name('admin.destination_video_delete');
+        
+        // setting route
+        Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');
+        Route::post('setting/update', [AdminSettingController::class, 'update'])->name('admin.settingUpdate');
     });
 });

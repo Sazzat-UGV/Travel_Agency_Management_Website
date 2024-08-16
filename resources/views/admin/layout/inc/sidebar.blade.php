@@ -272,5 +272,29 @@
 
             </ul>
         </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Setting -->
+        <li class="menu-item @if (Route::is('admin.settingIndex')) active @endif">
+            <a href="{{ route('admin.settingIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Settings</div>
+            </a>
+        </li>
+
     </ul>
 </aside>
