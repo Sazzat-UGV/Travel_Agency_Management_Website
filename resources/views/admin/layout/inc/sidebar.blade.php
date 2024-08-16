@@ -251,5 +251,26 @@
 
             </ul>
         </li>
+        <!-- package -->
+        <li class="menu-item @if (Route::is('package.index') || Route::is('package.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-package"></i>
+                <div data-i18n="packages">Packages</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('package.index')) active @endif">
+                    <a href="{{ route('package.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Package List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('package.create')) active @endif">
+                    <a href="{{ route('package.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Package</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>
