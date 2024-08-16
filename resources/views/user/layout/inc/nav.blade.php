@@ -39,7 +39,7 @@
                 <a href="{{ route('about') }}" class="drop-down">About</a>
             </li>
             <li>
-                <a href="#" class="drop-down">Destinations</a>
+                <a href="{{ route('destinations') }}" class="drop-down">Destinations</a>
             </li>
             <li>
                 <a href="#" class="drop-down">Packages</a>

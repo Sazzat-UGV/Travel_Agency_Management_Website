@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\CounterItem;
+use App\Models\Destination;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Slider;
@@ -22,13 +23,14 @@ class FrontController extends Controller
         $features = Feature::latest('id')->get();
         $testimonials = Testimonial::latest('id')->get();
         $blogs = Blog::latest('id')->take(3)->get();
-
+        $destinations = Destination::latest('view_count')->limit(12)->get();
         return view('frontend.pages.home', compact(
             'sliders',
             'welcome_item',
             'features',
             'testimonials',
             'blogs',
+            'destinations',
         ));
     }
 
@@ -82,6 +84,20 @@ class FrontController extends Controller
         $category = BlogCategory::where('slug', $slug)->first();
         $blogs = Blog::with('blog_category')->where('blog_category_id', $category->id)->latest('id')->paginate(9);
         return view('frontend.pages.category', compact('category', 'blogs'));
+    }
+
+    public function destinations()
+    {
+        $destinations = Destination::latest('id')->paginate(12);
+        return view('frontend.pages.destinations', compact('destinations'));
+    }
+
+    public function destination($slug)
+    {
+        $destination = Destination::where('slug', $slug)->first();
+        $destination->view_count += 1;
+        $destination->update();
+        return view('frontend.pages.destination', compact('destination'));
     }
 
 }

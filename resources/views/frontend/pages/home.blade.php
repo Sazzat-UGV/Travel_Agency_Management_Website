@@ -97,6 +97,66 @@
     <!-- welcome section end-->
 
 
+    <!-- popular destinations section start-->
+    <div class="destination-card2-slider-section mb-120">
+        <div class="container">
+            <div class="row mb-50">
+                <div class="col-lg-12">
+                    <div class="section-title2 text-center">
+                        <div class="eg-section-tag">
+                            <span>Popular Destinations</span>
+                        </div>
+                        <h2>Explore our most popular travel destinations</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div
+                        class="swiper destination-card2-slider mb-50 swiper-initialized swiper-horizontal swiper-backface-hidden">
+                        <div class="swiper-wrapper" id="swiper-wrapper-279217fd3ac76513" aria-live="polite">
+                            @foreach ($destinations as $destination)
+                                <div class="swiper-slide" style="width: 267.75px; margin-right: 15px;" role="group"
+                                    aria-label="4 / 8">
+                                    <div class="destination-card2">
+                                        <a href="{{ route('destination',$destination->slug) }}" class="destination-card-img"><img
+                                                src="{{ asset('uploads/destination') }}/{{ $destination->featured_photo }}"
+                                                alt="Destination Photo"></a>
+                                        <div class="destination-card2-content">
+                                            <span>Travel To</span>
+                                            <h4><a href="{{ route('destination',$destination->slug) }}">{{ $destination->name }}</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                    <div class="slide-and-view-btn-grp">
+                        <div class="slider-btn-grp3 two">
+                            <div class="slider-btn destination-card2-prev swiper-button-disabled" tabindex="-1"
+                                role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-279217fd3ac76513"
+                                aria-disabled="true">
+                                <i class="bi bi-arrow-left"></i>
+                                <span>PREV</span>
+                            </div>
+                            <div class="slider-btn destination-card2-next" tabindex="0" role="button"
+                                aria-label="Next slide" aria-controls="swiper-wrapper-279217fd3ac76513"
+                                aria-disabled="false">
+                                <span>NEXT</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
+                        </div>
+                        <a href="{{ route('destinations') }}" class="secondary-btn2">View All Destination</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- popular destinations section end-->
+
+
     <!-- feature section start-->
     <div class="feature-card-section mb-120">
         <img src="{{ asset('assets/frontend') }}/img/home1/section-vector4.png" alt="" class="section-vector4">
@@ -106,7 +166,7 @@
                     <div class="col-xl-4 col-md-6">
                         <div class="feature-card {{ $index % 2 == 0 ? 'two' : 'three' }}">
                             <div class="feature-card-icon">
-                                <i class="{{ $feature->icon }}" style="font-size:35px; color: #63AB45"></i>
+                                <i class="{{ $feature->icon }}" style="font-size:35px; color: black"></i>
                             </div>
                             <div class="feature-card-content">
                                 <h6>{{ $feature->heading }}</h6>
@@ -266,7 +326,8 @@
                                             </a>
                                         </div>
                                         <div class="blog-card-content">
-                                            <h5><a href="{{ route('blog_details', $blog->slug) }}">{{ $blog->title }}</a>
+                                            <h5><a
+                                                    href="{{ route('blog_details', $blog->slug) }}">{{ $blog->title }}</a>
                                             </h5>
                                             <p class="text-black">{{ Str::words($blog->short_description, 100, '...') }}
                                             </p>

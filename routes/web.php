@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminSliderController;
@@ -28,6 +29,8 @@ Route::prefix('/')->group(function () {
     Route::get('blog', [FrontController::class, 'blog'])->name('blog');
     Route::get('blog_details/{slug}', [FrontController::class, 'blog_details'])->name('blog_details');
     Route::get('category/{slug}', [FrontController::class, 'category'])->name('category');
+    Route::get('destinations', [FrontController::class, 'destinations'])->name('destinations');
+    Route::get('destination/{slug}', [FrontController::class, 'destination'])->name('destination');
 
     // registration route
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');
@@ -92,6 +95,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('faq', AdminFaqController::class);
         Route::resource('blog_category', AdminBlogCategoryController::class);
         Route::resource('blog', AdminBlogController::class);
+        Route::resource('destination', AdminDestinationController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');

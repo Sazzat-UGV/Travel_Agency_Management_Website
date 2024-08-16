@@ -230,5 +230,26 @@
 
             </ul>
         </li>
+        <!-- Destination -->
+        <li class="menu-item @if (Route::is('destination.index') || Route::is('destination.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-current-location"></i>
+                <div data-i18n="destinations">Destinations</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('destination.index')) active @endif">
+                    <a href="{{ route('destination.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Destination List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('destination.create')) active @endif">
+                    <a href="{{ route('destination.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Destination</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
 </aside>

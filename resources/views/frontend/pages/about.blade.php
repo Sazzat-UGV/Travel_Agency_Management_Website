@@ -78,7 +78,7 @@
                     <div class="col-xl-4 col-md-6">
                         <div class="feature-card {{ $index % 2 == 0 ? 'two' : 'three' }}">
                             <div class="feature-card-icon">
-                                <i class="{{ $feature->icon }}" style="font-size:35px; color: #63AB45"></i>
+                                <i class="{{ $feature->icon }}" style="font-size:35px; color: black"></i>
                             </div>
                             <div class="feature-card-content">
                                 <h6>{{ $feature->heading }}</h6>
