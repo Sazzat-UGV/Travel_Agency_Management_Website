@@ -26,20 +26,20 @@
                     </div>
                     <p>{!! $destination->description !!}</p>
                     @if ($destination->activity)
-                        <h2>Activity</h2>
+                        <h3>Activity</h3>
                         {!! $destination->activity !!}
                     @endif
                     @if ($destination->best_time)
-                        <h2>Best Time to Visit</h2>
+                        <h3>Best Time to Visit</h3>
                         <p>{!! $destination->best_time !!}</p>
                     @endif
 
                     @if ($destination->visa_requirement)
-                        <h2>Visa Requirement</h2>
+                        <h3>Visa Requirement</h3>
                         <p>{!! $destination->visa_requirement !!}</p>
                     @endif
                     @if ($destination->health_safety)
-                        <h2>Health Safety</h2>
+                        <h3>Health Safety</h3>
                         <p>{!! $destination->health_safety !!}</p>
                     @endif
                 </div>
@@ -85,15 +85,46 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="contact-map">
-                        @if ($destination->map)
-                            {!! $destination->map !!}
-                        @endif
+
+            @if ($photos && $photos->count() > 0)
+                <div class="destination-location-gallery mb-120">
+                    <div class="row">
+                        <h3>Photos</h3>
+                        <div class="col-lg-12">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="location1" role="tabpanel"
+                                    aria-labelledby="location1-tab">
+                                    <div class="destination-gallery">
+                                        <div class="row g-4">
+                                            @foreach ($photos as $photo)
+                                                <div class="col-lg-4 col-sm-6">
+                                                    <div class="gallery-img-wrap">
+                                                        <img src="{{ asset('uploads/destination') }}/{{ $photo->photo }}"
+                                                            alt="">
+                                                        <a data-fancybox="gallery-01"
+                                                            href="{{ asset('uploads/destination') }}/{{ $photo->photo }}"><i
+                                                                class="bi bi-eye"></i></a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
+            @if ($destination->map)
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-map">
+                            {!! $destination->map !!}
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     </div>

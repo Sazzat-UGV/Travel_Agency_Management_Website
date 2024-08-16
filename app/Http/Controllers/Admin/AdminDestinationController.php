@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
+use App\Models\DestinationPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -110,6 +111,10 @@ class AdminDestinationController extends Controller
     public function destroy(string $id)
     {
         $destination = Destination::findOrFail($id);
+        $destination_photos=DestinationPhoto::where('destination_id',$destination->id)->count();
+if($destination_photos>0){
+    return redirect()->back()->with('error', 'Delete all the photo of this destination first.');
+}
         if ($destination->featured_photo != '') {
             //delete old photo
             $photo_location = 'public/uploads/destination/';
@@ -140,5 +145,45 @@ class AdminDestinationController extends Controller
                 'featured_photo' => $new_photo_name,
             ]);
         }
+    }
+
+    public function destination_photos($id)
+    {
+        $destination = Destination::findOrFail($id);
+        $photos = DestinationPhoto::where('destination_id',$destination->id)->get();
+        return view('admin.pages.destination.photos', compact('destination','photos'));
+    }
+
+    public function destination_photo_submit(Request $request, $id)
+    {
+        $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+        ]);
+        $destination = Destination::findOrFail($id);
+        if ($request->hasFile('photo')) {
+            $photo_loation = 'public/uploads/destination/';
+            $uploaded_photo = $request->file('photo');
+            $new_photo_name = 'multi' . time() . '.' . $uploaded_photo->getClientOriginalExtension();
+            $new_photo_location = $photo_loation . $new_photo_name;
+            Image::make($uploaded_photo)->save(base_path($new_photo_location));
+            DestinationPhoto::create([
+                'destination_id' => $destination->id,
+                'photo' => $new_photo_name,
+            ]);
+        }
+        return redirect()->back()->with('success', 'Photo inserted successfully');
+    }
+    
+    public function destination_photo_delete($id){
+
+        $destination_photo=DestinationPhoto::findOrFail($id);
+        if ($destination_photo->photo != '') {
+            //delete old photo
+            $photo_location = 'public/uploads/destination/';
+            $old_photo_location = $photo_location . $destination_photo->photo;
+            unlink(base_path($old_photo_location));
+        }
+        $destination_photo->delete();
+        return redirect()->back()->with('success', 'Photo delete successfully');
     }
 }

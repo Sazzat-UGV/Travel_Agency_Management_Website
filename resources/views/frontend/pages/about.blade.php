@@ -70,15 +70,22 @@
 
 
     <!-- feature section start-->
-    <div class="feature-card-section mb-80">
+    <div class="feature-card-section mb-120">
         <img src="{{ asset('assets/frontend') }}/img/home1/section-vector4.png" alt="" class="section-vector4">
         <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center mb-60">
+                        <h2>Why we are Best</h2>
+                    </div>
+                </div>
+            </div>
             <div class="row g-md-4 gy-5">
                 @foreach ($features as $index => $feature)
                     <div class="col-xl-4 col-md-6">
-                        <div class="feature-card {{ $index % 2 == 0 ? 'two' : 'three' }}">
+                        <div class="feature-card style-2">
                             <div class="feature-card-icon">
-                                <i class="{{ $feature->icon }}" style="font-size:35px; color: black"></i>
+                                <i class="{{ $feature->icon }}" style="font-size:45px;"></i>
                             </div>
                             <div class="feature-card-content">
                                 <h6>{{ $feature->heading }}</h6>

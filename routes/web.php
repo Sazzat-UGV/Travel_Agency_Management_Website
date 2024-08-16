@@ -104,5 +104,10 @@ Route::prefix('/admin')->group(function () {
         // counter item route
         Route::get('counter-item/index', [AdminCounterItemController::class, 'index'])->name('admin.counterItemIndex');
         Route::post('counter-item/update', [AdminCounterItemController::class, 'update'])->name('admin.counterItemUpdate');
+
+        // destination photo route
+        Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');
+        Route::post('destination_photos/{id}', [AdminDestinationController::class, 'destination_photo_submit'])->name('admin.destination_photo_submit');
+        Route::delete('destination_photos/{id}', [AdminDestinationController::class, 'destination_photo_delete'])->name('admin.destination_photo_delete');
     });
 });

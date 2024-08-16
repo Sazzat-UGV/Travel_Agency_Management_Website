@@ -39,8 +39,7 @@
                             <th>#</th>
                             <th>Featured Photo</th>
                             <th>Name</th>
-                            <th>Currency</th>
-                            <th>Time Zone</th>
+                            <th>Gallery</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -51,8 +50,10 @@
                                 <td><img src="{{ asset('uploads/destination') }}/{{ $destination->featured_photo }}"
                                         alt="" class="img-fluid w-50"></td>
                                 <td class="wrap">{{ $destination->name }}</td>
-                                <td class="wrap">{{ $destination->currency }}</td>
-                                <td class="wrap">{{ $destination->timezone }}</td>
+                                <td >
+                                    <a href="{{ route('admin.destination_photos',$destination->id) }}" class="btn btn-success">Photo Gallery</a>
+                                    <a href="" class="btn btn-success">Video Gallery</a>
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

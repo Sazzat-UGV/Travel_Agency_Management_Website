@@ -26775,3 +26775,7 @@ to {
         section{
             margin: 120px 0px;
         }
+        .feature-card:hover .feature-card-icon i {
+            color: white;
+            transition: 0.4s;
+        }
