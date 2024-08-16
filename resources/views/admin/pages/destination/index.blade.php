@@ -50,9 +50,11 @@
                                 <td><img src="{{ asset('uploads/destination') }}/{{ $destination->featured_photo }}"
                                         alt="" class="img-fluid w-50"></td>
                                 <td class="wrap">{{ $destination->name }}</td>
-                                <td >
-                                    <a href="{{ route('admin.destination_photos',$destination->id) }}" class="btn btn-success">Photo Gallery</a>
-                                    <a href="" class="btn btn-success">Video Gallery</a>
+                                <td>
+                                    <a href="{{ route('admin.destination_photos', $destination->id) }}"
+                                        class="btn btn-success">Photo Gallery</a>
+                                    <a href="{{ route('admin.destination_videos', $destination->id) }}"
+                                        class="btn btn-success">Video Gallery</a>
                                 </td>
                                 <td>
                                     <div class="dropdown">

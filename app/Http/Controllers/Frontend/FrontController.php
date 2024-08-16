@@ -8,6 +8,7 @@ use App\Models\BlogCategory;
 use App\Models\CounterItem;
 use App\Models\Destination;
 use App\Models\DestinationPhoto;
+use App\Models\DestinationVideo;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Slider;
@@ -96,10 +97,11 @@ class FrontController extends Controller
     public function destination($slug)
     {
         $destination = Destination::where('slug', $slug)->first();
-        $photos = DestinationPhoto::latest('id')->where('destination_id',$destination->id)->get();
+        $photos = DestinationPhoto::latest('id')->where('destination_id', $destination->id)->get();
+        $videos = DestinationVideo::latest('id')->where('destination_id', $destination->id)->get();
         $destination->view_count += 1;
         $destination->update();
-        return view('frontend.pages.destination', compact('destination','photos'));
+        return view('frontend.pages.destination', compact('destination', 'photos', 'videos'));
     }
 
 }

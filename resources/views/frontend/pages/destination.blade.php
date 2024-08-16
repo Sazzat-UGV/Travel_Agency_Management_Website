@@ -116,6 +116,29 @@
                     </div>
                 </div>
             @endif
+            @if ($videos && $videos->count() > 0)
+                <div class="destination-location-gallery mb-120">
+                    <div class="row">
+                        <h3>Videos</h3>
+                        @foreach ($videos as $video)
+                            <div class="col-3 mb-3">
+                                <div class="gallery-img-wrap position-relative">
+                                    <!-- Video Thumbnail -->
+                                    <img src="https://img.youtube.com/vi/{{ $video->video }}/hqdefault.jpg"
+                                        alt="Video Thumbnail" class="img-fluid rounded shadow-sm">
+
+                                    <!-- Play Button Overlay -->
+                                    <a data-fancybox="gallery-01"
+                                        href="https://www.youtube.com/watch?v={{ $video->video }}"
+                                        class="play-button position-absolute top-50 start-50 translate-middle text-white text-center">
+                                        <i class="bi bi-play-circle" style="font-size: 40px"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
             @if ($destination->map)
                 <div class="row">
                     <div class="col-12">
