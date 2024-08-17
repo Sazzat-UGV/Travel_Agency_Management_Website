@@ -272,6 +272,27 @@
 
             </ul>
         </li>
+        <!-- amenity -->
+        <li class="menu-item @if (Route::is('amenity.index') || Route::is('amenity.create')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="amenitys">Amenities</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('amenity.index')) active @endif">
+                    <a href="{{ route('amenity.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Amenity List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('amenity.create')) active @endif">
+                    <a href="{{ route('amenity.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Amenity</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
 
 
 

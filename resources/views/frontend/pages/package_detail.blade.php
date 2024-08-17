@@ -57,22 +57,23 @@
                         </li>
                     </ul>
                     <p>{!! $package->description !!}</p>
-                    <h4>Included and Excluded</h4>
+                    @if ($package_amenity_include->count()>0 ||$package_amenity_exclude->count()>0)
+                    <h4>Included @if ($package_amenity_exclude->count()>0)
+                        and Excluded
+                    @endif</h4>
                     <div class="includ-and-exclud-area mb-20">
                         <ul>
-                            <li><i class="bi bi-check-lg"></i> Meal as per hotel Plan and drinks free too.</li>
-                            <li><i class="bi bi-check-lg"></i> Return airport and round trip transfers.</li>
-                            <li><i class="bi bi-check-lg"></i> Accommodation on twin sharing basis.</li>
-                            <li><i class="bi bi-check-lg"></i> The above rates are on per day disposal basi</li>
-                            <li><i class="bi bi-check-lg"></i> Enjoy Brussels day tours. Overnight Brussels</li>
+                            @foreach ($package_amenity_include as $include)
+                            <li><i class="bi bi-check-lg"></i> {{ $include->amenity->name }}</li>
+                             @endforeach
                         </ul>
                         <ul class="exclud">
-                            <li><i class="bi bi-x-lg"></i> AC will not be functional on Hills or Slopes.</li>
-                            <li><i class="bi bi-x-lg"></i> Any other service not mentioned</li>
-                            <li><i class="bi bi-x-lg"></i> Additional entry fees other than specified</li>
-                            <li><i class="bi bi-x-lg"></i> Amsterdam canal cruise not included for basic</li>
+                            @foreach ($package_amenity_exclude as $exclude)
+                            <li><i class="bi bi-x-lg"></i> {{ $exclude->amenity->name }}</li>
+                             @endforeach
                         </ul>
                     </div>
+                    @endif
                     <div class="highlight-tour mb-20">
                         <h4>Highlights of the Tour</h4>
                         <ul>

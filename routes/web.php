@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminBlogController;
@@ -100,6 +101,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('blog', AdminBlogController::class);
         Route::resource('destination', AdminDestinationController::class);
         Route::resource('package', AdminPackageController::class);
+        Route::resource('amenity', AdminAmenityController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');
@@ -113,12 +115,17 @@ Route::prefix('/admin')->group(function () {
         Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');
         Route::post('destination_photos/{id}', [AdminDestinationController::class, 'destination_photo_submit'])->name('admin.destination_photo_submit');
         Route::delete('destination_photos/{id}', [AdminDestinationController::class, 'destination_photo_delete'])->name('admin.destination_photo_delete');
-        
+
         // destination video route
         Route::get('destination_videos/{id}', [AdminDestinationController::class, 'destination_videos'])->name('admin.destination_videos');
         Route::post('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_submit'])->name('admin.destination_video_submit');
         Route::delete('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_delete'])->name('admin.destination_video_delete');
-        
+
+        // amenity route
+        Route::get('package_amenity/{id}', [AdminPackageController::class, 'package_amenity'])->name('admin.package_amenity');
+        Route::post('package_amenity/{id}', [AdminPackageController::class, 'package_amenity_submit'])->name('admin.package_amenity_submit');
+        Route::delete('package_amenity/{id}', [AdminPackageController::class, 'package_amenity_delete'])->name('admin.package_amenity_delete');
+
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');
         Route::post('setting/update', [AdminSettingController::class, 'update'])->name('admin.settingUpdate');

@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Package List
+    Amenity List
 @endsection
 @push('admin_style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -19,16 +19,16 @@
 @endpush
 @section('content')
     @include('admin.layout.inc.breadcumb', [
-        'main_page' => 'Packages',
-        'sub_page' => 'Package List',
+        'main_page' => 'Amenities',
+        'sub_page' => 'Amenity List',
     ])
     <div class="col-12">
         <div class="card px-4">
             <div class="col-md-12 col-lg-12 col-sm-12 py-4">
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('package.create') }}" class="btn btn-primary">
+                    <a href="{{ route('amenity.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus-circle"></i>
-                        Add New Package
+                        Add New Amenity
                     </a>
                 </div>
             </div>
@@ -37,27 +37,15 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Featured Photo</th>
                             <th>Name</th>
-                            <th>Gallery</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($packages as $index => $package)
+                        @foreach ($amenities as $index => $amenity)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td><img src="{{ asset('uploads/package') }}/{{ $package->featured_photo }}" alt=""
-                                        class="img-fluid w-50"></td>
-                                <td class="wrap">{{ $package->name }}</td>
-                                <td>
-                                    <a href="{{ route('admin.package_amenity', $package->id) }}"
-                                        class="btn btn-success btn-sm">Amenity</a>
-                                    <a href="#" class="btn btn-success  btn-sm">Itinerary</a>
-                                    <a href="#" class="btn btn-success  btn-sm">Photo Gallery</a>
-                                    <a href="#" class="btn btn-success  btn-sm">Video Gallery</a>
-                                </td>
-
+                                <td class="wrap">{{ $amenity->name }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -65,10 +53,10 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('package.edit', $package->id) }}"><i
+                                            <a class="dropdown-item" href="{{ route('amenity.edit', $amenity->id) }}"><i
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Edit</a>
-                                            <form action="{{ route('package.destroy', $package->id) }}" method="POST">
+                                            <form action="{{ route('amenity.destroy', $amenity->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item show_confirm" type="submit"><i

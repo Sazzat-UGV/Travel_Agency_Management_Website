@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
 use App\Models\Destination;
 use App\Models\Package;
+use App\Models\PackageAmenity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -103,8 +105,11 @@ class AdminPackageController extends Controller
      */
     public function destroy(string $id)
     {
-
-            $package = Package::findOrFail($id);
+        $total = PackageAmenity::where('package_id', $id)->count();
+        if ($total > 0) {
+            return redirect()->back()->with('error', 'Package contain some amenities .');
+        }
+        $package = Package::findOrFail($id);
         if ($package->featured_photo != '') {
             //delete old photo
             $photo_location = 'public/uploads/package/';
@@ -135,5 +140,33 @@ class AdminPackageController extends Controller
                 'featured_photo' => $new_photo_name,
             ]);
         }
+    }
+    public function package_amenity($id)
+    {
+        $package = Package::findOrFail($id);
+        $amenities = Amenity::orderBy('name', 'asc')->get();
+        $package_amenities = PackageAmenity::with('amenity')->latest('id')->where('package_id', $package->id)->get();
+        return view('admin.pages.package.amenities', compact('package', 'package_amenities', 'amenities'));
+    }
+
+    public function package_amenity_submit(Request $request, $id)
+    {
+        $total = PackageAmenity::where('package_id', $id)->where('amenity_id', $request->amenity)->count();
+        if ($total > 0) {
+            return redirect()->back()->with('error', 'Amenity alrady inserted.');
+        }
+        PackageAmenity::create([
+            'package_id' => $id,
+            'amenity_id' => $request->amenity,
+            'type' => $request->type,
+        ]);
+        return redirect()->back()->with('success', 'Amenity inserted successfully');
+    }
+
+    public function package_amenity_delete($id)
+    {
+        $package_amenity = PackageAmenity::findOrFail($id);
+        $package_amenity->delete();
+        return redirect()->back()->with('success', 'Amenity delete successfully');
     }
 }

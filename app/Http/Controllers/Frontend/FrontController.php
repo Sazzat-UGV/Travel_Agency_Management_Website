@@ -12,6 +12,7 @@ use App\Models\DestinationVideo;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Package;
+use App\Models\PackageAmenity;
 use App\Models\Slider;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
@@ -100,15 +101,17 @@ class FrontController extends Controller
         $destination = Destination::where('slug', $slug)->first();
         $photos = DestinationPhoto::latest('id')->where('destination_id', $destination->id)->get();
         $videos = DestinationVideo::latest('id')->where('destination_id', $destination->id)->get();
-        $packages=Package::where('destination_id',$destination->id)->get();
+        $packages = Package::where('destination_id', $destination->id)->get();
         $destination->view_count += 1;
         $destination->update();
-        return view('frontend.pages.destination', compact('destination', 'photos', 'videos','packages'));
+        return view('frontend.pages.destination', compact('destination', 'photos', 'videos', 'packages'));
     }
 
     public function package($slug)
     {
         $package = Package::with('destination')->where('slug', $slug)->first();
-        return view('frontend.pages.package_detail', compact('package'));
+        $package_amenity_include = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Include')->select('id', 'package_id', 'amenity_id')->get();
+        $package_amenity_exclude = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Exclude')->select('id', 'package_id', 'amenity_id')->get();
+        return view('frontend.pages.package_detail', compact('package', 'package_amenity_include', 'package_amenity_exclude'));
     }
 }
