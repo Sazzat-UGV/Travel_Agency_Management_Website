@@ -121,10 +121,15 @@ Route::prefix('/admin')->group(function () {
         Route::post('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_submit'])->name('admin.destination_video_submit');
         Route::delete('destination_videos/{id}', [AdminDestinationController::class, 'destination_video_delete'])->name('admin.destination_video_delete');
 
-        // amenity route
+        // package amenity route
         Route::get('package_amenity/{id}', [AdminPackageController::class, 'package_amenity'])->name('admin.package_amenity');
         Route::post('package_amenity/{id}', [AdminPackageController::class, 'package_amenity_submit'])->name('admin.package_amenity_submit');
         Route::delete('package_amenity/{id}', [AdminPackageController::class, 'package_amenity_delete'])->name('admin.package_amenity_delete');
+
+        // package amenity route
+        Route::get('package_itinerary/{id}', [AdminPackageController::class, 'package_itinerary'])->name('admin.package_itinerary');
+        Route::post('package_itinerary/{id}', [AdminPackageController::class, 'package_itinerary_submit'])->name('admin.package_itinerary_submit');
+        Route::delete('package_itinerary/{id}', [AdminPackageController::class, 'package_itinerary_delete'])->name('admin.package_itinerary_delete');
 
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');

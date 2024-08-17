@@ -34,7 +34,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
         <div class="col-7">
             <div class="card">
                 <div class="card-body">
@@ -93,7 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 @push('admin_script')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -105,17 +103,17 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
-          
+
             $('.dropify').dropify();
 
-        
+
             $('#example').DataTable({
                 pagingType: 'first_last_numbers',
             });
 
-           
+
             $('.show_confirm').click(function(event) {
-                event.preventDefault(); 
+                event.preventDefault();
 
                 Swal.fire({
                     title: 'Are you sure?',
@@ -127,7 +125,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $(this).closest('form').submit(); 
+                        $(this).closest('form').submit();
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',

@@ -7,6 +7,7 @@ use App\Models\Amenity;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Models\PackageAmenity;
+use App\Models\PackageItinerary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -107,7 +108,12 @@ class AdminPackageController extends Controller
     {
         $total = PackageAmenity::where('package_id', $id)->count();
         if ($total > 0) {
-            return redirect()->back()->with('error', 'Package contain some amenities .');
+            return redirect()->back()->with('error', 'Package contain some amenities.');
+        }
+
+        $total1 = PackageItinerary::where('package_id', $id)->count();
+        if ($total1 > 0) {
+            return redirect()->back()->with('error', 'Package contain some itineraries.');
         }
         $package = Package::findOrFail($id);
         if ($package->featured_photo != '') {
@@ -168,5 +174,35 @@ class AdminPackageController extends Controller
         $package_amenity = PackageAmenity::findOrFail($id);
         $package_amenity->delete();
         return redirect()->back()->with('success', 'Amenity delete successfully');
+    }
+
+    public function package_itinerary($id)
+    {
+        $package = Package::findOrFail($id);
+        $package_itineraries = PackageItinerary::latest('id')->where('package_id', $package->id)->get();
+        return view('admin.pages.package.itineraries', compact('package', 'package_itineraries'));
+    }
+
+    public function package_itinerary_submit(Request $request, $id)
+    {
+        $request->validate([
+            'day' => 'required|numeric',
+            'name' => 'required|unique:package_itineraries,name',
+            'description' => 'required',
+        ]);
+        PackageItinerary::create([
+            'package_id' => $id,
+            'day' => $request->day,
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        return redirect()->back()->with('success', 'Itinerary inserted successfully');
+    }
+
+    public function package_itinerary_delete($id)
+    {
+        $package_itinerary = PackageItinerary::findOrFail($id);
+        $package_itinerary->delete();
+        return redirect()->back()->with('success', 'Itinerary delete successfully');
     }
 }

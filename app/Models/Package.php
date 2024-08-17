@@ -13,4 +13,8 @@ class Package extends Model
     public function destination(){
         return $this->belongsTo(Destination::class);
     }
+
+    public function package_itineraries(){
+        return $this->hasMany(PackageItinerary::class);
+    }
 }

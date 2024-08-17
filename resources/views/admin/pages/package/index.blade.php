@@ -53,7 +53,8 @@
                                 <td>
                                     <a href="{{ route('admin.package_amenity', $package->id) }}"
                                         class="btn btn-success btn-sm">Amenity</a>
-                                    <a href="#" class="btn btn-success  btn-sm">Itinerary</a>
+                                    <a href="{{ route('admin.package_itinerary', $package->id) }}"
+                                        class="btn btn-success  btn-sm">Itinerary</a>
                                     <a href="#" class="btn btn-success  btn-sm">Photo Gallery</a>
                                     <a href="#" class="btn btn-success  btn-sm">Video Gallery</a>
                                 </td>

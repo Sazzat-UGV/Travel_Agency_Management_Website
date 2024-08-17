@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+
         <div class="col-7">
             <div class="card">
                 <div class="card-body">
@@ -90,7 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 @push('admin_script')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

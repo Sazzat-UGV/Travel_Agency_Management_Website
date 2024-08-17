@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Blog;
-use App\Models\BlogCategory;
-use App\Models\CounterItem;
-use App\Models\Destination;
-use App\Models\DestinationPhoto;
-use App\Models\DestinationVideo;
 use App\Models\Faq;
+use App\Models\Blog;
+use App\Models\Slider;
 use App\Models\Feature;
 use App\Models\Package;
-use App\Models\PackageAmenity;
-use App\Models\Slider;
 use App\Models\TeamMember;
+use App\Models\CounterItem;
+use App\Models\Destination;
 use App\Models\Testimonial;
 use App\Models\WelcomeItem;
+use App\Models\BlogCategory;
+use App\Models\PackageAmenity;
+use App\Models\DestinationPhoto;
+use App\Models\DestinationVideo;
+use App\Models\PackageItinerary;
+use App\Http\Controllers\Controller;
 
 class FrontController extends Controller
 {
@@ -112,6 +113,12 @@ class FrontController extends Controller
         $package = Package::with('destination')->where('slug', $slug)->first();
         $package_amenity_include = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Include')->select('id', 'package_id', 'amenity_id')->get();
         $package_amenity_exclude = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Exclude')->select('id', 'package_id', 'amenity_id')->get();
-        return view('frontend.pages.package_detail', compact('package', 'package_amenity_include', 'package_amenity_exclude'));
+        $package_itineraries = PackageItinerary::where('package_id', $package->id)->get();  
+        return view('frontend.pages.package_detail', compact(
+            'package',
+            'package_amenity_include',
+            'package_amenity_exclude',
+            'package_itineraries',
+        ));
     }
 }

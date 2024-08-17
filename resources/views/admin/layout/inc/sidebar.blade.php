@@ -231,7 +231,10 @@
             </ul>
         </li>
         <!-- Destination -->
-        <li class="menu-item @if (Route::is('destination.index') || Route::is('destination.create')) active @endif">
+        <li class="menu-item @if (Route::is('destination.index') ||
+                Route::is('destination.create') ||
+                Route::is('admin.destination_videos') ||
+                Route::is('admin.destination_photos')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-current-location"></i>
                 <div data-i18n="destinations">Destinations</div>
@@ -246,27 +249,6 @@
                 <li class="menu-item @if (Route::is('destination.create')) active @endif">
                     <a href="{{ route('destination.create') }}" class="menu-link">
                         <div data-i18n="Without navbar">Add New Destination</div>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-        <!-- package -->
-        <li class="menu-item @if (Route::is('package.index') || Route::is('package.create')) active @endif">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-package"></i>
-                <div data-i18n="packages">Packages</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item @if (Route::is('package.index')) active @endif">
-                    <a href="{{ route('package.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Package List</div>
-                    </a>
-                </li>
-                <li class="menu-item @if (Route::is('package.create')) active @endif">
-                    <a href="{{ route('package.create') }}" class="menu-link">
-                        <div data-i18n="Without navbar">Add New Package</div>
                     </a>
                 </li>
 
@@ -288,6 +270,30 @@
                 <li class="menu-item @if (Route::is('amenity.create')) active @endif">
                     <a href="{{ route('amenity.create') }}" class="menu-link">
                         <div data-i18n="Without navbar">Add New Amenity</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <!-- package -->
+        <li class="menu-item @if (Route::is('package.index') ||
+                Route::is('package.create') ||
+                Route::is('admin.package_amenity') ||
+                Route::is('admin.package_itinerary')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-package"></i>
+                <div data-i18n="packages">Packages</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('package.index')) active @endif">
+                    <a href="{{ route('package.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Package List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('package.create')) active @endif">
+                    <a href="{{ route('package.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Package</div>
                     </a>
                 </li>
 
