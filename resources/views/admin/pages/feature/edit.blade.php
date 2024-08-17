@@ -22,22 +22,19 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label class="form-label" for="icon">Existing Icon: </label>
-                        <span style="font-size: 30px; margin-right: 10px">[</span><i class="{{ $feature->icon }}"
-                            style="font-size: 20px"></i><span style="font-size: 30px; margin-left: 10px">]</span>
+                        <label class="form-label" for="icon">Existing Icon: </label>{!! $feature->icon !!}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="icon">Icon<Strong> (Font Awesome Icon)</Strong><span
-                                class="text-danger">*</span></label>
-                        <input type="text"
-                            class="form-control @error('icon')
-                            is-invalid
-                            @enderror"
-                            id="icon" placeholder="Enter feature icon" name="icon"
-                            value="{{ old('icon', $feature->icon) }}">
-                        @error('icon')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
+                        <label class="form-label" for="icon">Icon<Strong> (SVG Icon)</Strong><span
+                            class="text-danger">*</span></label>
+                    <textarea name="icon" id="" cols="30" rows="5"
+                        class="form-control @error('icon')
+                    is-invalid
+                    @enderror"
+                        placeholder="Enter feature icon" id="icon">{{ old('icon', $feature->icon) }}</textarea>
+                    @error('icon')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                    @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="heading">Heading<span class="text-danger">*</span></label>

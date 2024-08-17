@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 @endpush
 @section('content')
-@include('admin.layout.inc.breadcumb', ['main_page' => 'Features', 'sub_page' => 'Add New Feature'])
+    @include('admin.layout.inc.breadcumb', ['main_page' => 'Features', 'sub_page' => 'Add New Feature'])
     <div class="col-xxl">
         <div class="card mb-4">
             <div class="card-header d-flex align-items-center">
@@ -21,13 +21,13 @@
                 <form action="{{ route('feature.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="icon">Icon<Strong> (Font Awesome Icon)</Strong><span
+                        <label class="form-label" for="icon">Icon<Strong> (SVG Icon)</Strong><span
                                 class="text-danger">*</span></label>
-                        <input type="text"
+                        <textarea name="icon" id="" cols="30" rows="5"
                             class="form-control @error('icon')
-                            is-invalid
-                            @enderror"
-                            id="icon" placeholder="Enter feature icon" name="icon" value="{{ old('icon') }}">
+                        is-invalid
+                        @enderror"
+                            placeholder="Enter feature icon" id="icon">{{ old('icon') }}</textarea>
                         @error('icon')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror

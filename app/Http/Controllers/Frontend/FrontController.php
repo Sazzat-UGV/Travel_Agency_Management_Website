@@ -109,6 +109,6 @@ class FrontController extends Controller
     public function package($slug)
     {
         $package = Package::with('destination')->where('slug', $slug)->first();
-        return view('frontend.pages.package', compact('package'));
+        return view('frontend.pages.package_detail', compact('package'));
     }
 }

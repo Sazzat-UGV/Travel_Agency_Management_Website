@@ -46,7 +46,7 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td class="wrap"><i class="{{ $feature->icon }}"></i></td>
-                                <td class="wrap">{{ $feature->icon }}</td>
+                                <td class="wrap">{!! $feature->icon !!}</td>
                                 <td class="wrap">{{ $feature->heading }}</td>
                                 <td class="wrap">{{ $feature->description }}</td>
                                 <td>

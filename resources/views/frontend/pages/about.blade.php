@@ -82,18 +82,22 @@
             </div>
             <div class="row g-md-4 gy-5">
                 @foreach ($features as $index => $feature)
-                    <div class="col-xl-4 col-md-6">
-                        <div class="feature-card style-2">
-                            <div class="feature-card-icon">
-                                <i class="{{ $feature->icon }}" style="font-size:45px;"></i>
-                            </div>
-                            <div class="feature-card-content">
-                                <h6>{{ $feature->heading }}</h6>
-                                <p>{{ $feature->description }}</p>
-                            </div>
+                @php
+                    $classes = ['one', 'two', 'three'];
+                    $randomClass = $classes[$index % 3];
+                @endphp
+                <div class="col-xl-4 col-md-6">
+                    <div class="feature-card {{ $randomClass }}">
+                        <div class="feature-card-icon">
+                            {!! $feature->icon !!}
+                        </div>
+                        <div class="feature-card-content">
+                            <h6>{{ $feature->heading }}</h6>
+                            <p>{{ $feature->description }}</p>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
             </div>
         </div>
     </div>
