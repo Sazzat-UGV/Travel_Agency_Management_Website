@@ -13,6 +13,7 @@ use App\Models\Destination;
 use App\Models\Testimonial;
 use App\Models\WelcomeItem;
 use App\Models\BlogCategory;
+use App\Models\PackagePhoto;
 use App\Models\PackageAmenity;
 use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
@@ -113,12 +114,14 @@ class FrontController extends Controller
         $package = Package::with('destination')->where('slug', $slug)->first();
         $package_amenity_include = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Include')->select('id', 'package_id', 'amenity_id')->get();
         $package_amenity_exclude = PackageAmenity::with('amenity:id,name')->where('package_id', $package->id)->where('type', 'Exclude')->select('id', 'package_id', 'amenity_id')->get();
-        $package_itineraries = PackageItinerary::where('package_id', $package->id)->get();  
+        $package_itineraries = PackageItinerary::where('package_id', $package->id)->get();
+        $package_photos = PackagePhoto::latest('id')->where('package_id', $package->id)->get();
         return view('frontend.pages.package_detail', compact(
             'package',
             'package_amenity_include',
             'package_amenity_exclude',
             'package_itineraries',
+            'package_photos',
         ));
     }
 }

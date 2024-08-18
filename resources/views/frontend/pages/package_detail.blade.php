@@ -11,13 +11,16 @@
         'parent_page_link' => '#',
         'page_name' => $package->name,
     ])
+
     <div class="package-details-area pt-120 mb-120 position-relative">
         <div class="container">
             <div class="row">
+
+
                 <div class="co-lg-12">
                     <div class="package-img-group mb-50">
                         <div class="row align-items-center g-3">
-                            <div class="col-lg-12">
+                            <div class="col-lg-{{ $package_photos->count() > 0 ? '6' : '12' }}">
                                 <div class="gallery-img-wrap">
                                     <img src="{{ asset('uploads/package') }}/{{ $package->featured_photo }}"
                                         alt="featured photo">
@@ -26,10 +29,82 @@
                                             class="bi bi-eye"></i></a>
                                 </div>
                             </div>
+                            <div class="col-lg-6 h-100">
+                                <div class="row g-3 h-100">
+                                    @if ($package_photos->count() > 3)
+                                        @foreach ($package_photos->take(2) as $index => $package_photo)
+                                            <div class="col-6">
+                                                <div class="gallery-img-wrap">
+                                                    <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
+                                                        alt="package photo">
+                                                    <a data-fancybox="gallery-01"
+                                                        href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <div class="col-6">
+                                            <div class="gallery-img-wrap active">
+                                                <div class="gallery-img-wrap">
+                                                    @foreach ($package_photos as $package_photo)
+                                                        <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
+                                                            alt="package photo">
+                                                        <a data-fancybox="gallery-01"
+                                                            href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
+                                                    @endforeach
+                                                    <i class="bi bi-plus-lg"></i> View More Images
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @elseif ($package_photos->count() == 3)
+                                        @foreach ($package_photos as $package_photo)
+                                            <div class="col-6">
+                                                <div class="gallery-img-wrap">
+                                                    <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
+                                                        alt="package photo">
+                                                    <a data-fancybox="gallery-01"
+                                                        href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                    <div class="col-6">
+                                        <div class="gallery-img-wrap active">
+                                            <img src="{{ asset('assets/frontend') }}/img/innerpage/package-05.jpg"
+                                                alt="">
+                                            <a data-fancybox="gallery-01"
+                                                href="https://www.youtube.com/watch?v=u31qwQUeGuM"><i
+                                                    class="bi bi-play-circle"></i> Watch Video</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="row g-xl-4 gy-5">
                 <div class="col-xl-8">
@@ -93,21 +168,22 @@
                     @if ($package_itineraries->count() > 0)
                         <h4>Itinerary</h4>
                         <div class="accordion tour-plan" id="tourPlan">
-                            @foreach ($package_itineraries as $index=>$itinerary)
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne-{{ $index }}" aria-expanded="true" aria-controls="collapseOne">
-                                        <span>Day {{ $itinerary->day }} :</span> {{ $itinerary->name }}
-                                    </button>
-                                </h2>
-                                <div id="collapseOne-{{ $index }}" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                                    data-bs-parent="#tourPlan">
-                                    <div class="accordion-body">
-                                        {!! $itinerary->description !!}
+                            @foreach ($package_itineraries as $index => $itinerary)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne-{{ $index }}" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            <span>Day {{ $itinerary->day }} :</span> {{ $itinerary->name }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne-{{ $index }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#tourPlan">
+                                        <div class="accordion-body">
+                                            {!! $itinerary->description !!}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     @endif
@@ -144,9 +220,9 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="travelheadingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#travelcollapseTwo" aria-expanded="false"
-                                            aria-controls="travelcollapseTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#travelcollapseTwo"
+                                            aria-expanded="false" aria-controls="travelcollapseTwo">
                                             02. What payment methods do you accept?
                                         </button>
                                     </h2>
@@ -163,9 +239,9 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="travelheadingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#travelcollapseThree" aria-expanded="false"
-                                            aria-controls="travelcollapseThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#travelcollapseThree"
+                                            aria-expanded="false" aria-controls="travelcollapseThree">
                                             03. Can I make changes to my reservation after booking?
                                         </button>
                                     </h2>

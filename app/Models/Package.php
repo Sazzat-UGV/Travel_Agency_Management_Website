@@ -17,4 +17,10 @@ class Package extends Model
     public function package_itineraries(){
         return $this->hasMany(PackageItinerary::class);
     }
+
+    public function photos(){
+        return $this->hasMany(PackagePhoto::class);
+    }
+
+
 }

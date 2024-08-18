@@ -8,6 +8,7 @@ use App\Models\Destination;
 use App\Models\Package;
 use App\Models\PackageAmenity;
 use App\Models\PackageItinerary;
+use App\Models\PackagePhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -115,6 +116,10 @@ class AdminPackageController extends Controller
         if ($total1 > 0) {
             return redirect()->back()->with('error', 'Package contain some itineraries.');
         }
+        $total2 = PackagePhoto::where('package_id', $id)->count();
+        if ($total2 > 0) {
+            return redirect()->back()->with('error', 'Package contain some itineraries.');
+        }
         $package = Package::findOrFail($id);
         if ($package->featured_photo != '') {
             //delete old photo
@@ -204,5 +209,45 @@ class AdminPackageController extends Controller
         $package_itinerary = PackageItinerary::findOrFail($id);
         $package_itinerary->delete();
         return redirect()->back()->with('success', 'Itinerary delete successfully');
+    }
+
+    public function package_photos($id)
+    {
+        $package = Package::findOrFail($id);
+        $photos = PackagePhoto::latest('id')->where('package_id', $package->id)->get();
+        return view('admin.pages.package.photos', compact('package', 'photos'));
+    }
+
+    public function package_photos_submit(Request $request, $id)
+    {
+        $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+        ]);
+        if ($request->hasFile('photo')) {
+            $photo_loation = 'public/uploads/package/';
+            $uploaded_photo = $request->file('photo');
+            $new_photo_name = 'multi' . time() . '.' . $uploaded_photo->getClientOriginalExtension();
+            $new_photo_location = $photo_loation . $new_photo_name;
+            Image::make($uploaded_photo)->save(base_path($new_photo_location));
+            PackagePhoto::create([
+                'package_id' => $id,
+                'photo' => $new_photo_name,
+            ]);
+        }
+        return redirect()->back()->with('success', 'Photo inserted successfully');
+    }
+
+    public function package_photos_delete($id)
+    {
+
+        $package_photo = PackagePhoto::findOrFail($id);
+        if ($package_photo->photo != '') {
+            //delete old photo
+            $photo_location = 'public/uploads/package/';
+            $old_photo_location = $photo_location . $package_photo->photo;
+            unlink(base_path($old_photo_location));
+        }
+        $package_photo->delete();
+        return redirect()->back()->with('success', 'Photo delete successfully');
     }
 }
