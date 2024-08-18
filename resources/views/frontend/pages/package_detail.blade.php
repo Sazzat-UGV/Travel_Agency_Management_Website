@@ -20,7 +20,12 @@
                 <div class="co-lg-12">
                     <div class="package-img-group mb-50">
                         <div class="row align-items-center g-3">
-                            <div class="col-lg-{{ $package_photos->count() > 0 ? '6' : '12' }}">
+                            <div
+                                class="@if ($package_photos->count() > 0) col-lg-6
+                                @elseif ($package_videos->count() > 0)
+                                col-lg-6
+                                @else
+                                col-lg-12 @endif">
                                 <div class="gallery-img-wrap">
                                     <img src="{{ asset('uploads/package') }}/{{ $package->featured_photo }}"
                                         alt="featured photo">
@@ -32,13 +37,13 @@
                             <div class="col-lg-6 h-100">
                                 <div class="row g-3 h-100">
                                     @if ($package_photos->count() > 3)
-                                        @foreach ($package_photos->take(2) as $index => $package_photo)
+                                        @foreach ($package_photos->take(2) as $package_photo)
                                             <div class="col-6">
                                                 <div class="gallery-img-wrap">
-                                                    <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
+                                                    <img src="{{ asset('uploads/package/' . $package_photo->photo) }}"
                                                         alt="package photo">
                                                     <a data-fancybox="gallery-01"
-                                                        href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
+                                                        href="{{ asset('uploads/package/' . $package_photo->photo) }}">
                                                         <i class="bi bi-eye"></i>
                                                     </a>
                                                 </div>
@@ -47,26 +52,29 @@
 
                                         <div class="col-6">
                                             <div class="gallery-img-wrap active">
-                                                <div class="gallery-img-wrap">
-                                                    @foreach ($package_photos as $package_photo)
-                                                        <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
-                                                            alt="package photo">
-                                                        <a data-fancybox="gallery-01"
-                                                            href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
-                                                    @endforeach
+                                                <img src="{{ asset('uploads/package/' . $package_photos->skip(2)->first()->photo) }}"
+                                                    alt="package photo">
+                                                <a data-fancybox="gallery-01"
+                                                    href="{{ asset('uploads/package/' . $package_photos->skip(2)->first()->photo) }}">
                                                     <i class="bi bi-plus-lg"></i> View More Images
-                                                    </a>
-                                                </div>
+                                                </a>
                                             </div>
                                         </div>
+
+                                        {{-- Hidden links for all other images to be included in the Fancybox gallery --}}
+                                        @foreach ($package_photos->skip(2) as $package_photo)
+                                            <a data-fancybox="gallery-01"
+                                                href="{{ asset('uploads/package/' . $package_photo->photo) }}"
+                                                style="display: none;"></a>
+                                        @endforeach
                                     @elseif ($package_photos->count() == 3)
                                         @foreach ($package_photos as $package_photo)
                                             <div class="col-6">
                                                 <div class="gallery-img-wrap">
-                                                    <img src="{{ asset('uploads/package') }}/{{ $package_photo->photo }}"
+                                                    <img src="{{ asset('uploads/package/' . $package_photo->photo) }}"
                                                         alt="package photo">
                                                     <a data-fancybox="gallery-01"
-                                                        href="{{ asset('uploads/package') }}/{{ $package_photo->photo }}">
+                                                        href="{{ asset('uploads/package/' . $package_photo->photo) }}">
                                                         <i class="bi bi-eye"></i>
                                                     </a>
                                                 </div>
@@ -74,37 +82,42 @@
                                         @endforeach
                                     @endif
 
-                                    <div class="col-6">
-                                        <div class="gallery-img-wrap active">
-                                            <img src="{{ asset('assets/frontend') }}/img/innerpage/package-05.jpg"
-                                                alt="">
-                                            <a data-fancybox="gallery-01"
-                                                href="https://www.youtube.com/watch?v=u31qwQUeGuM"><i
-                                                    class="bi bi-play-circle"></i> Watch Video</a>
+                                    @if ($package_videos->isNotEmpty())
+                                        @php
+                                            $firstVideo = $package_videos->first();
+                                            $thumbnailUrl = "https://img.youtube.com/vi/{$firstVideo->video}/hqdefault.jpg";
+                                        @endphp
+
+                                        <div class="col-6">
+                                            <div class="gallery-img-wrap active">
+                                                <img src="{{ $thumbnailUrl }}" alt="Video Thumbnail">
+                                                <a data-fancybox="video-gallery"
+                                                    href="https://www.youtube.com/watch?v={{ $firstVideo->video }}">
+                                                    <i class="bi bi-play-circle"></i> Watch Video
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        {{-- Hidden links for other videos to show in the Fancybox gallery --}}
+                                        @foreach ($package_videos->skip(1) as $video)
+                                            @php
+                                                // Generate thumbnail URL for each video
+                                                $thumbnailUrl = "https://img.youtube.com/vi/{$video->video}/hqdefault.jpg";
+                                            @endphp
+                                            <a data-fancybox="video-gallery"
+                                                href="https://www.youtube.com/watch?v={{ $video->video }}"
+                                                style="display: none;">
+                                                <img src="{{ $thumbnailUrl }}" alt="Video Thumbnail">
+                                            </a>
+                                        @endforeach
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="row g-xl-4 gy-5">
                 <div class="col-xl-8">

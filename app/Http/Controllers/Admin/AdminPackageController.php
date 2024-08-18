@@ -9,6 +9,7 @@ use App\Models\Package;
 use App\Models\PackageAmenity;
 use App\Models\PackageItinerary;
 use App\Models\PackagePhoto;
+use App\Models\PackageVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -118,7 +119,11 @@ class AdminPackageController extends Controller
         }
         $total2 = PackagePhoto::where('package_id', $id)->count();
         if ($total2 > 0) {
-            return redirect()->back()->with('error', 'Package contain some itineraries.');
+            return redirect()->back()->with('error', 'Package contain some photos.');
+        }
+        $total3 = PackageVideo::where('package_id', $id)->count();
+        if ($total3 > 0) {
+            return redirect()->back()->with('error', 'Package contain some videos.');
         }
         $package = Package::findOrFail($id);
         if ($package->featured_photo != '') {
@@ -249,5 +254,33 @@ class AdminPackageController extends Controller
         }
         $package_photo->delete();
         return redirect()->back()->with('success', 'Photo delete successfully');
+    }
+
+    public function package_videos($id)
+    {
+        $package = Package::findOrFail($id);
+        $videos = PackageVideo::latest('id')->where('package_id', $package->id)->get();
+        return view('admin.pages.package.videos', compact('package', 'videos'));
+    }
+
+    public function package_videos_submit(Request $request, $id)
+    {
+        $request->validate([
+            'video' => 'required',
+        ]);
+        $package = Package::findOrFail($id);
+        PackageVideo::create([
+            'package_id' => $package->id,
+            'video' => $request->video,
+        ]);
+        return redirect()->back()->with('success', 'Video inserted successfully');
+    }
+
+    public function package_videos_delete($id)
+    {
+
+        $package_video = PackageVideo::findOrFail($id);
+        $package_video->delete();
+        return redirect()->back()->with('success', 'Video delete successfully');
     }
 }
