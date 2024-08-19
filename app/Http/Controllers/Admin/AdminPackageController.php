@@ -7,6 +7,7 @@ use App\Models\Amenity;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Models\PackageAmenity;
+use App\Models\PackageFaq;
 use App\Models\PackageItinerary;
 use App\Models\PackagePhoto;
 use App\Models\PackageVideo;
@@ -125,6 +126,11 @@ class AdminPackageController extends Controller
         if ($total3 > 0) {
             return redirect()->back()->with('error', 'Package contain some videos.');
         }
+        $total4 = PackageFaq::where('package_id', $id)->count();
+        if ($total4 > 0) {
+            return redirect()->back()->with('error', 'Package contain some faqs.');
+        }
+
         $package = Package::findOrFail($id);
         if ($package->featured_photo != '') {
             //delete old photo
@@ -282,5 +288,35 @@ class AdminPackageController extends Controller
         $package_video = PackageVideo::findOrFail($id);
         $package_video->delete();
         return redirect()->back()->with('success', 'Video delete successfully');
+    }
+
+    public function package_faqs($id)
+    {
+        $package = Package::findOrFail($id);
+        $faqs = PackageFaq::latest('id')->where('package_id', $package->id)->get();
+        return view('admin.pages.package.faqs', compact('package', 'faqs'));
+    }
+
+    public function package_faqs_submit(Request $request, $id)
+    {
+        $request->validate([
+            'question' => 'required',
+            'answer' => 'required',
+        ]);
+        $package = Package::findOrFail($id);
+        PackageFaq::create([
+            'package_id' => $package->id,
+            'question' => $request->question,
+            'answer' => $request->answer,
+        ]);
+        return redirect()->back()->with('success', 'Faq inserted successfully');
+    }
+
+    public function package_faqs_delete($id)
+    {
+
+        $package_faq = PackageFaq::findOrFail($id);
+        $package_faq->delete();
+        return redirect()->back()->with('success', 'Faq delete successfully');
     }
 }

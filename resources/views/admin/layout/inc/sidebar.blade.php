@@ -281,6 +281,7 @@
                 Route::is('admin.package_amenity') ||
                 Route::is('admin.package_photos') ||
                 Route::is('admin.package_videos') ||
+                Route::is('admin.package_faqs') ||
                 Route::is('admin.package_itinerary')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-package"></i>

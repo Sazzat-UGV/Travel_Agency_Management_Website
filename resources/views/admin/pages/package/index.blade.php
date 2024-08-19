@@ -57,6 +57,7 @@
                                         class="btn btn-success  btn-sm">Itinerary</a>
                                     <a href="{{ route('admin.package_photos', $package->id) }}" class="btn btn-success  btn-sm">Photo Gallery</a>
                                     <a href="{{ route('admin.package_videos', $package->id) }}" class="btn btn-success  btn-sm">Video Gallery</a>
+                                    <a href="{{ route('admin.package_faqs', $package->id) }}" class="btn btn-success  btn-sm">FAQ</a>
                                 </td>
 
                                 <td>

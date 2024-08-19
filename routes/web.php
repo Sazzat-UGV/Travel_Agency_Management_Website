@@ -141,6 +141,11 @@ Route::prefix('/admin')->group(function () {
         Route::post('package_videos/{id}', [AdminPackageController::class, 'package_videos_submit'])->name('admin.package_videos_submit');
         Route::delete('package_videos/{id}', [AdminPackageController::class, 'package_videos_delete'])->name('admin.package_videos_delete');
 
+        // package faqs route
+        Route::get('package_faqs/{id}', [AdminPackageController::class, 'package_faqs'])->name('admin.package_faqs');
+        Route::post('package_faqs/{id}', [AdminPackageController::class, 'package_faqs_submit'])->name('admin.package_faqs_submit');
+        Route::delete('package_faqs/{id}', [AdminPackageController::class, 'package_faqs_delete'])->name('admin.package_faqs_delete');
+
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');
         Route::post('setting/update', [AdminSettingController::class, 'update'])->name('admin.settingUpdate');

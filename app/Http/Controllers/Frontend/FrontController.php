@@ -13,6 +13,7 @@ use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Package;
 use App\Models\PackageAmenity;
+use App\Models\PackageFaq;
 use App\Models\PackageItinerary;
 use App\Models\PackagePhoto;
 use App\Models\PackageVideo;
@@ -118,6 +119,7 @@ class FrontController extends Controller
         $package_itineraries = PackageItinerary::where('package_id', $package->id)->get();
         $package_photos = PackagePhoto::latest('id')->where('package_id', $package->id)->get();
         $package_videos = PackageVideo::latest('id')->where('package_id', $package->id)->get();
+        $package_faqs = PackageFaq::latest('id')->where('package_id', $package->id)->get();
         return view('frontend.pages.package_detail', compact(
             'package',
             'package_amenity_include',
@@ -125,6 +127,7 @@ class FrontController extends Controller
             'package_itineraries',
             'package_photos',
             'package_videos',
+            'package_faqs',
         ));
     }
 }
