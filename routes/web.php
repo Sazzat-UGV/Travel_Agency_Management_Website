@@ -35,6 +35,7 @@ Route::prefix('/')->group(function () {
     Route::get('destinations', [FrontController::class, 'destinations'])->name('destinations');
     Route::get('destination/{slug}', [FrontController::class, 'destination'])->name('destination');
     Route::get('package/{slug}', [FrontController::class, 'package'])->name('package');
+    Route::post('package/inquiry{id}', [FrontController::class, 'package_inquiry'])->name('package_inquiry');
 
     // registration route
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');

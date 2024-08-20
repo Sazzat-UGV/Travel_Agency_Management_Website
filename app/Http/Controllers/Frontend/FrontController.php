@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PackageInquiryMail;
+use App\Models\Admin;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\CounterItem;
@@ -21,6 +23,8 @@ use App\Models\Slider;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use App\Models\WelcomeItem;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontController extends Controller
 {
@@ -129,5 +133,26 @@ class FrontController extends Controller
             'package_videos',
             'package_faqs',
         ));
+    }
+
+    public function package_inquiry(Request $request,$id){
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'phone'=>'required',
+            'message'=>'required',
+        ]);
+        $package=Package::findOrFail($id);
+        $admin=Admin::where('id',1)->first();
+
+        $name=$request->name;
+        $email=$request->email;
+        $phone=$request->phone;
+        $inquiryMessage=$request->message;
+        $package_name=$package->name;
+
+        Mail::to($admin->email)->send(new PackageInquiryMail($name,$email,$phone,$inquiryMessage,$package_name));
+
+        return redirect()->back()->with('success','Your mail has been sent successfully. We will contact you soon.');
     }
 }

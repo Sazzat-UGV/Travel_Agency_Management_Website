@@ -3,21 +3,27 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPasswordMail extends Mailable
+class PackageInquiryMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject, $reset_link;
-
-    public function __construct($subject, $reset_link)
+    /**
+     * Create a new message instance.
+     */
+    public $name,$email,$phone,$inquiryMessage,$package_name;
+    public function __construct($name,$email,$phone,$inquiryMessage,$package_name)
     {
-        $this->subject = $subject;
-        $this->reset_link = $reset_link;
+       $this->name=$name;
+       $this->email=$email;
+       $this->phone=$phone;
+       $this->inquiryMessage=$inquiryMessage;
+       $this->package_name=$package_name;
     }
 
     /**
@@ -26,7 +32,7 @@ class ResetPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: 'Inquiry for '.$this->package_name,
         );
     }
 
@@ -36,7 +42,7 @@ class ResetPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'frontend.pages.email.reset_password',
+            view: 'frontend.pages.email.inquiry',
         );
     }
 
