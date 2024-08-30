@@ -8,6 +8,13 @@
                     <h6>Dashboard</h6>
                 </a>
             </li>
+            <li class="@if (Route::is('booking') || Route::is('user_invoice')) active @endif">
+                <a href="{{ route('booking') }}">
+                    <img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAd9JREFUSEvN1UvITWEUBuDnd0tKyiUxkJRcw0C5ZCAZyEyZu4SBmEjKTJGhkRIR5sQUA1Ei9yS3gTBhgIEQUXyrvq3zb/vb55y//vq/2p1zOu9e73rXu9b6BgzzGRjm+EYMwVTswCbMy6pf4hJO42OpEt0UjMcx7MLoQpBfOIn9+FnHtBHMx+Wc8e/8/TwepGBfMQebc+BI5EVWGJ//TolgNu5gOi6mEuzBh4KCmbiGhRmzAu8qbIngNlbibAJv76HTpuEW5uI61rURrM8Zvc9l+FEj+JN/15ObhdfZq7W4EbgmBaewE3txvCH7EkFAz2TFJ7C7RPAqS12KJ30SLMMjPM+eNCqIthuD6Iz/2g6VgqZmmYgv+ZlUV3AOW2oZR1tuLXjQRvAplTeGc5CCCbiPBfnNkLkc33voogqyKM3GU0QXrm7yIHo5SOJE8Gd9BA/oQRxFVGNbyeSqJAHq54Rnb/JwbsCVEkE/QTuxlYddB63zpcNpkc1IPhzA5wLz5LxRY9PGOokN8LbCti27CHwVi/M6jq16Dw9Tncd1zMohTME3rMHjpvYqlWVsmokjeWOOaqld3Av7sgeDYN3ugwq8BBuTcavyEwpiLd9MCi+k/+6WyHslGKrxI+dOHrKCv64NVRmrB563AAAAAElFTkSuQmCC" />
+                    <h6>Booking</h6>
+                </a>
+            </li>
             <li class="@if (Route::is('profile')) active @endif">
                 <a href="{{ route('profile') }}">
                     <img

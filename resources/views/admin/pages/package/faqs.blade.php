@@ -44,7 +44,7 @@
                         @foreach ($faqs as $index => $faq)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-                                <td>Day-{{ $faq->question }}</td>
+                                <td>{{ $faq->question }}</td>
                                 <td>
                                     {{ $faq->answer }}
                                 </td>
@@ -52,7 +52,8 @@
                                     <form action="{{ route('admin.package_faqs_delete', $faq->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="show_confirm btn btn-danger" type="submit">Delete</button>
+                                        <button class="show_confirm btn btn-danger" type="submit"><i
+                                            class="bx bx-trash "></i> </button>
                                     </form>
                                 </td>
                             </tr>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
+use App\Http\Controllers\Admin\AdminTourController;
 use App\Http\Controllers\Admin\AdminWelcomeItemController;
 use App\Http\Controllers\Frontend\FrontAuthController;
 use App\Http\Controllers\Frontend\FrontController;
@@ -36,6 +37,13 @@ Route::prefix('/')->group(function () {
     Route::get('destination/{slug}', [FrontController::class, 'destination'])->name('destination');
     Route::get('package/{slug}', [FrontController::class, 'package'])->name('package');
     Route::post('package/inquiry{id}', [FrontController::class, 'package_inquiry'])->name('package_inquiry');
+
+    // paypal payment routes
+    Route::post('payment', [FrontController::class, 'payment'])->name('payment');
+    Route::get('paypal/success', [FrontController::class, 'paypal_success'])->name('paypal_success');
+    Route::get('paypal/cancel', [FrontController::class, 'paypal_cancel'])->name('paypal_cancel');
+    Route::get('stripe/success', [FrontController::class, 'stripe_success'])->name('stripe_success');
+    Route::get('stripe/cancel', [FrontController::class, 'stripe_cancel'])->name('stripe_cancel');
 
     // registration route
     Route::get('registration', [FrontAuthController::class, 'registration'])->name('registration');
@@ -60,6 +68,9 @@ Route::prefix('/')->group(function () {
 // user route
 Route::prefix('user/')->middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('booking', [UserController::class, 'booking'])->name('booking');
+    Route::get('tour/invoice/{invoice_no}', [UserController::class, 'user_invoice'])->name('user_invoice');
+
 
     // profile route
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
@@ -103,6 +114,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('destination', AdminDestinationController::class);
         Route::resource('package', AdminPackageController::class);
         Route::resource('amenity', AdminAmenityController::class);
+        Route::resource('tour', AdminTourController::class);
 
         // welcome item route
         Route::get('welcome-item/index', [AdminWelcomeItemController::class, 'index'])->name('admin.welcomeItemIndex');
@@ -146,6 +158,11 @@ Route::prefix('/admin')->group(function () {
         Route::get('package_faqs/{id}', [AdminPackageController::class, 'package_faqs'])->name('admin.package_faqs');
         Route::post('package_faqs/{id}', [AdminPackageController::class, 'package_faqs_submit'])->name('admin.package_faqs_submit');
         Route::delete('package_faqs/{id}', [AdminPackageController::class, 'package_faqs_delete'])->name('admin.package_faqs_delete');
+
+        // tour booking route
+        Route::get('tour/booking/{tour_id}/{package_id}', [AdminTourController::class, 'tour_booking'])->name('admin.tour_booking');
+        Route::delete('tour/booking/{booking_id}', [AdminTourController::class, 'tour_booking_delete'])->name('admin.tour_booking_delete');
+        Route::get('tour/invoice/{invoice_no}', [AdminTourController::class, 'tour_invoice'])->name('admin.tour_invoice');
 
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');

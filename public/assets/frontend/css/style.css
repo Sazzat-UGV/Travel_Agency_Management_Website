@@ -23290,12 +23290,12 @@ to {
     font-family: var(--font-rubik);
     line-height: 1;
 }
-.booking-form-wrap .sidebar-booking-form .tour-date-wrap .form-check .form-check-label .tour-date .start-date span:first-child, .booking-form-wrap .sidebar-booking-form .tour-date-wrap .form-check .form-check-label .tour-date .end-date span:first-child {
+.booking-form-wrap .sidebar-booking-form .tour-date-wrap .form-check .form-check-label .tour-date .start-date span, .booking-form-wrap .sidebar-booking-form .tour-date-wrap .form-check .form-check-label .tour-date .end-date span {
     font-size: 14px;
     font-weight: 500;
     display: block;
     color: var(--title-color);
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 .booking-form-wrap .sidebar-booking-form .form-inner .form-group {
     position: relative;

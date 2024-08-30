@@ -28,4 +28,7 @@ class Package extends Model
     public function faqs(){
         return $this->hasMany(PackageFaq::class);
     }
+    public function tours(){
+        return $this->hasMany(Tour::class);
+    }
 }

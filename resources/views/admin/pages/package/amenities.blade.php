@@ -60,7 +60,8 @@
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="show_confirm btn btn-danger" type="submit">Delete</button>
+                                            <button class="show_confirm btn btn-danger" type="submit"><i
+                                                class="bx bx-trash "></i> </button>
                                         </form>
                                     </td>
                                 </tr>

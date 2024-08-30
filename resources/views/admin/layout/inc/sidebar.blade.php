@@ -302,6 +302,27 @@
 
             </ul>
         </li>
+        <!-- tour -->
+        <li class="menu-item @if (Route::is('tour.index')||Route::is('tour.create') ||Route::is('admin.tour_booking')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="tours">Tours</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @if (Route::is('tour.index')) active @endif">
+                    <a href="{{ route('tour.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Tour List</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (Route::is('tour.create')) active @endif">
+                    <a href="{{ route('tour.create') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Add New Tour</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
 
 
 

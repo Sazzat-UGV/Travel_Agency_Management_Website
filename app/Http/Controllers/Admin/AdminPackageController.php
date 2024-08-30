@@ -11,6 +11,7 @@ use App\Models\PackageFaq;
 use App\Models\PackageItinerary;
 use App\Models\PackagePhoto;
 use App\Models\PackageVideo;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
@@ -129,6 +130,10 @@ class AdminPackageController extends Controller
         $total4 = PackageFaq::where('package_id', $id)->count();
         if ($total4 > 0) {
             return redirect()->back()->with('error', 'Package contain some faqs.');
+        }
+        $total5 = Tour::where('package_id', $id)->count();
+        if ($total5 > 0) {
+            return redirect()->back()->with('error', 'Package contain some tours.');
         }
 
         $package = Package::findOrFail($id);
