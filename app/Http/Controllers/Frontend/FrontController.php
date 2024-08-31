@@ -40,6 +40,7 @@ class FrontController extends Controller
         $welcome_item = WelcomeItem::where('id', 1)->first();
         $features = Feature::latest('id')->get();
         $testimonials = Testimonial::latest('id')->get();
+        $packages = Package::latest('id')->get()->take(3);
         $blogs = Blog::latest('id')->take(3)->get();
         $destinations = Destination::latest('view_count')->limit(12)->get();
         return view('frontend.pages.home', compact(
@@ -49,6 +50,7 @@ class FrontController extends Controller
             'testimonials',
             'blogs',
             'destinations',
+            'packages',
         ));
     }
 
@@ -371,7 +373,7 @@ class FrontController extends Controller
         if ($request->destination_id != '') {
             $packages = $packages->where('destination_id', $request->destination_id);
         }
-        if ($request->review != 'all') {
+        if ($request->review != 'all' && $request->review !=null) {
             $packages = $packages->whereRaw('total_score/total_rating = ?', [$request->review]);
         }
 

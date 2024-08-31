@@ -28,7 +28,8 @@
                                         </div>
                                         <div class="package-card-content">
                                             <div class="card-content-top">
-                                                <h5><a href="{{ route('package', $package->slug) }}">{{ $package->name }}</a>
+                                                <h5><a
+                                                        href="{{ route('package', $package->slug) }}">{{ $package->name }}</a>
                                                 </h5>
                                             </div>
                                             <div class="card-content-bottom">
@@ -126,7 +127,7 @@
                                 <div class="box">
                                     <div class="form-check form-check-review form-check-review-1">
                                         <input name="review" class="form-check-input" type="radio" id="reviewRadiosAll"
-                                            value="all" @if ($review == 'all') checked @endif>
+                                            value="all" @if ($review == 'all' || $review == null) checked @endif>
                                         <label class="form-check-label" for="reviewRadiosAll">
                                             All
                                         </label>

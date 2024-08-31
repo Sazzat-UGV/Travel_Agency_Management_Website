@@ -220,9 +220,7 @@
                                     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                                 </div>
                             </div>
-                            <div class="col-lg-12 d-flex align-items-center justify-content-center">
-                                <a href="package-grid.html" class="secondary-btn4">View All Package</a>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
