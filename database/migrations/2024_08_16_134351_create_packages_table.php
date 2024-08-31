@@ -21,6 +21,8 @@ return new class extends Migration
             $table->longText('map')->nullable();
             $table->string('price')->nullable();
             $table->string('old_price')->nullable();
+            $table->integer('total_rating')->default(0);
+            $table->integer('total_score')->default(0);
             $table->timestamps();
         });
     }

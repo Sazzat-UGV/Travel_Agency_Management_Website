@@ -23613,7 +23613,7 @@ to {
 }
 .review-box .modal .modal-dialog .modal-content .modal-body .review-from-wrapper .star-rating-wrapper .star-rating-list li .rating-container i {
     color: var(--text-color);
-    font-size: 13px;
+    font-size: 30px;
     cursor: pointer;
 }
 .review-box .modal .modal-dialog .modal-content .modal-body .review-from-wrapper .star-rating-wrapper .star-rating-list li span {
@@ -23639,7 +23639,7 @@ to {
     list-style: none;
 }
 .review-area .comment>li {
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 .review-area .comment>li>.single-comment-area {
     margin-bottom: 24px;

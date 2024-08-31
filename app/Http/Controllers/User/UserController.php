@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\User;
 
-use Image;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Booking;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Image;
 
 class UserController extends Controller
 {
     public function dashboard()
     {
-        $total_completed_order=Booking::where('user_id',Auth::user()->id)->where('payment_status','Completed')->count();
-        return view('user.pages.dashboard',compact('total_completed_order'));
+        $total_completed_order = Booking::where('user_id', Auth::user()->id)->where('payment_status', 'Completed')->count();
+        return view('user.pages.dashboard', compact('total_completed_order'));
     }
 
     public function profile()
@@ -79,15 +80,22 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Profile is updated!');
     }
 
-    public function booking(){
-        $all_booking = Booking::with('package','tour')->where('user_id',Auth::guard('web')->user()->id)->latest('id')->get();
-        return view('user.pages.booking',compact('all_booking'));
+    public function booking()
+    {
+        $all_booking = Booking::with('package', 'tour')->where('user_id', Auth::guard('web')->user()->id)->latest('id')->get();
+        return view('user.pages.booking', compact('all_booking'));
     }
 
-    public function user_invoice($invoice_no){
-        $admin=Admin::findOrFail(1);
-        $invoice = Booking::with('user','package','tour')->where('invoice_no', $invoice_no)->first();
-        return view('user.pages.invoice',compact('invoice','admin'));
+    public function user_invoice($invoice_no)
+    {
+        $admin = Admin::findOrFail(1);
+        $invoice = Booking::with('user', 'package', 'tour')->where('invoice_no', $invoice_no)->first();
+        return view('user.pages.invoice', compact('invoice', 'admin'));
     }
 
+    public function index()
+    {
+        $reviews = Review::with('package')->where('user_id', Auth::user()->id)->latest('id')->get();
+        return view('user.pages.reviews', compact('reviews'));
+    }
 }

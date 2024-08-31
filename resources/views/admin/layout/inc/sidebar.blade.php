@@ -303,7 +303,7 @@
             </ul>
         </li>
         <!-- tour -->
-        <li class="menu-item @if (Route::is('tour.index')||Route::is('tour.create') ||Route::is('admin.tour_booking')) active @endif">
+        <li class="menu-item @if (Route::is('tour.index') || Route::is('tour.create') || Route::is('admin.tour_booking')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Tours</div>
@@ -323,7 +323,13 @@
 
             </ul>
         </li>
-
+        <!-- Review -->
+        <li class="menu-item @if (Route::is('admin.reviewIndex')) active @endif">
+            <a href="{{ route('admin.reviewIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="Analytics">Reviews</div>
+            </a>
+        </li>
 
 
 

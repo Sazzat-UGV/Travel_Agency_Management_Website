@@ -1,8 +1,9 @@
 @extends('user.layout.master')
 @section('title')
-    Dashboard
+    Booking
 @endsection
 @push('user_style')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 @endpush
 @section('content')
     <div class="row">
@@ -13,7 +14,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade active show" id="all" role="tabpanel" aria-labelledby="all-tab">
                                 <div class="recent-listing-table">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped" id="example">
                                         <thead>
                                             <tr>
                                                 <th>SL</th>
@@ -56,7 +57,8 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal-{{ $index }}">Details</button>
                                                         <br>
-                                                        <a href="{{ route('user_invoice',$booking->invoice_no) }}" class="btn btn-secondary btn-sm px-3">Invoice</a>
+                                                        <a href="{{ route('user_invoice', $booking->invoice_no) }}"
+                                                            class="btn btn-secondary btn-sm px-3">Invoice</a>
                                                     </td>
                                                 </tr>
 
@@ -146,39 +148,7 @@
                                 @endforeach
                                 </tbody>
                                 </table>
-                                <div class="pagination-area">
-                                    <ul class="paginations">
-                                        <li class="page-item active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a href="#">3</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="paginations-buttons">
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="14"
-                                                    viewBox="0 0 7 14">
-                                                    <path d="M0 7.00008L7 0L2.54545 7.00008L7 14L0 7.00008Z"></path>
-                                                </svg>
-                                                Prev
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Next
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="14"
-                                                    viewBox="0 0 7 14" fill="none">
-                                                    <path d="M7 7.00008L0 0L4.45455 7.00008L0 14L7 7.00008Z"></path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div>
 
@@ -191,4 +161,14 @@
     </div>
 @endsection
 @push('user_script')
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                pagingType: 'first_last_numbers',
+            });
+        });
+    </script>
 @endpush

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminReviewController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
@@ -37,6 +38,7 @@ Route::prefix('/')->group(function () {
     Route::get('destination/{slug}', [FrontController::class, 'destination'])->name('destination');
     Route::get('package/{slug}', [FrontController::class, 'package'])->name('package');
     Route::post('package/inquiry{id}', [FrontController::class, 'package_inquiry'])->name('package_inquiry');
+    Route::post('review/submit', [FrontController::class, 'review_submit'])->name('review_submit');
 
     // paypal payment routes
     Route::post('payment', [FrontController::class, 'payment'])->name('payment');
@@ -68,9 +70,11 @@ Route::prefix('/')->group(function () {
 // user route
 Route::prefix('user/')->middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    // booking route
     Route::get('booking', [UserController::class, 'booking'])->name('booking');
     Route::get('tour/invoice/{invoice_no}', [UserController::class, 'user_invoice'])->name('user_invoice');
-
+    // review route
+    Route::get('review/index', [UserController::class, 'index'])->name('reviewIndex');
 
     // profile route
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
@@ -163,6 +167,10 @@ Route::prefix('/admin')->group(function () {
         Route::get('tour/booking/{tour_id}/{package_id}', [AdminTourController::class, 'tour_booking'])->name('admin.tour_booking');
         Route::delete('tour/booking/{booking_id}', [AdminTourController::class, 'tour_booking_delete'])->name('admin.tour_booking_delete');
         Route::get('tour/invoice/{invoice_no}', [AdminTourController::class, 'tour_invoice'])->name('admin.tour_invoice');
+
+        // review route
+        Route::get('review/index', [AdminReviewController::class, 'index'])->name('admin.reviewIndex');
+        Route::delete('review/delete/{id}', [AdminReviewController::class, 'delete'])->name('admin.reviewDelete');
 
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');

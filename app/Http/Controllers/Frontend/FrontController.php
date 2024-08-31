@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Mail\PackageInquiryMail;
-use App\Models\Admin;
-use App\Models\Blog;
-use App\Models\BlogCategory;
-use App\Models\Booking;
-use App\Models\CounterItem;
-use App\Models\Destination;
-use App\Models\DestinationPhoto;
-use App\Models\DestinationVideo;
+use Carbon\Carbon;
 use App\Models\Faq;
+use App\Models\Blog;
+use App\Models\Tour;
+use App\Models\Admin;
+use App\Models\Review;
+use App\Models\Slider;
+use App\Models\Booking;
 use App\Models\Feature;
 use App\Models\Package;
-use App\Models\PackageAmenity;
 use App\Models\PackageFaq;
-use App\Models\PackageItinerary;
+use App\Models\TeamMember;
+use App\Models\CounterItem;
+use App\Models\Destination;
+use App\Models\Testimonial;
+use App\Models\WelcomeItem;
+use App\Models\BlogCategory;
 use App\Models\PackagePhoto;
 use App\Models\PackageVideo;
-use App\Models\Slider;
-use App\Models\TeamMember;
-use App\Models\Testimonial;
-use App\Models\Tour;
-use App\Models\WelcomeItem;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\PackageAmenity;
+use App\Mail\PackageInquiryMail;
+use App\Models\DestinationPhoto;
+use App\Models\DestinationVideo;
+use App\Models\PackageItinerary;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -131,6 +132,8 @@ class FrontController extends Controller
         $package_videos = PackageVideo::latest('id')->where('package_id', $package->id)->get();
         $package_faqs = PackageFaq::latest('id')->where('package_id', $package->id)->get();
         $tours = Tour::withSum('bookings', 'total_person')->latest('id')->where('package_id', $package->id)->where('booking_end_date', '>=', $today)->get();
+        $package_reviews=Review::with('user')->latest('id')->where('package_id', $package->id)->get();
+    
         return view('frontend.pages.package_detail', compact(
             'package',
             'package_amenity_include',
@@ -140,6 +143,7 @@ class FrontController extends Controller
             'package_videos',
             'package_faqs',
             'tours',
+            'package_reviews',
         ));
     }
 
@@ -321,5 +325,25 @@ class FrontController extends Controller
     public function stripe_cancel()
     {
         return redirect()->back()->with('error', 'Payment is cancelled!');
+    }
+    
+    public function review_submit(Request $request){
+        $request->validate([
+            'review'=>'required',
+            'rating'=>'required',
+        ]);
+       Review::create([
+           'user_id'=>Auth::user()->id,
+           'package_id'=>$request->package_id,
+           'rating'=>$request->rating,
+           'comment'=>$request->review,
+        ]);
+
+        $package_data=Package::where('id',$request->package_id)->first();
+        $package_data->total_rating=$package_data->total_rating+1;
+        $package_data->total_score=$package_data->total_score+$request->rating;
+        $package_data->update();
+
+        return redirect()->back()->with('success', 'Review is submitted successfully.');
     }
 }
