@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Carbon\Carbon;
-use App\Models\Faq;
-use App\Models\Blog;
-use App\Models\Tour;
+use App\Http\Controllers\Controller;
+use App\Mail\PackageInquiryMail;
 use App\Models\Admin;
-use App\Models\Review;
-use App\Models\Slider;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Booking;
-use App\Models\Feature;
-use App\Models\Package;
-use App\Models\PackageFaq;
-use App\Models\TeamMember;
 use App\Models\CounterItem;
 use App\Models\Destination;
-use App\Models\Testimonial;
-use App\Models\WelcomeItem;
-use App\Models\BlogCategory;
-use App\Models\PackagePhoto;
-use App\Models\PackageVideo;
-use Illuminate\Http\Request;
-use App\Models\PackageAmenity;
-use App\Mail\PackageInquiryMail;
 use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
+use App\Models\Faq;
+use App\Models\Feature;
+use App\Models\Package;
+use App\Models\PackageAmenity;
+use App\Models\PackageFaq;
 use App\Models\PackageItinerary;
-use App\Http\Controllers\Controller;
+use App\Models\PackagePhoto;
+use App\Models\PackageVideo;
+use App\Models\Review;
+use App\Models\Slider;
+use App\Models\TeamMember;
+use App\Models\Testimonial;
+use App\Models\Tour;
+use App\Models\WelcomeItem;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -132,8 +132,8 @@ class FrontController extends Controller
         $package_videos = PackageVideo::latest('id')->where('package_id', $package->id)->get();
         $package_faqs = PackageFaq::latest('id')->where('package_id', $package->id)->get();
         $tours = Tour::withSum('bookings', 'total_person')->latest('id')->where('package_id', $package->id)->where('booking_end_date', '>=', $today)->get();
-        $package_reviews=Review::with('user')->latest('id')->where('package_id', $package->id)->get();
-    
+        $package_reviews = Review::with('user')->latest('id')->where('package_id', $package->id)->get();
+
         return view('frontend.pages.package_detail', compact(
             'package',
             'package_amenity_include',
@@ -326,24 +326,56 @@ class FrontController extends Controller
     {
         return redirect()->back()->with('error', 'Payment is cancelled!');
     }
-    
-    public function review_submit(Request $request){
+
+    public function review_submit(Request $request)
+    {
         $request->validate([
-            'review'=>'required',
-            'rating'=>'required',
+            'review' => 'required',
+            'rating' => 'required',
         ]);
-       Review::create([
-           'user_id'=>Auth::user()->id,
-           'package_id'=>$request->package_id,
-           'rating'=>$request->rating,
-           'comment'=>$request->review,
+        Review::create([
+            'user_id' => Auth::user()->id,
+            'package_id' => $request->package_id,
+            'rating' => $request->rating,
+            'comment' => $request->review,
         ]);
 
-        $package_data=Package::where('id',$request->package_id)->first();
-        $package_data->total_rating=$package_data->total_rating+1;
-        $package_data->total_score=$package_data->total_score+$request->rating;
+        $package_data = Package::where('id', $request->package_id)->first();
+        $package_data->total_rating = $package_data->total_rating + 1;
+        $package_data->total_score = $package_data->total_score + $request->rating;
         $package_data->update();
 
         return redirect()->back()->with('success', 'Review is submitted successfully.');
+    }
+    public function packages(Request $request)
+    {
+        $package_name = $request->name;
+        $min_price = $request->min_price;
+        $max_price = $request->max_price;
+        $destination_id = $request->destination_id;
+        $review = $request->review;
+
+        $destinations = Destination::orderBy('name', 'asc')->get();
+
+        $packages = Package::with('destination')->latest('id');
+
+        if ($request->name != '') {
+            $packages = $packages->where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->min_price != '') {
+            $packages = $packages->where('price', '>=', $request->min_price);
+        }
+        if ($request->max_price != '') {
+            $packages = $packages->where('price', '<=', $request->max_price);
+        }
+        if ($request->destination_id != '') {
+            $packages = $packages->where('destination_id', $request->destination_id);
+        }
+        if ($request->review != 'all') {
+            $packages = $packages->whereRaw('total_score/total_rating = ?', [$request->review]);
+        }
+
+        $packages = $packages->paginate(6);
+        return view('frontend.pages.packages', compact('packages', 'destinations', 'package_name', 'min_price', 'max_price', 'destination_id', 'review'));
     }
 }

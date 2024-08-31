@@ -25,9 +25,10 @@
             <li class="@if (Route::is('destinations')) active @endif">
                 <a href="{{ route('destinations') }}" class="drop-down">Destinations</a>
             </li>
-            <li>
-                <a href="#" class="drop-down">Packages</a>
+            <li class="@if (Route::is('packages')) active @endif">
+                <a href="{{ route('packages') }}" class="drop-down">Packages</a>
             </li>
+           
             <li class="@if (Route::is('team_members')) active @endif">
                 <a href="{{ route('team_members') }}" class="drop-down">Team</a>
             </li>

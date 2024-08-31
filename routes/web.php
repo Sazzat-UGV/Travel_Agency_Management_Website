@@ -39,6 +39,7 @@ Route::prefix('/')->group(function () {
     Route::get('package/{slug}', [FrontController::class, 'package'])->name('package');
     Route::post('package/inquiry{id}', [FrontController::class, 'package_inquiry'])->name('package_inquiry');
     Route::post('review/submit', [FrontController::class, 'review_submit'])->name('review_submit');
+    Route::get('packages', [FrontController::class, 'packages'])->name('packages');
 
     // paypal payment routes
     Route::post('payment', [FrontController::class, 'payment'])->name('payment');
