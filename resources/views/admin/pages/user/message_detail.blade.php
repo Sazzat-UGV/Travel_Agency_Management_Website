@@ -55,7 +55,7 @@
 @endpush
 @section('content')
     @include('admin.layout.inc.breadcumb', [
-        'main_page' => 'User Section',
+        'main_page' => 'User',
         'sub_page' => 'Messages',
     ])
     <main class="content">

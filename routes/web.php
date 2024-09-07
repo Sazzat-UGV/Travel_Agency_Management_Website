@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminReviewController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminSliderController;
+use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminTourController;
@@ -41,6 +42,8 @@ Route::prefix('/')->group(function () {
     Route::post('package/inquiry{id}', [FrontController::class, 'package_inquiry'])->name('package_inquiry');
     Route::post('review/submit', [FrontController::class, 'review_submit'])->name('review_submit');
     Route::get('packages', [FrontController::class, 'packages'])->name('packages');
+    Route::post('subscriber_submit', [FrontController::class, 'subscriber_submit'])->name('subscriber_submit');
+    Route::get('subscriber_verified/{email}/{token}', [FrontController::class, 'subscriber_verified'])->name('subscriber_verified');
 
     // paypal payment routes
     Route::post('payment', [FrontController::class, 'payment'])->name('payment');
@@ -178,11 +181,16 @@ Route::prefix('/admin')->group(function () {
         Route::get('review/index', [AdminReviewController::class, 'index'])->name('admin.reviewIndex');
         Route::delete('review/delete/{id}', [AdminReviewController::class, 'delete'])->name('admin.reviewDelete');
 
-
-        // user section route
+        // user  route
         Route::get('message', [AdminUserController::class, 'message'])->name('admin.messageIndex');
         Route::get('message/detail/{id}', [AdminUserController::class, 'message_detail'])->name('admin.messageDetail');
         Route::post('message/submit/{id}', [AdminUserController::class, 'message_submit'])->name('admin.messageSubmit');
+
+        // subscriber route
+        Route::get('subscriber', [AdminSubscriberController::class, 'subscribers'])->name('admin.subscribers');
+        Route::get('subscriber/send-email', [AdminSubscriberController::class, 'send_email'])->name('admin.subscriber_send_email');
+        Route::post('subscriber/send-email', [AdminSubscriberController::class, 'send_email_submit'])->name('admin.subscriber_send_email_submit');
+        Route::delete('subscriber/delete/{id}', [AdminSubscriberController::class, 'subscriber_delete'])->name('admin.subscriber_delete');
 
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');

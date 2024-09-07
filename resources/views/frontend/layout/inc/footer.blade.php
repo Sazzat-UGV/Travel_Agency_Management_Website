@@ -81,9 +81,10 @@
                         <div class="widget-title two">
                             <h5>Join Our <span>Newsletter &amp; Update</span> Package.</h5>
                         </div>
-                        <form>
+                        <form action="{{ route('subscriber_submit') }}" method="POST">
+                            @csrf
                             <div class="form-inner mb-50">
-                                <input type="text" placeholder="Email here...">
+                                <input type="text" placeholder="Email here..." name="email">
                                 <button type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                         viewBox="0 0 18 18">

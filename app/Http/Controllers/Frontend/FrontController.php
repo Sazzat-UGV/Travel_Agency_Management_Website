@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AccountConfirmationMail;
 use App\Mail\PackageInquiryMail;
 use App\Models\Admin;
 use App\Models\Blog;
@@ -22,6 +23,7 @@ use App\Models\PackagePhoto;
 use App\Models\PackageVideo;
 use App\Models\Review;
 use App\Models\Slider;
+use App\Models\Subscriber;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use App\Models\Tour;
@@ -373,11 +375,43 @@ class FrontController extends Controller
         if ($request->destination_id != '') {
             $packages = $packages->where('destination_id', $request->destination_id);
         }
-        if ($request->review != 'all' && $request->review !=null) {
+        if ($request->review != 'all' && $request->review != null) {
             $packages = $packages->whereRaw('total_score/total_rating = ?', [$request->review]);
         }
 
         $packages = $packages->paginate(6);
         return view('frontend.pages.packages', compact('packages', 'destinations', 'package_name', 'min_price', 'max_price', 'destination_id', 'review'));
+    }
+
+    public function subscriber_submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:subscribers,email',
+        ]);
+
+        $token = hash('sha256', time());
+        Subscriber::create([
+            'email' => $request->email,
+            'token' => $token,
+            'status' => 'Pending',
+        ]);
+        $verification_link = route('subscriber_verified', ['email' => $request->email, 'token' => $token]);
+        $subject = "Subscriber Verification";
+
+        Mail::to($request->email)->send(new AccountConfirmationMail($subject, $verification_link));
+        return redirect()->back()->with('success', 'You are subscribed successfully. Please check your email to confirm the verification link.');
+    }
+
+    public function subscriber_verified($email, $token)
+    {
+
+        $subscriber = Subscriber::where('email', $email)->where('token', $token)->first();
+        if (!$subscriber) {
+            return redirect()->route('home');
+        }
+        $subscriber->token = '';
+        $subscriber->status = 'Active  ';
+        $subscriber->update();
+        return redirect()->back()->with('success', 'Your subscription is Successful.');
     }
 }

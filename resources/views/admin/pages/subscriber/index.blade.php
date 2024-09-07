@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Messages
+    Subscriber List
 @endsection
 @push('admin_style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -19,37 +19,41 @@
 @endpush
 @section('content')
     @include('admin.layout.inc.breadcumb', [
-        'main_page' => 'User',
-        'sub_page' => 'Messages',
+        'main_page' => 'Subscribers',
+        'sub_page' => 'Subscriber List',
     ])
-
     <div class="col-12">
         <div class="card px-4">
+            <div class="col-md-12 col-lg-12 col-sm-12 py-4">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('admin.subscriber_send_email') }}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                        Send Email
+                    </a>
+                </div>
+            </div>
             <div class="table-responsive text-nowrap my-2">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Photo</th>
-                            <th>Name</th>
                             <th>Email</th>
-                            <th>Phone</th>
-                            <th>Options</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($messages as $index => $message)
+                        @foreach ($subscribers as $index => $subscriber)
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
-
-                                <td class="wrap"><img src="{{ asset('uploads/user') }}/{{ $message->user->photo }}"
-                                        alt="" style="height: 80px;width: auto;"></td>
-                                <td class="wrap">{{ $message->user->name }}</td>
-                                <td class="wrap">{{ $message->user->email }}</td>
-                                <td class="wrap">{{ $message->user->phone }}</td>
-                                <td class="wrap">
-                                    <a href="{{ route('admin.messageDetail', $message->id) }}"
-                                        class="btn btn-primary btn-sm">Messages</a>
+                                <td class="wrap">{{ $subscriber->email }}</td>
+                                <td>
+                                    <form action="{{ route('admin.subscriber_delete', ['id' => $subscriber->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="show_confirm btn btn-danger" type="submit"><i
+                                                class="bx bx-trash "></i> </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
