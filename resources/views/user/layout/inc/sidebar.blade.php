@@ -22,6 +22,12 @@
                     <h6>Reviews</h6>
                 </a>
             </li>
+            <li class="@if (Route::is('message')) active @endif">
+                <a href="{{ route('message') }}">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAP5JREFUSEvt1D1KxFAUxfHflC5gLBQGBsFxG67A1nZKawWxsdZmsLSzdQUuYJZgoZ0oiIUuwEZRH7wHSUgmXwQsJk0e7+aef3Ju3hkZ+BoNrC8LOMAF9npCH3GCu6CTBbxiu6d4an/CThHwE6t9bcvpZMXWgOR/K4vmuIydp7iJ66r9UG4FeMc4in5gM66r9v8fYHCLupy7VjNYA3Jh94JJhScpUvZxjd0a754xLYZdiOtwqGYlzVtY4LDBUO5xVhbXZb3pj/j8g28g3M9xha8GsJxFqwChdotjvDURTs/UZX/4ggccYdlGuCkgvHGw47uLeHHIXTVW9tVZ1Bv6C0XQQRmS+Po6AAAAAElFTkSuQmCC"/>
+                    <h6>Messages</h6>
+                </a>
+            </li>
             <li class="@if (Route::is('profile')) active @endif">
                 <a href="{{ route('profile') }}">
                     <img

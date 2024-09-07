@@ -330,6 +330,23 @@
                 <div data-i18n="Analytics">Reviews</div>
             </a>
         </li>
+        <!-- User -->
+        <li class="menu-item @if (Route::is('admin.messageIndex') ||Route::is('admin.messageDetail')) active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="tours">User Section</div>
+            </a>
+
+            <ul class="menu-sub">
+
+                <li class="menu-item @if (Route::is('admin.messageIndex') ||Route::is('admin.messageDetail')) active @endif">
+                    <a href="{{ route('admin.messageIndex') }}" class="menu-link">
+                        <div data-i18n="Without navbar">Message</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
 
 
 

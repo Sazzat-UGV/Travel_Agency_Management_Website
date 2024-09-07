@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Booking;
+use App\Models\Message;
+use App\Models\MessageComment;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -97,5 +99,46 @@ class UserController extends Controller
     {
         $reviews = Review::with('package')->where('user_id', Auth::user()->id)->latest('id')->get();
         return view('user.pages.reviews', compact('reviews'));
+    }
+
+    public function message()
+    {
+        $message_check = Message::where('user_id', Auth::user()->id)->count();
+        $message = Message::where('user_id', Auth::user()->id)->first();
+        if ($message) {
+            $message_comment = MessageComment::where('message_id', $message->id)->get();
+        } else {
+            $message_comment = [];
+        }
+
+        return view('user.pages.message', compact('message_check', 'message_comment'));
+    }
+
+    public function message_start()
+    {
+        $message_check = Message::where('user_id', Auth::user()->id)->count();
+
+        if ($message_check > 0) {
+            return redirect()->back()->with('error', 'You have already started a conversation!');
+        }
+        Message::create([
+            'user_id' => Auth::user()->id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function message_submit(Request $request)
+    {
+        $request->validate([
+            'comment' => 'required',
+        ]);
+        $message = Message::where('user_id', Auth::user()->id)->first();
+        MessageComment::create([
+            'message_id' => $message->id,
+            'sender_id' => Auth::user()->id,
+            'type' => 'User',
+            'comment' => $request->comment,
+        ]);
+        return redirect()->back()->with('success', 'Message is sent successfully!');
     }
 }

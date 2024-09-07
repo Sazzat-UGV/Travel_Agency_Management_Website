@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminTourController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminWelcomeItemController;
 use App\Http\Controllers\Frontend\FrontAuthController;
 use App\Http\Controllers\Frontend\FrontController;
@@ -80,6 +81,10 @@ Route::prefix('user/')->middleware('auth')->group(function () {
     // profile route
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
     Route::post('profile', [UserController::class, 'profile_submit'])->name('profile_submit');
+    // message route
+    Route::get('message', [UserController::class, 'message'])->name('message');
+    Route::get('message_start', [UserController::class, 'message_start'])->name('message_start');
+    Route::post('message_submit', [UserController::class, 'message_submit'])->name('message_submit');
 
 });
 
@@ -172,6 +177,12 @@ Route::prefix('/admin')->group(function () {
         // review route
         Route::get('review/index', [AdminReviewController::class, 'index'])->name('admin.reviewIndex');
         Route::delete('review/delete/{id}', [AdminReviewController::class, 'delete'])->name('admin.reviewDelete');
+
+
+        // user section route
+        Route::get('message', [AdminUserController::class, 'message'])->name('admin.messageIndex');
+        Route::get('message/detail/{id}', [AdminUserController::class, 'message_detail'])->name('admin.messageDetail');
+        Route::post('message/submit/{id}', [AdminUserController::class, 'message_submit'])->name('admin.messageSubmit');
 
         // setting route
         Route::get('setting/index', [AdminSettingController::class, 'index'])->name('admin.settingIndex');
