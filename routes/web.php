@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminFeatureController;
+use App\Http\Controllers\Admin\AdminHomeItemController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminReviewController;
 use App\Http\Controllers\Admin\AdminSettingController;
@@ -136,6 +137,10 @@ Route::prefix('/admin')->group(function () {
         // counter item route
         Route::get('counter-item/index', [AdminCounterItemController::class, 'index'])->name('admin.counterItemIndex');
         Route::post('counter-item/update', [AdminCounterItemController::class, 'update'])->name('admin.counterItemUpdate');
+
+        // home item route
+        Route::get('home-item/index', [AdminHomeItemController::class, 'index'])->name('admin.homeItemIndex');
+        Route::post('home-item/update', [AdminHomeItemController::class, 'update'])->name('admin.homeItemUpdate');
 
         // destination photo route
         Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');

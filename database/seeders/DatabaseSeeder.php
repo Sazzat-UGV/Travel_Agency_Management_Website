@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             BlogCategorySeeder::class,
             AmenitySeeder::class,
-
+            HomeItemSeeder::class,
             SettingSeeder::class,
         ]);
     }

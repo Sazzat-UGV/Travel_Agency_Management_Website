@@ -15,6 +15,7 @@ use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
 use App\Models\Faq;
 use App\Models\Feature;
+use App\Models\HomeItem;
 use App\Models\Package;
 use App\Models\PackageAmenity;
 use App\Models\PackageFaq;
@@ -45,6 +46,7 @@ class FrontController extends Controller
         $packages = Package::latest('id')->get()->take(3);
         $blogs = Blog::latest('id')->take(3)->get();
         $destinations = Destination::latest('view_count')->limit(12)->get();
+        $home_item = HomeItem::where('id', 1)->first();
         return view('frontend.pages.home', compact(
             'sliders',
             'welcome_item',
@@ -53,6 +55,7 @@ class FrontController extends Controller
             'blogs',
             'destinations',
             'packages',
+            'home_item'
         ));
     }
 
