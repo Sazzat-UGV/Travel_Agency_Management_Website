@@ -70,6 +70,7 @@
 
 
     <!-- feature section start-->
+    @if ($about_item->feature_status == 'Active')
     <div class="feature-card-section mb-120">
         <img src="{{ asset('assets/frontend') }}/img/home1/section-vector4.png" alt="" class="section-vector4">
         <div class="container">
@@ -101,6 +102,7 @@
             </div>
         </div>
     </div>
+    @endif
     <!-- feature section end-->
 
 

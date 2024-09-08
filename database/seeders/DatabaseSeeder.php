@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             BlogCategorySeeder::class,
             AmenitySeeder::class,
             HomeItemSeeder::class,
+            AboutItemSeeder::class,
             SettingSeeder::class,
         ]);
     }

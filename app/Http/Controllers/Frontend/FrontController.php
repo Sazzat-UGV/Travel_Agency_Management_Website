@@ -2,37 +2,38 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Mail\AccountConfirmationMail;
-use App\Mail\PackageInquiryMail;
-use App\Models\Admin;
-use App\Models\Blog;
-use App\Models\BlogCategory;
-use App\Models\Booking;
-use App\Models\CounterItem;
-use App\Models\Destination;
-use App\Models\DestinationPhoto;
-use App\Models\DestinationVideo;
+use Carbon\Carbon;
 use App\Models\Faq;
-use App\Models\Feature;
-use App\Models\HomeItem;
-use App\Models\Package;
-use App\Models\PackageAmenity;
-use App\Models\PackageFaq;
-use App\Models\PackageItinerary;
-use App\Models\PackagePhoto;
-use App\Models\PackageVideo;
+use App\Models\Blog;
+use App\Models\Tour;
+use App\Models\Admin;
 use App\Models\Review;
 use App\Models\Slider;
+use App\Models\Booking;
+use App\Models\Feature;
+use App\Models\Package;
+use App\Models\HomeItem;
+use App\Models\AboutItem;
+use App\Models\PackageFaq;
 use App\Models\Subscriber;
 use App\Models\TeamMember;
+use App\Models\CounterItem;
+use App\Models\Destination;
 use App\Models\Testimonial;
-use App\Models\Tour;
 use App\Models\WelcomeItem;
-use Carbon\Carbon;
+use App\Models\BlogCategory;
+use App\Models\PackagePhoto;
+use App\Models\PackageVideo;
 use Illuminate\Http\Request;
+use App\Models\PackageAmenity;
+use App\Mail\PackageInquiryMail;
+use App\Models\DestinationPhoto;
+use App\Models\DestinationVideo;
+use App\Models\PackageItinerary;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountConfirmationMail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class FrontController extends Controller
@@ -64,11 +65,13 @@ class FrontController extends Controller
         $welcome_item = WelcomeItem::where('id', 1)->first();
         $features = Feature::latest('id')->get();
         $counter_item = CounterItem::where('id', 1)->first();
+        $about_item = AboutItem::where('id', 1)->first();
 
         return view('frontend.pages.about', compact(
             'welcome_item',
             'features',
             'counter_item',
+            'about_item',
         ));
     }
 
@@ -284,9 +287,9 @@ class FrontController extends Controller
 
             return redirect()->back()->with('success', "Payment is successful");
 
-            unset($_SESSION['tour_id ']);
-            unset($_SESSION['package_id ']);
-            unset($_SESSION['user_id ']);
+            unset($_SESSION['tour_id']);
+            unset($_SESSION['package_id']);
+            unset($_SESSION['user_id']);
             unset($_SESSION['number_of_person']);
 
         } else {
@@ -319,9 +322,9 @@ class FrontController extends Controller
 
             return redirect()->back()->with('success', "Payment is successful");
 
-            unset($_SESSION['tour_id ']);
-            unset($_SESSION['package_id ']);
-            unset($_SESSION['user_id ']);
+            unset($_SESSION['tour_id']);
+            unset($_SESSION['package_id']);
+            unset($_SESSION['user_id']);
             unset($_SESSION['number_of_person']);
             unset($_SESSION['paid_amount']);
         } else {

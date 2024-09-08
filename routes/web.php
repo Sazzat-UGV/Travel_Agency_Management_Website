@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAboutItemController;
 use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminBlogCategoryController;
@@ -141,6 +142,10 @@ Route::prefix('/admin')->group(function () {
         // home item route
         Route::get('home-item/index', [AdminHomeItemController::class, 'index'])->name('admin.homeItemIndex');
         Route::post('home-item/update', [AdminHomeItemController::class, 'update'])->name('admin.homeItemUpdate');
+
+        // about item route
+        Route::get('about-item/index', [AdminAboutItemController::class, 'index'])->name('admin.aboutItemIndex');
+        Route::post('about-item/update', [AdminAboutItemController::class, 'update'])->name('admin.aboutItemUpdate');
 
         // destination photo route
         Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');

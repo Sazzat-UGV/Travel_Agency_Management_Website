@@ -337,6 +337,13 @@
                 <div data-i18n="Analytics">Home Page Item</div>
             </a>
         </li>
+        <!-- about item -->
+        <li class="menu-item @if (Route::is('admin.aboutItemIndex')) active @endif">
+            <a href="{{ route('admin.aboutItemIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="Analytics">About Page Item</div>
+            </a>
+        </li>
         <!-- User -->
         <li class="menu-item @if (Route::is('admin.messageIndex') ||Route::is('admin.messageDetail')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
