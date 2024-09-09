@@ -18,14 +18,13 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 d-flex justify-content-lg-center justify-content-sm-start">
                     <div class="footer-widget">
                         <div class="widget-title">
-                            <h5>Quick Link</h5>
+                            <h5>Useful Link</h5>
                         </div>
                         <ul class="widget-list">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="destination1.html">Destinations</a></li>
-                            <li><a href="package-grid.html">Tour Package</a></li>
-                            <li><a href="guide2.html">Tour Guide</a></li>
-                            <li><a href="blog-grid.html">Article</a></li>
+                            <li><a href="{{ route('faq') }}">FAQ</a></li>
+                            <li><a href="{{ route('terms') }}">Terms of use</a></li>
+                            <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div>

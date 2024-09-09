@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminSubscriberController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
+use App\Http\Controllers\Admin\AdminTermPrivacyItemController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminTourController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -49,6 +50,8 @@ Route::prefix('/')->group(function () {
     Route::get('subscriber_verified/{email}/{token}', [FrontController::class, 'subscriber_verified'])->name('subscriber_verified');
     Route::get('contact', [FrontController::class, 'contact'])->name('contact');
     Route::post('contact', [FrontController::class, 'contact_submit'])->name('contact_submit');
+    Route::get('terms-of-use', [FrontController::class, 'terms'])->name('terms');
+    Route::get('privacy-policy', [FrontController::class, 'privacy'])->name('privacy');
 
     // paypal payment routes
     Route::post('payment', [FrontController::class, 'payment'])->name('payment');
@@ -153,6 +156,10 @@ Route::prefix('/admin')->group(function () {
         // contact item route
         Route::get('contact-item/index', [AdminContactItemController::class, 'index'])->name('admin.contactItemIndex');
         Route::post('contact-item/update', [AdminContactItemController::class, 'update'])->name('admin.contactItemUpdate');
+
+        // term and privacy item route
+        Route::get('term-privacy-item/index', [AdminTermPrivacyItemController::class, 'index'])->name('admin.termPrivacyItemIndex');
+        Route::post('term-privacy-item/update', [AdminTermPrivacyItemController::class, 'update'])->name('admin.termPrivacyItemUpdate');
 
         // destination photo route
         Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');

@@ -30,6 +30,7 @@ use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\Subscriber;
 use App\Models\TeamMember;
+use App\Models\TermPrivacyItem;
 use App\Models\Testimonial;
 use App\Models\Tour;
 use App\Models\WelcomeItem;
@@ -448,5 +449,17 @@ class FrontController extends Controller
         Mail::to($admin->email)->send(new ContactMail($name, $email, $inquiryMessage, $subject));
 
         return redirect()->back()->with('success', 'Your mail has been sent successfully. We will contact you soon.');
+    }
+
+    public function terms()
+    {
+        $term_privacy_item = TermPrivacyItem::where('id', 1)->first();
+        return view('frontend.pages.terms', compact('term_privacy_item'));
+    }
+
+    public function privacy()
+    {
+        $term_privacy_item = TermPrivacyItem::where('id', 1)->first();
+        return view('frontend.pages.privacy', compact('term_privacy_item'));
     }
 }

@@ -351,6 +351,13 @@
                 <div data-i18n="Analytics">Contact Page Item</div>
             </a>
         </li>
+        <!-- term and privacy item -->
+        <li class="menu-item @if (Route::is('admin.termPrivacyItemIndex')) active @endif">
+            <a href="{{ route('admin.termPrivacyItemIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="Analytics">Term and Privacy</div>
+            </a>
+        </li>
         <!-- User -->
         <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
