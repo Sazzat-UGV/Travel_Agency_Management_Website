@@ -344,8 +344,15 @@
                 <div data-i18n="Analytics">About Page Item</div>
             </a>
         </li>
+        <!-- contact item -->
+        <li class="menu-item @if (Route::is('admin.contactItemIndex')) active @endif">
+            <a href="{{ route('admin.contactItemIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-hand-right"></i>
+                <div data-i18n="Analytics">Contact Page Item</div>
+            </a>
+        </li>
         <!-- User -->
-        <li class="menu-item @if (Route::is('admin.messageIndex') ||Route::is('admin.messageDetail')) active @endif">
+        <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Users</div>
@@ -353,7 +360,7 @@
 
             <ul class="menu-sub">
 
-                <li class="menu-item @if (Route::is('admin.messageIndex') ||Route::is('admin.messageDetail')) active @endif">
+                <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')) active @endif">
                     <a href="{{ route('admin.messageIndex') }}" class="menu-link">
                         <div data-i18n="Without navbar">Message</div>
                     </a>
@@ -362,7 +369,7 @@
             </ul>
         </li>
         <!-- Subscriber -->
-        <li class="menu-item @if (Route::is('admin.subscribers')||Route::is('admin.subscriber_send_email')) active @endif">
+        <li class="menu-item @if (Route::is('admin.subscribers') || Route::is('admin.subscriber_send_email')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Subscribers</div>

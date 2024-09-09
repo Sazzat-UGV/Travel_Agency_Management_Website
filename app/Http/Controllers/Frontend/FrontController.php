@@ -2,38 +2,41 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Carbon\Carbon;
-use App\Models\Faq;
-use App\Models\Blog;
-use App\Models\Tour;
-use App\Models\Admin;
-use App\Models\Review;
-use App\Models\Slider;
-use App\Models\Booking;
-use App\Models\Feature;
-use App\Models\Package;
-use App\Models\HomeItem;
+use App\Http\Controllers\Controller;
+use App\Mail\AccountConfirmationMail;
+use App\Mail\ContactMail;
+use App\Mail\PackageInquiryMail;
 use App\Models\AboutItem;
-use App\Models\PackageFaq;
-use App\Models\Subscriber;
-use App\Models\TeamMember;
+use App\Models\Admin;
+use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Booking;
+use App\Models\ContactItem;
 use App\Models\CounterItem;
 use App\Models\Destination;
-use App\Models\Testimonial;
-use App\Models\WelcomeItem;
-use App\Models\BlogCategory;
-use App\Models\PackagePhoto;
-use App\Models\PackageVideo;
-use Illuminate\Http\Request;
-use App\Models\PackageAmenity;
-use App\Mail\PackageInquiryMail;
 use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
+use App\Models\Faq;
+use App\Models\Feature;
+use App\Models\HomeItem;
+use App\Models\Package;
+use App\Models\PackageAmenity;
+use App\Models\PackageFaq;
 use App\Models\PackageItinerary;
-use App\Http\Controllers\Controller;
+use App\Models\PackagePhoto;
+use App\Models\PackageVideo;
+use App\Models\Review;
+use App\Models\Setting;
+use App\Models\Slider;
+use App\Models\Subscriber;
+use App\Models\TeamMember;
+use App\Models\Testimonial;
+use App\Models\Tour;
+use App\Models\WelcomeItem;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\AccountConfirmationMail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class FrontController extends Controller
@@ -419,5 +422,31 @@ class FrontController extends Controller
         $subscriber->status = 'Active  ';
         $subscriber->update();
         return redirect()->back()->with('success', 'Your subscription is Successful.');
+    }
+
+    public function contact()
+    {
+        $setting = Setting::where('id', 1)->first();
+        $contact_item = ContactItem::where('id', 1)->first();
+        return view('frontend.pages.contact', compact('setting', 'contact_item'));
+    }
+
+    public function contact_submit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'comment' => 'required',
+        ]);
+        $admin = Admin::where('id', 1)->first();
+
+        $name = $request->name;
+        $email = $request->email;
+        $inquiryMessage = $request->comment;
+        $subject = 'Contact Form Message';
+
+        Mail::to($admin->email)->send(new ContactMail($name, $email, $inquiryMessage, $subject));
+
+        return redirect()->back()->with('success', 'Your mail has been sent successfully. We will contact you soon.');
     }
 }

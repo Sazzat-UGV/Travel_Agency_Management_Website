@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminContactItemController;
 use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
@@ -46,6 +47,8 @@ Route::prefix('/')->group(function () {
     Route::get('packages', [FrontController::class, 'packages'])->name('packages');
     Route::post('subscriber_submit', [FrontController::class, 'subscriber_submit'])->name('subscriber_submit');
     Route::get('subscriber_verified/{email}/{token}', [FrontController::class, 'subscriber_verified'])->name('subscriber_verified');
+    Route::get('contact', [FrontController::class, 'contact'])->name('contact');
+    Route::post('contact', [FrontController::class, 'contact_submit'])->name('contact_submit');
 
     // paypal payment routes
     Route::post('payment', [FrontController::class, 'payment'])->name('payment');
@@ -146,6 +149,10 @@ Route::prefix('/admin')->group(function () {
         // about item route
         Route::get('about-item/index', [AdminAboutItemController::class, 'index'])->name('admin.aboutItemIndex');
         Route::post('about-item/update', [AdminAboutItemController::class, 'update'])->name('admin.aboutItemUpdate');
+
+        // contact item route
+        Route::get('contact-item/index', [AdminContactItemController::class, 'index'])->name('admin.contactItemIndex');
+        Route::post('contact-item/update', [AdminContactItemController::class, 'update'])->name('admin.contactItemUpdate');
 
         // destination photo route
         Route::get('destination_photos/{id}', [AdminDestinationController::class, 'destination_photos'])->name('admin.destination_photos');

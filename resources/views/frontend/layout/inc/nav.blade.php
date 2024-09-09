@@ -28,7 +28,7 @@
             <li class="@if (Route::is('packages')) active @endif">
                 <a href="{{ route('packages') }}" class="drop-down">Packages</a>
             </li>
-           
+
             <li class="@if (Route::is('team_members')) active @endif">
                 <a href="{{ route('team_members') }}" class="drop-down">Team</a>
             </li>
@@ -38,8 +38,8 @@
             <li class="@if (Route::is('blog')) active @endif">
                 <a href="{{ route('blog') }}" class="drop-down">Blog</a>
             </li>
-            <li>
-                <a href="#" class="drop-down">Contact</a>
+            <li class="@if (Route::is('contact')) active @endif">
+                <a href="{{ route('contact') }}" class="drop-down">Contact</a>
             </li>
             @guest
                 <li class="d-lg-none"> <!-- Visible only on mobile screens -->

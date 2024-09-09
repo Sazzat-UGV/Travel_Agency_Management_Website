@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AmenitySeeder::class,
             HomeItemSeeder::class,
             AboutItemSeeder::class,
+            ContactItemSeeder::class,
             SettingSeeder::class,
         ]);
     }
