@@ -206,6 +206,13 @@ Route::prefix('/admin')->group(function () {
         Route::delete('review/delete/{id}', [AdminReviewController::class, 'delete'])->name('admin.reviewDelete');
 
         // user  route
+        Route::get('users', [AdminUserController::class, 'users'])->name('admin.users');
+        Route::get('user/create', [AdminUserController::class, 'user_create'])->name('admin.userCreate');
+        Route::post('user/create', [AdminUserController::class, 'user_create_submit'])->name('admin.userCreateSubmit');
+        Route::get('user/edit/{id}', [AdminUserController::class, 'user_edit'])->name('admin.userEdit');
+        Route::put('user/edit/{id}', [AdminUserController::class, 'user_edit_submit'])->name('admin.userEditSubmit');
+        Route::delete('user/delete/{id}', [AdminUserController::class, 'user_delete'])->name('admin.userDelete');
+
         Route::get('message', [AdminUserController::class, 'message'])->name('admin.messageIndex');
         Route::get('message/detail/{id}', [AdminUserController::class, 'message_detail'])->name('admin.messageDetail');
         Route::post('message/submit/{id}', [AdminUserController::class, 'message_submit'])->name('admin.messageSubmit');

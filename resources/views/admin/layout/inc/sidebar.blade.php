@@ -359,7 +359,7 @@
             </a>
         </li>
         <!-- User -->
-        <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')) active @endif">
+        <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')|| Route::is('admin.users')|| Route::is('admin.userEdit')|| Route::is('admin.userCreate')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Users</div>
@@ -367,6 +367,11 @@
 
             <ul class="menu-sub">
 
+                <li class="menu-item @if (Route::is('admin.users')) active @endif">
+                    <a href="{{ route('admin.users') }}" class="menu-link">
+                        <div data-i18n="Without navbar">User List</div>
+                    </a>
+                </li>
                 <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')) active @endif">
                     <a href="{{ route('admin.messageIndex') }}" class="menu-link">
                         <div data-i18n="Without navbar">Message</div>

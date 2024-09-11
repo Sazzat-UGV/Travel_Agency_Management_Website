@@ -19,7 +19,7 @@
 @endpush
 @section('content')
     @include('admin.layout.inc.breadcumb', [
-        'main_page' => 'User',
+        'main_page' => 'Users',
         'sub_page' => 'Messages',
     ])
 
