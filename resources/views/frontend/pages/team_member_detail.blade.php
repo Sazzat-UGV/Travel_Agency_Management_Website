@@ -24,7 +24,7 @@
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="booking-form-wrap mb-30">
                         <img src="{{ asset('uploads/team_member') }}/{{ $team_member->photo }}" alt="Member Photo">
-                        <ul class="d-flex mt-3 justify-content-center">
+                        <ul class="d-flex mt-3 justify-content-center gap-4">
                             <li>
                                 @if ($team_member->facebook)
                                     <div class="div"> <a href="{{ $team_member->facebook }}"><i

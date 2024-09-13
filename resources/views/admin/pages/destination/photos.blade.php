@@ -50,7 +50,7 @@
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td><img src="{{ asset('uploads/destination') }}/{{ $photo->photo }}" alt=""
-                                            class="img-fluid w-50"></td>
+                                            class="img-fluid" style="height: 20%; width: auto"></td>
 
                                     <td>
                                         <form action="{{ route('admin.destination_photo_delete', $photo->id) }}"

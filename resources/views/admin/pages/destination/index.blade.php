@@ -48,7 +48,7 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><img src="{{ asset('uploads/destination') }}/{{ $destination->featured_photo }}"
-                                        alt="" class="img-fluid w-50"></td>
+                                        alt="" class="img-fluid" style="height: 100px; width: auto"></td>
                                 <td class="wrap">{{ $destination->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.destination_photos', $destination->id) }}"

@@ -11,6 +11,7 @@
         'parent_page_link' => '',
         'page_name' => 'Destinations',
     ])
+    @if ($destinations->count()>0)
     <div class="destination-section pt-120 mb-120">
         <div class="container">
             <div class="row g-lg-4 gy-5 mb-70">
@@ -36,6 +37,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 @push('frontend_script')
 @endpush

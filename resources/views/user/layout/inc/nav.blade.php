@@ -46,7 +46,7 @@
                 <a href="{{ route('destinations') }}" class="drop-down">Destinations</a>
             </li>
             <li>
-                <a href="#" class="drop-down">Packages</a>
+                <a href="{{ route('packages') }}" class="drop-down">Packages</a>
             </li>
             <li>
                 <a href="{{ route('team_members') }}" class="drop-down">Team</a>
@@ -58,7 +58,7 @@
                 <a href="{{ route('blog') }}" class="drop-down">Blog</a>
             </li>
             <li>
-                <a href="#" class="drop-down">Contact</a>
+                <a href="{{ route('contact') }}" class="drop-down">Contact</a>
             </li>
         </ul>
     </div>

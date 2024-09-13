@@ -48,7 +48,7 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}" alt=""
-                                        class="img-fluid w-50"></td>
+                                        class="img-fluid" style="height:40%;width: auto"></td>
                                 <td class="wrap">{{ $testimonial->name }}</td>
                                 <td class="wrap">{{ $testimonial->location }}</td>
                                 <td class="wrap">{{ $testimonial->comment }}</td>

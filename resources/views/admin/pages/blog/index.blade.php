@@ -45,11 +45,11 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><img src="{{ asset('uploads/blog') }}/{{ $blog->photo }}" alt=""
-                                        class="img-fluid w-50"></td>
+                                        class="img-fluid" style="height: 100px; width: auto"></td>
                                 <td class="wrap">{{ $blog->title }}</td>
-                                <td class="wrap">{{ $blog->blog_category->name }}</td>
+                                <td class="">{{ $blog->blog_category->name }}</td>
                                 <td>
-                                    <div class="dropdown">
+                                    <div class="dropdown">sh
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>

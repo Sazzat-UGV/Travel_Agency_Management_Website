@@ -65,7 +65,7 @@
         </li>
 
         <!-- Slider -->
-        <li class="menu-item @if (Route::is('slider.index') || Route::is('slider.create')) active @endif">
+        <li class="menu-item @if (Route::is('slider.index') || Route::is('slider.create') || Route::is('slider.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-slider"></i>
                 <div data-i18n="Sliders">Sliders</div>
@@ -95,7 +95,7 @@
         </li>
 
         <!-- Feature -->
-        <li class="menu-item @if (Route::is('feature.index') || Route::is('feature.create')) active @endif">
+        <li class="menu-item @if (Route::is('feature.index') || Route::is('feature.create') || Route::is('feature.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="features">Features</div>
@@ -125,7 +125,7 @@
         </li>
 
         <!-- Testimonial -->
-        <li class="menu-item @if (Route::is('testimonial.index') || Route::is('testimonial.create')) active @endif">
+        <li class="menu-item @if (Route::is('testimonial.index') || Route::is('testimonial.create') || Route::is('testimonial.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="testimonials">Testimonials</div>
@@ -147,7 +147,7 @@
         </li>
 
         <!-- Team member -->
-        <li class="menu-item @if (Route::is('team_member.index') || Route::is('team_member.create')) active @endif">
+        <li class="menu-item @if (Route::is('team_member.index') || Route::is('team_member.create') || Route::is('team_member.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="team_members">Team Member</div>
@@ -168,7 +168,7 @@
             </ul>
         </li>
         <!-- Faq -->
-        <li class="menu-item @if (Route::is('faq.index') || Route::is('faq.create')) active @endif">
+        <li class="menu-item @if (Route::is('faq.index') || Route::is('faq.create') || Route::is('faq.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-question-mark"></i>
                 <div data-i18n="faqs">FAQ</div>
@@ -189,7 +189,7 @@
             </ul>
         </li>
         <!-- Blog category -->
-        <li class="menu-item @if (Route::is('blog_category.index') || Route::is('blog_category.create')) active @endif">
+        <li class="menu-item @if (Route::is('blog_category.index') || Route::is('blog_category.create') || Route::is('blog_category.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="blog_categories">Blog Categories</div>
@@ -210,7 +210,7 @@
             </ul>
         </li>
         <!-- Blog -->
-        <li class="menu-item @if (Route::is('blog.index') || Route::is('blog.create')) active @endif">
+        <li class="menu-item @if (Route::is('blog.index') || Route::is('blog.create') || Route::is('blog.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxl-blogger"></i>
                 <div data-i18n="blogs">Blogs</div>
@@ -233,6 +233,7 @@
         <!-- Destination -->
         <li class="menu-item @if (Route::is('destination.index') ||
                 Route::is('destination.create') ||
+                Route::is('destination.edit') ||
                 Route::is('admin.destination_videos') ||
                 Route::is('admin.destination_photos')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -255,7 +256,7 @@
             </ul>
         </li>
         <!-- amenity -->
-        <li class="menu-item @if (Route::is('amenity.index') || Route::is('amenity.create')) active @endif">
+        <li class="menu-item @if (Route::is('amenity.index') || Route::is('amenity.create') || Route::is('amenity.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="amenitys">Amenities</div>
@@ -278,6 +279,7 @@
         <!-- package -->
         <li class="menu-item @if (Route::is('package.index') ||
                 Route::is('package.create') ||
+                Route::is('package.edit') ||
                 Route::is('admin.package_amenity') ||
                 Route::is('admin.package_photos') ||
                 Route::is('admin.package_videos') ||
@@ -303,7 +305,7 @@
             </ul>
         </li>
         <!-- tour -->
-        <li class="menu-item @if (Route::is('tour.index') || Route::is('tour.create') || Route::is('admin.tour_booking')) active @endif">
+        <li class="menu-item @if (Route::is('tour.index') || Route::is('tour.create') || Route::is('admin.tour_booking')|| Route::is('tour.edit')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Tours</div>
@@ -359,7 +361,11 @@
             </a>
         </li>
         <!-- User -->
-        <li class="menu-item @if (Route::is('admin.messageIndex') || Route::is('admin.messageDetail')|| Route::is('admin.users')|| Route::is('admin.userEdit')|| Route::is('admin.userCreate')) active @endif">
+        <li class="menu-item @if (Route::is('admin.messageIndex') ||
+                Route::is('admin.messageDetail') ||
+                Route::is('admin.users') ||
+                Route::is('admin.userEdit') ||
+                Route::is('admin.userCreate')) active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxs-hand-right"></i>
                 <div data-i18n="tours">Users</div>
@@ -402,21 +408,6 @@
 
             </ul>
         </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Setting -->
         <li class="menu-item @if (Route::is('admin.settingIndex')) active @endif">
             <a href="{{ route('admin.settingIndex') }}" class="menu-link">

@@ -3,6 +3,17 @@
     Package Detail
 @endsection
 @push('frontend_style')
+    <style>
+        .blink-text {
+            animation: blinker 2s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
 @endpush
 @section('content')
     @include('frontend.layout.inc.breadcrumb', [
@@ -15,8 +26,6 @@
     <div class="package-details-area pt-120 mb-120 position-relative">
         <div class="container">
             <div class="row">
-
-
                 <div class="co-lg-12">
                     <div class="package-img-group mb-50">
                         <div class="row align-items-center g-3">
@@ -223,185 +232,184 @@
                                 </div>
                             </div>
                     @endif
-                </div>
-
-
-                <div class="review-wrapper">
-                    <h4>Customer Review</h4>
-                    <div class="review-box">
-                        <div class="total-review">
-                            @php
-                                $package_rating = $package->total_score / $package->total_rating;
-                            @endphp
-                            <h2>{{ $package_rating }}</h2>
-                            <div class="review-wrap">
-                                <ul class="star-list">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $package_rating)
-                                            <li><i class="bi bi-star-fill"></i></li>
-                                        @elseif ($i - 0.5 <= $package_rating)
-                                            <li><i class="bi bi-star-half"></i></li>
-                                        @else
-                                            <li><i class="bi bi-star"></i></li>
-                                        @endif
-                                    @endfor
-                                </ul>
-                                <span>{{ $package_reviews->count() }} Reviews</span>
+                    <div class="review-wrapper">
+                        <h4>Customer Review</h4>
+                        <div class="review-box">
+                            <div class="total-review">
+                                @php
+                                    if ($package->total_rating > 0) {
+                                        $package_rating = $package->total_score / $package->total_rating;
+                                    } else {
+                                        $package_rating = 0; // or any default value, such as a message like "No ratings yet"
+                                    }
+                                @endphp
+                                <h2>{{ $package_rating }}</h2>
+                                <div class="review-wrap">
+                                    <ul class="star-list">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $package_rating)
+                                                <li><i class="bi bi-star-fill"></i></li>
+                                            @elseif ($i - 0.5 <= $package_rating)
+                                                <li><i class="bi bi-star-half"></i></li>
+                                            @else
+                                                <li><i class="bi bi-star"></i></li>
+                                            @endif
+                                        @endfor
+                                    </ul>
+                                    <span>{{ $package_reviews->count() }} Reviews</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="review-from-wrapper">
-                                                    <h4>Write Your Review</h4>
-                                                    <form action="{{ route('review_submit') }}" method="POST">
-                                                        @csrf
-                                                        <div class="row">
-                                                            <div class="col-lg-12 mb-20">
-                                                                <div class="form-inner">
-                                                                    <label>Review*</label>
-                                                                    <textarea name="review" placeholder="Enter Your Review..." class="@error('review') is-invalid @enderror"></textarea>
-                                                                    @error('review')
-                                                                        <span class="invalid-feedback"
-                                                                            role="alert"><strong>{{ $message }}</strong></span>
-                                                                    @enderror
+                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="review-from-wrapper">
+                                                        <h4>Write Your Review</h4>
+                                                        <form action="{{ route('review_submit') }}" method="POST">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-lg-12 mb-20">
+                                                                    <div class="form-inner">
+                                                                        <label>Review*</label>
+                                                                        <textarea name="review" placeholder="Enter Your Review..." class="@error('review') is-invalid @enderror"></textarea>
+                                                                        @error('review')
+                                                                            <span class="invalid-feedback"
+                                                                                role="alert"><strong>{{ $message }}</strong></span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-12 mb-40">
+                                                                    <div class="star-rating-wrapper">
+                                                                        <ul class="star-rating-list">
+                                                                            <li>
+                                                                                <div class="rating-container"
+                                                                                    data-rating="0">
+                                                                                    <i class="bi bi-star-fill star-icon"
+                                                                                        data-value="1"></i>
+                                                                                    <i class="bi bi-star-fill star-icon"
+                                                                                        data-value="2"></i>
+                                                                                    <i class="bi bi-star-fill star-icon"
+                                                                                        data-value="3"></i>
+                                                                                    <i class="bi bi-star-fill star-icon"
+                                                                                        data-value="4"></i>
+                                                                                    <i class="bi bi-star-fill star-icon"
+                                                                                        data-value="5"></i>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+
+                                                                <input type="hidden" name="rating" id="rating"
+                                                                    value="0">
+                                                                <input type="hidden" name="package_id" id="package_id"
+                                                                    value="{{ $package->id }}">
+
+                                                                <div class="col-lg-12">
+                                                                    <button type="submit" class="primary-btn1">Submit
+                                                                        Now</button>
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-lg-12 mb-40">
-                                                                <div class="star-rating-wrapper">
-                                                                    <ul class="star-rating-list">
-                                                                        <li>
-                                                                            <div class="rating-container" data-rating="0">
-                                                                                <i class="bi bi-star-fill star-icon"
-                                                                                    data-value="1"></i>
-                                                                                <i class="bi bi-star-fill star-icon"
-                                                                                    data-value="2"></i>
-                                                                                <i class="bi bi-star-fill star-icon"
-                                                                                    data-value="3"></i>
-                                                                                <i class="bi bi-star-fill star-icon"
-                                                                                    data-value="4"></i>
-                                                                                <i class="bi bi-star-fill star-icon"
-                                                                                    data-value="5"></i>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-
-                                                            <input type="hidden" name="rating" id="rating"
-                                                                value="0">
-                                                            <input type="hidden" name="package_id" id="package_id"
-                                                                value="{{ $package->id }}">
-
-                                                            <div class="col-lg-12">
-                                                                <button type="submit" class="primary-btn1">Submit
-                                                                    Now</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
 
 
+                                                    </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @auth
-                            @php
-                                $review_possible = App\Models\Booking::where('package_id', $package->id)
-                                    ->where('user_id', Auth::user()->id)
-                                    ->where('payment_status', 'Completed')
-                                    ->count();
-                            @endphp
-                            @if ($review_possible == 0)
-                                <a class="btn btn-danger">You have to book the package before review.</a>
-                            @else
+                            @auth
                                 @php
-                                    App\Models\Review::where('package_id', $package->id)
+                                    $review_possible = App\Models\Booking::where('package_id', $package->id)
                                         ->where('user_id', Auth::user()->id)
-                                        ->count() > 0
-                                        ? ($reviews = true)
-                                        : ($reviews = false);
+                                        ->where('payment_status', 'Completed')
+                                        ->count();
                                 @endphp
-                                @if ($reviews == true)
-                                    <a class="btn btn-warning">You already have a review.</a>
+                                @if ($review_possible == 0)
+                                    <a class="btn btn-danger">You have to book the package before review.</a>
                                 @else
-                                    <a class="primary-btn1" data-bs-toggle="modal" href="#exampleModalToggle"
-                                        role="button">GIVE A
-                                        RATING</a>
+                                    @php
+                                        App\Models\Review::where('package_id', $package->id)
+                                            ->where('user_id', Auth::user()->id)
+                                            ->count() > 0
+                                            ? ($reviews = true)
+                                            : ($reviews = false);
+                                    @endphp
+                                    @if ($reviews == true)
+                                        <a class="btn btn-warning">You already have a review.</a>
+                                    @else
+                                        <a class="primary-btn1" data-bs-toggle="modal" href="#exampleModalToggle"
+                                            role="button">GIVE A
+                                            RATING</a>
+                                    @endif
                                 @endif
-                            @endif
-                        @endauth
-                        @guest
-                            <a href="{{ route('login') }}" class="primary-btn1 two">Login to Give Rating</a>
-                        @endguest
-                    </div>
+                            @endauth
+                            @guest
+                                <a href="{{ route('login') }}" class="primary-btn1 two">Login to Give Rating</a>
+                            @endguest
+                        </div>
 
-                    <div class="review-area">
-                        <ul class="comment">
-                            @foreach ($package_reviews as $item)
-                                <li>
-                                    <div class="single-comment-area">
-                                        <div class="author-img">
-                                            <img src="{{ asset('uploads/user') }}/{{ $item->user->photo }}"
-                                                alt="">
-                                        </div>
-                                        <div class="comment-content">
-                                            <div class="author-name-deg">
-                                                <h6>{{ $item->user->name }},</h6>
-                                                <span>{{ $item->created_at->format('d M, Y') }}</span>
+                        <div class="review-area">
+                            <ul class="comment">
+                                @foreach ($package_reviews as $item)
+                                    <li>
+                                        <div class="single-comment-area">
+                                            <div class="author-img">
+                                                <img src="{{ asset('uploads/user') }}/{{ $item->user->photo }}"
+                                                    alt="">
                                             </div>
-                                            <ul class="review-item-list">
-                                                <li>
-                                                    <ul class="star-list">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $item->rating)
-                                                                <li><i class="bi bi-star-fill"></i></li>
-                                                            @else
-                                                                <li><i class="bi bi-star"></i></li>
-                                                            @endif
-                                                        @endfor
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            <p>{{ $item->comment }} </p>
+                                            <div class="comment-content">
+                                                <div class="author-name-deg">
+                                                    <h6>{{ $item->user->name }},</h6>
+                                                    <span>{{ $item->created_at->format('d M, Y') }}</span>
+                                                </div>
+                                                <ul class="review-item-list">
+                                                    <li>
+                                                        <ul class="star-list">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $item->rating)
+                                                                    <li><i class="bi bi-star-fill"></i></li>
+                                                                @else
+                                                                    <li><i class="bi bi-star"></i></li>
+                                                                @endif
+                                                            @endfor
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <p>{{ $item->comment }} </p>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <hr>
-                            @endforeach
-                        </ul>
+                                    </li>
+                                    <hr>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="booking-form-wrap mb-40">
-                    <h4>Book Your Tour</h4>
-                    <p>Reserve your ideal trip early for a hassle-free trip; secure comfort and convenience!</p>
-                    <div class="nav nav-pills mb-40" role="tablist">
-                        @if ($tours->count() > 0)
+
+                <div class="col-xl-4">
+                    <div class="booking-form-wrap mb-40">
+                        <h4>Book Your Tour</h4>
+                        <p>Reserve your ideal trip early for a hassle-free trip; secure comfort and convenience!</p>
+                        <div class="nav nav-pills mb-40" role="tablist">
                             <button class="nav-link show active" id="v-pills-booking-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-booking" type="button" role="tab"
                                 aria-controls="v-pills-booking" aria-selected="true">Online Booking</button>
-                        @endif
-                        <button class="nav-link @if ($tours->count() == 0) show active @endif"
-                            id="v-pills-contact-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contact"
-                            type="button" role="tab" aria-controls="v-pills-contact" aria-selected="false"
-                            tabindex="-1">Inquiry
-                            Form</button>
-                    </div>
-                    @if ($tours->count() > 0)
+                            <button class="nav-link" id="v-pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-contact" type="button" role="tab"
+                                aria-controls="v-pills-contact" aria-selected="false" tabindex="-1">Inquiry
+                                Form</button>
+                        </div>
                         <div class="tab-content" id="v-pills-tabContent2">
                             <div class="tab-pane fade active show" id="v-pills-booking" role="tabpanel"
                                 aria-labelledby="v-pills-booking-tab">
@@ -411,169 +419,179 @@
                                         <input type="hidden" name="ticket_price" id="ticketPrice"
                                             value="{{ $package->price }}">
                                         <input type="hidden" name="package_id" value="{{ $package->id }}">
-                                        <div class="tour-date-wrap mb-50">
-                                            <h6>Select Your Tour:</h6>
-                                            @foreach ($tours as $index => $tour)
-                                                <div class="form-check mb-25">
-                                                    <input class="form-check-input" type="radio" name="tour_id"
-                                                        id="checkIn-{{ $tour->id }}" value="{{ $tour->id }}"
-                                                        @if (old('tour_id') == $tour->id || $index == 0) checked @endif>
-                                                    <label class="form-check-label" for="checkIn-{{ $tour->id }}">
-                                                        <span class="tour-date">
-                                                            <span class="start-date">
-                                                                <span>Tour Number:</span>
-                                                                <span>Tour Start:</span>
-                                                                <span>Tour End:</span>
-                                                                <span>Booking End:</span>
-                                                                <span>Total Seat:</span>
-                                                                <span>Booked Seat:</span>
-                                                                @if ($tour->total_seat != '')
-                                                                    <span>Available Seat:</span>
-                                                                @endif
-                                                            </span>
-                                                            <i class="bi bi-arrow-right"></i>
-                                                            <span class="end-date text-end">
-                                                                <span><strong>{{ $index + 1 }}</strong></span>
-                                                                <span>{{ date('M d, Y', strtotime($tour->tour_start_date)) }}</span>
-                                                                <span>{{ date('M d, Y', strtotime($tour->tour_end_date)) }}</span>
-                                                                <span
-                                                                    class="text-danger text-bold">{{ date('M d, Y', strtotime($tour->booking_end_date)) }}</span>
-                                                                <span>
-                                                                    @if ($tour->total_seat)
-                                                                        {{ $tour->total_seat }}
-                                                                    @else
-                                                                        Unlimited
+                                        @if ($tours->count() > 0)
+                                            <div class="tour-date-wrap mb-50">
+                                                <h6>Select Your Tour:</h6>
+                                                @foreach ($tours as $index => $tour)
+                                                    <div class="form-check mb-25">
+                                                        <input class="form-check-input" type="radio" name="tour_id"
+                                                            id="checkIn-{{ $tour->id }}" value="{{ $tour->id }}"
+                                                            @if (old('tour_id') == $tour->id || $index == 0) checked @endif>
+                                                        <label class="form-check-label"
+                                                            for="checkIn-{{ $tour->id }}">
+                                                            <span class="tour-date">
+                                                                <span class="start-date">
+                                                                    <span>Tour Number:</span>
+                                                                    <span>Tour Start:</span>
+                                                                    <span>Tour End:</span>
+                                                                    <span>Booking End:</span>
+                                                                    <span>Total Seat:</span>
+                                                                    <span>Booked Seat:</span>
+                                                                    @if ($tour->total_seat != '')
+                                                                        <span>Available Seat:</span>
                                                                     @endif
                                                                 </span>
-                                                                <span>
-                                                                    @if ($tour->bookings_sum_total_person == 0)
-                                                                        0
-                                                                    @else
-                                                                        {{ $tour->bookings_sum_total_person }}
-                                                                </span>
-                                                                @if ($tour->total_seat != '')
+                                                                <i class="bi bi-arrow-right"></i>
+                                                                <span class="end-date text-end">
+                                                                    <span><strong>{{ $index + 1 }}</strong></span>
+                                                                    <span>{{ date('M d, Y', strtotime($tour->tour_start_date)) }}</span>
+                                                                    <span>{{ date('M d, Y', strtotime($tour->tour_end_date)) }}</span>
+                                                                    <span
+                                                                        class="text-danger text-bold">{{ date('M d, Y', strtotime($tour->booking_end_date)) }}</span>
                                                                     <span>
-                                                                        @php
-                                                                            $available_seat =
-                                                                                $tour->total_seat -
-                                                                                $tour->bookings_sum_total_person;
-                                                                        @endphp
-                                                                        {{ $available_seat }}
-
+                                                                        @if ($tour->total_seat)
+                                                                            {{ $tour->total_seat }}
+                                                                        @else
+                                                                            Unlimited
+                                                                        @endif
                                                                     </span>
-                                                                @endif
-                                            @endif
-                                            </span>
-                                            </span>
-                                            </label>
-                                        </div>
-                    @endforeach
+                                                                    <span>
+                                                                        @if ($tour->bookings_sum_total_person == 0)
+                                                                            0
+                                                                        @else
+                                                                            {{ $tour->bookings_sum_total_person }}
+                                                                        @endif
+                                                                    </span>
+                                                                    @if ($tour->total_seat != '')
+                                                                        <span>
+                                                                            @php
+                                                                                $available_seat =
+                                                                                    $tour->total_seat -
+                                                                                    $tour->bookings_sum_total_person;
+                                                                            @endphp
+                                                                            {{ $available_seat }}
 
-                    <div class="booking-form-item-type mb-35">
-                        <div class="number-input-item children">
-                            <label class="number-input-lable">Number of Person:<span>
-                                </span></label>
-                            <div class="quantity-counter">
-                                <a href="javascript:void(0)" class="quantity__minus" onclick="calculateTotal()"><i
-                                        class="bi bi-dash"></i></a>
-                                <input type="text" class="quantity__input" name="number_of_person" value="1"
-                                    id="numPersons" oninput="calculateTotal()">
-                                <a href="javascript:void(0)" class="quantity__plus" onclick="calculateTotal()"><i
-                                        class="bi bi-plus"></i></a>
+                                                                        </span>
+                                                                    @endif
+                                                                </span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+
+                                                <div class="booking-form-item-type mb-35">
+                                                    <div class="number-input-item children">
+                                                        <label class="number-input-lable">Number of Person:<span>
+                                                            </span></label>
+                                                        <div class="quantity-counter">
+                                                            <a href="javascript:void(0)" class="quantity__minus"
+                                                                onclick="calculateTotal()"><i class="bi bi-dash"></i></a>
+                                                            <input type="text" class="quantity__input"
+                                                                name="number_of_person" value="1" id="numPersons"
+                                                                oninput="calculateTotal()">
+                                                            <a href="javascript:void(0)" class="quantity__plus"
+                                                                onclick="calculateTotal()"><i class="bi bi-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="inquery-form">
+                                                    <div class="form-inner mb-70">
+                                                        <label>Select Payment Method<span>*</span></label>
+                                                        <select style="display: none;" name="payment_method">
+                                                            <option value="PayPal"
+                                                                @if (old('payment_method') == 'PayPal') selected @endif>
+                                                                PayPal</option>
+                                                            <option value="Stripe"
+                                                                @if (old('payment_method') == 'Stripe') selected @endif>
+                                                                Stripe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="booking-form-item-type mb-35">
+
+                                            </div>
+                                            <div class="total-price" id="totalAmount"><span>Total Price:</span>
+                                                ${{ $package->price }}</div>
+
+                                            @auth
+                                                <button type="submit" class="primary-btn1 two">Book Now</button>
+                                            @endauth
+                                            @guest
+                                                <a href="{{ route('login') }}" class="primary-btn1 two">Login to Book</a>
+                                            @endguest
+                                        @else
+                                            <h4 class="text-danger blink-text">No Tour Available</h4>
+                                        @endif
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="v-pills-contact" role="tabpanel"
+                                aria-labelledby="v-pills-contact-tab">
+                                <div class="sidebar-booking-form">
+                                    <form action="{{ route('package_inquiry', $package->id) }}" method="POST">
+                                        @csrf
+                                        <div class="form-inner mb-20">
+                                            <label>Full Name <span>*</span></label>
+                                            <input type="text" placeholder="Enter your full name" name="name"
+                                                class="@error('name')
+                                                        is-invalid
+                                                    @enderror"
+                                                value="{{ old('name') }}">
+                                            @error('name')
+                                                <span class="invalid-feedback" style="font-size: 11px;"
+                                                    role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-inner mb-20">
+                                            <label>Email Address <span>*</span></label>
+                                            <input type="email" placeholder="Enter your email address" name="email"
+                                                class="@error('email')
+                                                    is-invalid
+                                                @enderror"
+                                                value="{{ old('email') }}">
+                                            @error('email')
+                                                <span class="invalid-feedback" style="font-size: 11px;"
+                                                    role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-inner mb-20">
+                                            <label>Phone Number <span>*</span></label>
+                                            <input type="text" placeholder="Enter your phone number" name="phone"
+                                                class="@error('phone')
+                                                    is-invalid
+                                                @enderror"
+                                                value="{{ old('phone') }}">
+                                            @error('phone')
+                                                <span class="invalid-feedback" style="font-size: 11px;"
+                                                    role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-inner mb-30">
+                                            <label>Write Your Massage <span>*</span></label>
+                                            <textarea placeholder="Write your quiry" name="message"
+                                                class="@error('message')
+                                                    is-invalid
+                                                @enderror">{{ old('message') }}</textarea>
+                                            @error('message')
+                                                <span class="invalid-feedback" style="font-size: 11px;"
+                                                    role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-inner">
+                                            <button type="submit" class="primary-btn1 two">Submit Now</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="inquery-form">
-                        <div class="form-inner mb-70">
-                            <label>Select Payment Method<span>*</span></label>
-                            <select style="display: none;" name="payment_method">
-                                <option value="PayPal" @if (old('payment_method') == 'PayPal') selected @endif>
-                                    PayPal</option>
-                                <option value="Stripe" @if (old('payment_method') == 'Stripe') selected @endif>
-                                    Stripe</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
-                <div class="booking-form-item-type mb-35">
 
-                </div>
-                <div class="total-price" id="totalAmount"><span>Total Price:</span>
-                    ${{ $package->price }}</div>
-
-                @auth
-                    <button type="submit" class="primary-btn1 two">Book Now</button>
-                @endauth
-                @guest
-                    <a href="{{ route('login') }}" class="primary-btn1 two">Login to Book</a>
-                @endguest
-                </form>
             </div>
         </div>
-        @endif
-        <div class="tab-pane fade @if ($tours->count() == 0) active show @endif" id="v-pills-contact"
-            role="tabpanel" aria-labelledby="v-pills-contact-tab">
-            <div class="sidebar-booking-form">
-                <form action="{{ route('package_inquiry', $package->id) }}" method="POST">
-                    @csrf
-                    <div class="form-inner mb-20">
-                        <label>Full Name <span>*</span></label>
-                        <input type="text" placeholder="Enter your full name" name="name"
-                            class="@error('name')
-                                    is-invalid
-                                @enderror"
-                            value="{{ old('name') }}">
-                        @error('name')
-                            <span class="invalid-feedback" style="font-size: 11px;"
-                                role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="form-inner mb-20">
-                        <label>Email Address <span>*</span></label>
-                        <input type="email" placeholder="Enter your email address" name="email"
-                            class="@error('email')
-                                is-invalid
-                            @enderror"
-                            value="{{ old('email') }}">
-                        @error('email')
-                            <span class="invalid-feedback" style="font-size: 11px;"
-                                role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="form-inner mb-20">
-                        <label>Phone Number <span>*</span></label>
-                        <input type="text" placeholder="Enter your phone number" name="phone"
-                            class="@error('phone')
-                                is-invalid
-                            @enderror"
-                            value="{{ old('phone') }}">
-                        @error('phone')
-                            <span class="invalid-feedback" style="font-size: 11px;"
-                                role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="form-inner mb-30">
-                        <label>Write Your Massage <span>*</span></label>
-                        <textarea placeholder="Write your quiry" name="message"
-                            class="@error('message')
-                                is-invalid
-                            @enderror">{{ old('message') }}</textarea>
-                        @error('message')
-                            <span class="invalid-feedback" style="font-size: 11px;"
-                                role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-                    <div class="form-inner">
-                        <button type="submit" class="primary-btn1 two">Submit Now</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    </div>
-    </div>
     </div>
     </div>
 @endsection

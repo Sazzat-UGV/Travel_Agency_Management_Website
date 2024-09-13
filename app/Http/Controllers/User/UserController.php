@@ -19,7 +19,10 @@ class UserController extends Controller
     public function dashboard()
     {
         $total_completed_order = Booking::where('user_id', Auth::user()->id)->where('payment_status', 'Completed')->count();
-        return view('user.pages.dashboard', compact('total_completed_order'));
+        $total_review = Review::where('user_id', Auth::user()->id)->count();
+
+        $latest_booking = Booking::with('package', 'tour')->where('user_id', Auth::guard('web')->user()->id)->latest('id')->limit(5)->get();
+        return view('user.pages.dashboard', compact('total_completed_order','total_review','latest_booking'));
     }
 
     public function profile()

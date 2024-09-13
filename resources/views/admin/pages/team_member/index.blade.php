@@ -49,8 +49,8 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><img src="{{ asset('uploads/team_member') }}/{{ $team_member->photo }}" alt=""
-                                        class="img-fluid w-50"></td>
-                                <td class="wrap">{{ $team_member->name }}</td>
+                                        class="img-fluid" style="height: 100px; width: auto"></td>
+                                <td class="">{{ $team_member->name }}</td>
                                 <td class="wrap">{{ $team_member->designation }}</td>
                                 <td class="wrap">{{ $team_member->address }}</td>
                                 <td>

@@ -38,7 +38,6 @@
     </div>
     <!-- slider section end-->
 
-
     <!-- welcome section start-->
     @if ($welcome_item->status == 'Show')
         <div class="home2-about-section pt-120 mb-120">

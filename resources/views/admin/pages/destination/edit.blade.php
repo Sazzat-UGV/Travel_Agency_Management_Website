@@ -214,7 +214,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    <button type="submit" class="btn btn-warning mt-3">Update</button>
 
                 </form>
             </div>

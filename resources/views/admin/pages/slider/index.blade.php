@@ -18,9 +18,7 @@
     </style>
 @endpush
 @section('content')
-@include('admin.layout.inc.breadcumb',
-['main_page'=>'Sliders',
-'sub_page'=>'Slider List'])
+    @include('admin.layout.inc.breadcumb', ['main_page' => 'Sliders', 'sub_page' => 'Slider List'])
     <div class="col-12">
         <div class="card px-4">
             <div class="col-md-12 col-lg-12 col-sm-12 py-4">
@@ -47,7 +45,7 @@
                             <tr>
                                 <th scope="row">{{ $index + 1 }}</th>
                                 <td><img src="{{ asset('uploads/slider') }}/{{ $slider->photo }}" alt=""
-                                        class="img-fluid w-50"></td>
+                                        class="img-fluid" style="height: 10%; width: auto"></td>
                                 <td class="wrap">{{ $slider->heading }}</td>
                                 <td class="wrap">{{ $slider->text }}</td>
                                 <td>
